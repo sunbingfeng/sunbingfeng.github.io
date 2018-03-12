@@ -17,6 +17,12 @@ navigation:
   - archive.html
   - about.md
 
+# Build settings
+markdown: kramdown
+theme: jekyll-theme-cayman
+plugins:
+  - jekyll-feed
+
 comments:
   disqus: "disqus-contrast"
 #  isso: "comments.mysite.org"
