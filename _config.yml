@@ -1,8 +1,8 @@
 # Site
-title:              Massively
-bio:                'Jekyll version of the Massively theme by HTML5UP'
-description:        "Jekyll version of the Massively theme by HTML5UP"
-locale:             en_US
+title:              Bill's tech blog
+bio:                'Code To Death'
+description:        "Bill is an excellent programmer driving an autonomous car"
+locale:             en_cn
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "" # the base hostname & protocol for your site
 
@@ -35,15 +35,16 @@ disqus_shortname:   default
 
 # Social
 analytics-id:       "default"
-twitter:            default
-facebook:           default
+github:             sunbingfeng
+twitter:            sunbingfeng2
+facebook:           sun.bill.3
 instagram:          default
-github:             default
+
 
 # personal
-location:           Los Angeles, CA
-phone:              310-318-5555
-email:              info@default.com
+location:           Shenzhen, China
+# phone:              310-318-5555
+email:              bingfeng.sun@perceptin.io
 
 # Gems
 gems:
