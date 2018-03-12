@@ -1,36 +1,60 @@
-# Contrast
+## How to Use This Theme
+Just go ahead and read up on [how to install Jekyll](https://jekyllrb.com/). It's not too hard I promise!
 
-### Note
+Download this repository [here](https://github.com/iwiedenm/jekyll-theme-massively-src/archive/master.zip) and save it to any folder you want.
 
-Create a `master`-branch and adjust `_config.yml` if you want to use this theme in the root folder of `yourname.github.io`.
+Open a terminal window or a command line and ```cd``` to that location.
 
-### Default
+Then enter: ```bundle exec jekyll serve```. You can now access your new Jekyll site from [http://127.0.0.1:4000/](http://127.0.0.1:4000/). Have fun exploring your new site!
 
-![screenshot](https://user-images.githubusercontent.com/4943215/35478338-b502fdfa-03da-11e8-975b-469a7c30b54f.png)
+## Features
+### Auto-Generating Sitemap
+The sitemap is auto generated! Just simply change the sitemap variable in front matter of each page. It looks like so...
+```
+sitemap:
+    priority: 0.7
+    lastmod: 2017-11-02
+    changefreq: weekly
+```
 
-### Minimal
+### Formspring.io Integration
+Formspring is supported out of the box! Just add your email to ```_config.yml```
 
-![screenshot](https://user-images.githubusercontent.com/4943215/35478340-d391eda8-03da-11e8-9352-e4dd5cdb74d2.png)
 
-### Usage
+## Credits
+### Original README from HTML5 UP
+```
+Massively by HTML5 UP
+html5up.net | @ajlkn
+Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
 
-Just fork the repo and adjust the `_config.yml` to use with [Github Pages](https://pages.github.com/) and your page is done ... or read more about [Jekyll](https://jekyllrb.com/).
 
-### Features
+This is Massively, a text-heavy, article-oriented design built around a huge background
+image (with a new parallax implementation I'm testing) and scroll effects (powered by
+Scrollex). A *slight* departure from all the one-pagers I've been doing lately, but one
+that fulfills a few user requests and makes use of some new techniques I've been wanting
+to try out. Enjoy it :)
 
- - responsive
- - pagination
- - archive page
- - feed.xml generation
- - syntax highlighting
- - comments ([disqus](https://disqus.com/) / [isso](http://posativ.org/isso/))
+Demo images* courtesy of Unsplash, a radtastic collection of CC0 (public domain) images
+you can use for pretty much whatever.
 
-### Based on
+(* = not included)
 
-- [Jekyll](https://jekyllrb.com/)
-- [Source Sans Pro](https://fonts.google.com/specimen/Source+Sans+Pro)
-- [Font Awesome](http://fontawesome.io/)
-- [Pygments](https://github.com/richleland/pygments-css)
-- [Pixyll](https://github.com/johnotander/pixyll)
+AJ
+aj@lkn.io | @ajlkn
 
-Niklas Buschmann, 2014-18, MIT-License
+
+Credits:
+
+	Demo Images:
+		Unsplash (unsplash.com)
+
+	Icons:
+		Font Awesome (fortawesome.github.com/Font-Awesome)
+
+	Other:
+		jQuery (jquery.com)
+		Misc. Sass functions (@HugoGiraudel)
+		Skel (skel.io)
+		Scrollex (github.com/ajlkn/jquery.scrollex)
+```
