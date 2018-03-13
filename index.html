@@ -58,9 +58,9 @@ sitemap:
 									<h2><a href="#">Fighting 2018</a></h2>
 									<p>Everything around you that you call life was made up by people that were no smarter than you and you can change it, you can influence it, you can build your own things that other people can use.</p>
 								</header>
-<!-- 								<div style="display: flex; justify-content: center;">
-									<a href="#" class="image main"><img src="{{ "/images/sbf_sea.jpeg" | absolute_url }}" alt="" /></a>
-								</div> -->
+								<div style="text-align: center;">
+									<img src="{{ "/images/bill_sea.jpeg" | absolute_url }}" alt="" />
+								</div>
 
 							</article>
 
@@ -73,7 +73,7 @@ sitemap:
   										<span class="date">{{ post.date | date_to_string }}</span>
   										<h2><a href="{{ post.url | absolute_url }}">{{ post.title }}</h2>
   									</header>
-  									<a href="{{ post.url | absolute_url }}" class="image fit"><img src="{{ post.image | absolute_url }}" alt="" /></a>
+  									<a href="{{ post.url | absolute_url }}" class="image main"><img src="{{ post.image | absolute_url }}" alt="" /></a>
   									<p>{{ post.excerpt }}</p>
   									<ul class="actions">
   										<li><a href="{{ post.url | absolute_url }}" class="button">Full Story</a></li>
