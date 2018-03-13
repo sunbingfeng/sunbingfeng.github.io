@@ -1,10 +1,16 @@
+---
+layout: default
+comments: true
+# other options
+---
+
 # Site
 title:              Bill's tech blog
 bio:                'Code To Death'
 description:        "Bill is an excellent programmer driving an autonomous car"
 locale:             en_cn
-baseurl: "" # the subpath of your site, e.g. /blog
-url: "" # the base hostname & protocol for your site
+baseurl: "/blog" # the subpath of your site, e.g. /blog
+url: "https://sunbingfeng.github.io" # the base hostname & protocol for your site
 
 defaults:
 - scope:
@@ -31,7 +37,7 @@ sass:
   style:            compressed
 
 # Comments
-disqus_shortname:   default
+disqus_shortname:   sunbingfeng-github-io
 
 # Social
 analytics-id:       "default"
