@@ -17,7 +17,7 @@ This article demonstrates a GUI demo which fetches latest sensor data from radar
 
 The final UI is showed as follows. It's not beautiful actually, but it can helps. You can find the whole sample at [github](https://github.com/sunbingfeng/libyue_cpp_demo)
 
-![](http://oonn91xrt.bkt.clouddn.com/Screen%20Shot%202018-03-13%20at%207.15.52%20PM.png)
+![](http://oonn91xrt.bkt.clouddn.com/Screen%20Shot%202018-03-13%20at%207.15.52%20PM.png){:height="300px" width="300px"}
 
 ## Introduction to libyue
 
