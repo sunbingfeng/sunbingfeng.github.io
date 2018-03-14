@@ -26,9 +26,9 @@
             {% include nav.html %}
 
             <ul class="icons">
-                  <li><a href="https://twitter.com/sunbingfeng2" class="icon fa-twitter" rel="nofollow"><span class="label">Twitter</span></a></li>
-                  <li><a href="https://facebook.com/sun.bill.3" class="icon fa-facebook" rel="nofollow"><span class="label">Facebook</span></a></li>
-                  <li><a href="https://github.com/sunbingfeng" class="icon fa-github" rel="nofollow"><span class="label">GitHub</span></a></li>
+                  <li><a href="https://twitter.com/{{site.twitter}}" class="icon fa-twitter" rel="nofollow"><span class="label">Twitter</span></a></li>
+                  <li><a href="https://facebook.com/{{site.facebook}}" class="icon fa-facebook" rel="nofollow"><span class="label">Facebook</span></a></li>
+                  <li><a href="https://github.com/{{site.github}}" class="icon fa-github" rel="nofollow"><span class="label">GitHub</span></a></li>
             </ul>
 					</nav>
 
@@ -53,14 +53,14 @@
                */
 
               var disqus_config = function () {
-                  this.page.url = 'https://sunbingfeng.github.io{{ page.url }}';  /*Replace PAGE_URL with your page's canonical URL variable*/
+                  this.page.url = '{{site.disqus_shortname}}{{ page.url }}';  /*Replace PAGE_URL with your page's canonical URL variable*/
                   this.page.identifier = '{{ page.url }}'; /*Replace PAGE_IDENTIFIER with your page's unique identifier variable*/
               };
 
               (function() {  /* dont endit below this line */
                   var d = document, s = d.createElement('script');
 
-                  s.src = 'https://sunbingfeng-github-io.disqus.com/embed.js';
+                  s.src = 'https://{{site.disqus_shortname}}.disqus.com/embed.js';
 
                   s.setAttribute('data-timestamp', +new Date());
                   (d.head || d.body).appendChild(s);
