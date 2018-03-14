@@ -12,6 +12,7 @@ locale:             en_cn
 baseurl: "/blog" # the subpath of your site, e.g. /blog
 url: "https://sunbingfeng.github.io" # the base hostname & protocol for your site
 
+
 defaults:
 - scope:
     path: ''
