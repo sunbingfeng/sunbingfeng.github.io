@@ -6,9 +6,6 @@ excerpt: "Introduction to libyue usage based on C++"
 image: "/images/radar.jpg"
 ---
 
-Design a responsive GUI with libyue & observer pattern
-==============================
-
 ## Purpose
 
 Usually a simple GUI tool can give you direct visual status about your dev system, and can offer great help during development.

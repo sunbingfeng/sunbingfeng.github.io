@@ -6,9 +6,6 @@ excerpt: "Introduction to parallel programming"
 image: "/images/openmp.png"
 ---
 
-OpenMP && MPI
-=============
-
 ## syntax
 
 Therefore there can be three layers of parallelism in a single program: 
