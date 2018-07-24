@@ -3,7 +3,7 @@ layout: post
 title:  "awk: A Silver bullet you should have"
 date:   2018-07-23
 excerpt: "Intro to awk programming language"
-image: "/images/sed-awk.jpg"
+image: "/images/dolphin.jpg"
 ---
 
 ## Hello world
