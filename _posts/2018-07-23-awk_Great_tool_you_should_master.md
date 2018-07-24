@@ -37,7 +37,7 @@ As a data analysist, the first-hand data mined form internet may not be of the f
 
 ## Log parser
 
-Supposed that you get a log file, and we subtract a segment of it below.
+Supposed that you get a log file which has thousands of lines and is not in a standard csv-like format(we subtract a segment of it below), you have to perform some analysis based on it.
 
 ```
 I0713 10:40:47.478701  9083 xxxx.cpp:284] ================================>FPS: 7
@@ -45,7 +45,7 @@ I0713 10:40:47.478701  9083 xxxx.cpp:284] ================================>FPS: 
 I0713 10:43:36.649893 10353 xxxx.cpp:1121] *** DEBUG 5: in removeLostFeatures: invalid/processed feature #: 2/3
 ```
 
-You want to know about the FPS trends, and then draw a FPS-time graph. Also, you need to extract the invalid and processed features to a file for further process.
+For example, you want to know about the FPS trends, and then draw a FPS-time graph. Also, you need to extract the invalid and processed features to a file for further process.
 
 You may find it a little tough, and have no idea where to start with. But if you have a basic knowledge about awk, you may think it's so easy.
 
@@ -63,6 +63,9 @@ cat "$@" | grep 'DEBUG 5' | awk '{print $NF}' | awk 'BEGIN{FS="/"}{print $1, $2}
 
 ```
 
+Therefore, it will produce two new files with csv-like format, and you can draw it with python or matlab easily.
+
+Done!
 ## Format tranform
 
 You are assigned a task to tranform every record in a csv file to comma seperated and filter out the records with zero heading or flag_h.
@@ -95,7 +98,17 @@ echo "working directory: $base"
 
 cat "$@" | awk '(NR==1){print;next} ($NF != 0 && $(NF-2) != 0){print}' > $base/filter.txt
 ```
+Output file:
 
+```
+time x y heading flag_p flag_h
+1531465177.6090000 800834.5063542 2499953.6377944 275.5880000 3 4
+1531465177.7030001 800834.2666566 2499953.6450343 275.4430000 3 4
+1531465177.7990000 800833.9966345 2499953.6953184 275.4430000 3 4
+1531465196.1059999 800822.7694385 2500002.0436874 358.8210000 3 4
+1531465196.2100000 800822.7527709 2500002.3459400 358.8210000 3 4
+1531465196.2100000 800822.7527709 2500002.3459400 358.8210000 3 4
+```
 So cool is it!
 
 ## Conclusion
