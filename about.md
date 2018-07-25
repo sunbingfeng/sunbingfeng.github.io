@@ -1,27 +1,33 @@
 ---
 layout: page
-title: Jekyll Theme - About - Massively
-description: When building a website it's helpful to see what the focus of your site is. This page is an example of how to show a website's focus.
+title: About Me
+description: Skills and experience.
 sitemap:
     priority: 0.7
-    lastmod: 2017-11-02
+    lastmod: 2018-07-25
     changefreq: weekly
 ---
-## About our Site
+## About Me
 
-<span class="image left"><img src="{{ "/images/pic04.jpg" | absolute_url }}" alt="" /></span>
+<span class="image left"><img src="{{ "/images/bill_coffee.JPG" | absolute_url }}" alt="" /></span>
 
-Making steady content and conveying it well takes a great deal of research and, hence, time and exertion. Building a profound established comprehension of your target customer needs is critical as your principle objective ought to be to fulfill their requirements as awesome content. You should need to enhance their lives. Having significant content like this may not be simple by any methods. Be that as it may, in any case, it's a fundamental apparatus in the event that you expect to grow a fruitful and supportable business in the present web focused world.
+I am a software maker, and I love programming.
 
-Receiving the benefits of content is a certain something. Be that as it may, it's so substantially less demanding once you begin conveying all the more successfully. The profitable content thought isn't just about bragging your item's capacities and general worth or your organization's achievements. You should concentrate less on advertising how awesome your item is and rather concentrate on indicating how valuable it is. This is a client focused approach as it concentrates on their issues and your answer for them. Making yourself fundamental is critical.
+Since I graduated from [BIT](http://www.bit.edu.cn/) in 2011, I started my programming career. At the first, I worked on embedded software developing. My everyday job was occupied by lists of register setting and reading, contacting with many bus protocols, such as i2c, UART, SPI etc., and debugging high memory and cpu cost issues. It's tough and challenging, and I loved it a bit. But embedded software engineers' average salary was very low, and they were not valued equally. So I gived up finally. But through this work experience, I consistently believe that I belong to software because I love it with all my heart.
 
-### Content is Imortant
-<div class="box">
-  <p>
-  In saying that, a one-measure fits-all approach won't do the trick with regards to content promoting. Rather, an emphasis on making remarkable, high caliber and totally genuine content that is engaging, helpful and fascinating for customers will get you the crown. From content, video and symbolism to infographics, studies, online courses and podcasts, whatever your favored content medium is, guarantee it is shareable and pertinent to your industry.
-  </p>
-</div>
+Later then at 2014, I maked a decision to switch to iOS developing at the time when I took the first glance of Swift language, and I was caught by the great elegance of it. But it's a bit funny that I never write Swift codes more than 100 lines, for the reason that when I dived into iOS coding Objective-C becomes the main language to me. At the later times, I even terribly wanna have a try to write Swift code, but not have a chance, worser when I moved to robot area. I still feel a little pity, and great wishes to Swift.
 
-<span class="image left"><img src="{{ "/images/pic05.jpg" | absolute_url }}" alt="" /></span>
+During the time of iOS developing, I read a lot of open sources because iOS native UI/animation library did not meet our requirements all the time. Another aspect is that some 3rd-party library provides nice wrapper of native functions, and then it's easier to use. And exactly during this period I formed a habbit to refer to open sources whenever I need a function or specific module. Github becomes the place where I would call on often, and github trends comes to be the fixed place where I view the latest trends in software community.
 
-On social media, we may share our own thoughts and advance our image notwithstanding spreading musings for different associations and affiliations. With such a critical number of associations with people and relationship on social media, our experience can be over-burden with a considerable measure of information.
+Now, I am a C++ coder in robot area. But did you know that I deeply hated C++ in the beginning? Extremely funny! At the year of 2011 when I was in my first job, sometimes I might need to use C++ to make some debug tools or simple GUI. At that times, C++ 11 had not been popular yet, and we used VC6 as IDE. It's ugly and unfriendly. That's my first impression of C++, a buggy language. Nowadays, C++ 17 is the latest version, and C++ 20 has already been planned. C++ has become more and more friendly and easy-to-use for us. And now C++ is my main programming language.
+
+I am a bit volatile, and I changed a lot these years. But the only one that not changed is my love to software. I love software architecture, and I believe in the philosophy behind it. 
+
+My latest job is focused on autonomous driving, and if you are with the same profession, welcome for your advice or comments.
+
+<blockquote>
+  Most good programmers do programming not because they expect to get paid or get adulation by the public, but because it is fun to program.
+
+  <br />        
+  ----Linus Torvalds
+</blockquote>   
