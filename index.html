@@ -7,92 +7,87 @@ sitemap:
     lastmod: 2018-03-12
     changefreq: weekly
 ---
+
 <!DOCTYPE HTML>
 <!--
 	Massively by HTML5 UP
 	html5up.net | @ajlkn
-  Jekyll integration by somiibo.com
+Jekyll integration by somiibo.com
 	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
 -->
 
 <head>
-	<title>Bill's Tech Blog</title>
+    <title>Bill's Tech Blog</title>
+</head>
+<html>
+
+<head>
+    {% include head.html %}
 </head>
 
-<html>
-	<head>
-
-    {% include head.html %}
-
-
-	</head>
-	<body class="is-loading">
-
-		<!-- Wrapper -->
-			<div id="wrapper" class="fade-in">
-
-				<!-- Intro -->
-					<div id="intro">
+<body class="is-loading">
+    <!-- Wrapper -->
+    <div id="wrapper" class="fade-in">
+        <!-- Intro -->
+        <div id="intro">
             <h1>{{site.title}}</h1>
-						<h2>Small step to make difference</h2>
-						<ul class="actions">
-							<li><a href="#header" class="button icon solo fa-arrow-down scrolly">Continue</a></li>
-						</ul>
-					</div>
-
-				<!-- Header -->
-					<header id="header">
-						<a href="{{ "/" | absolute_url }}" class="logo">{{site.title}}</a>
-					</header>
-
-				<!-- Main -->
-					<div id="main">
-						<!-- Featured Post -->
-							<article class="post featured">
-								<header class="major">
-									<h2><a href="#">Fighting 2018</a></h2>
-									<p>Everything around you that you call life was made up by people that were no smarter than you and you can change it, you can influence it, you can build your own things that other people can use.</p>
-								</header>
-								<div style="text-align: center;">
-									<img src="{{ "/images/bill_sea.jpeg" | absolute_url }}" alt="" />
-								</div>
-
-							</article>
-
-						<!-- Posts -->
-							<section class="posts">
-                {% for post in site.posts limit:3 %}
-                {% assign mod3 = forloop.index | modulo: 3 %}
-  								<article>
-  									<header>
-  										<span class="date">{{ post.date | date_to_string }}</span>
-  										<h2><a href="{{ post.url | absolute_url }}">{{ post.title }}</h2>
-  									</header>
-  									<a href="{{ post.url | absolute_url }}" class="image main"><img src="{{ post.image | absolute_url }}" alt="" /></a>
-  									<p>{{ post.excerpt }}</p>
-  									<ul class="actions">
-  										<li><a href="{{ post.url | absolute_url }}" class="button">Full Story</a></li>
-  									</ul>
-  								</article>
+            <h2>Small step to make difference</h2>
+            <ul class="actions">
+                <li><a href="#header" class="button icon solo fa-arrow-down scrolly">Continue</a></li>
+            </ul>
+        </div>
+        <!-- Header -->
+        <header id="header">
+            <a href="{{ " / " | absolute_url }}" class="logo">{{site.title}}</a>
+        </header>
+        <!-- Nav -->
+        <nav id="nav">
+            {% include nav.html %}
+            <ul class="icons">
+                <li><a href="https://twitter.com/{{site.twitter}}" class="icon fa-twitter" rel="nofollow"><span class="label">Twitter</span></a></li>
+                <li><a href="https://facebook.com/{{site.facebook}}" class="icon fa-facebook" rel="nofollow"><span class="label">Facebook</span></a></li>
+                <li><a href="https://github.com/{{site.github}}" class="icon fa-github" rel="nofollow"><span class="label">GitHub</span></a></li>
+            </ul>
+        </nav>
+        <!-- Main -->
+        <div id="main">
+            <!-- Featured Post -->
+            <article class="post featured">
+                <header class="major">
+                    <h2><a href="#">Fighting 2018</a></h2>
+                    <p>Everything around you that you call life was made up by people that were no smarter than you and you can change it, you can influence it, you can build your own things that other people can use.</p>
+                </header>
+                <div style="text-align: center;">
+                    <img src="{{ "/images/bill_sea.jpeg" | absolute_url }}" alt="" />
+                </div>
+            </article>
+            <!-- Posts -->
+            <section class="posts">
+                {% for post in site.posts limit:3 %} {% assign mod3 = forloop.index | modulo: 3 %}
+                <article>
+                    <header>
+                        <span class="date">{{ post.date | date_to_string }}</span>
+                        <h2><a href="{{ post.url | absolute_url }}">{{ post.title }}</h2>
+                    </header>
+                    <a href="{{ post.url | absolute_url }}" class="image main"><img src="{{ post.image | absolute_url }}" alt="" /></a>
+                    <p>{{ post.excerpt }}</p>
+                    <ul class="actions">
+                        <li><a href="{{ post.url | absolute_url }}" class="button">Full Story</a></li>
+                    </ul>
+                </article>
                 {% endfor %}
-			                  <article>
-									<ul class="actions">
-					                  <li><a href="{{ "/blog" | absolute_url }}" class="button">Read more</a></li>
-					                </ul>                  				
-
-  							</article>
-
-							</section>
-					</div>
-
-				<!-- Footer -->
+                <article>
+                    <ul class="actions">
+                        <li><a href="{{ " /blog " | absolute_url }}" class="button">Read more</a></li>
+                    </ul>
+                </article>
+            </section>
+        </div>
+        <!-- Footer -->
         <!-- {% include foot.html %} -->
+    </div>
+    <!-- Scripts -->
+    {% include scripts-main.html %} {% include tracking.html %}
+</body>
 
-			</div>
-
-		<!-- Scripts -->
-		{% include scripts-main.html %}
-    {% include tracking.html %}
-
-	</body>
 </html>
