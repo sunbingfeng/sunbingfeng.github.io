@@ -40,13 +40,13 @@ So I suggest you store your projects through github or some other alternatives.
 
 Git commit history may become very complicated when many people collabrate together and time goes on. You may possibly want to know what new changes have been imported in recent commits and when was a new API function imported for example.
 
-Options | Remarks
+Usage | Remarks
 --------|------------
--\<n> | Show only the last n commits
--p | Show the difference (the patch output) introduced in each commit
---stat | Only show some abbreviated stats for each commit.
---graph | Display an ASCII graph of the branch and merge history beside the log output.
--S | Only show commits adding or removing code matching the string
+git log -\<n\> | Show only the last n commits	
+git log -p | Show the difference (the patch output) introduced in each commit
+git log --stat | Only show some abbreviated stats for each commit.
+git log --graph | Display an ASCII graph of the branch and merge history beside the log output.
+git log -S | Only show commits adding or removing code matching the string
 
 ### 2. `git diff`: compare between files or commits
 
@@ -189,7 +189,7 @@ For example, you can add an alias named `git st` to `git status`:
 $ git config --global alias.st status
 ```
 
-My global aliases is listed as follows, and you can take as a reference.
+My global aliases are listed as follows, and you can take as a reference.
 
 ```
 alias.ci=commit
