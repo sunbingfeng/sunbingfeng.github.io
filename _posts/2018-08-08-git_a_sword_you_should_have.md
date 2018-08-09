@@ -46,7 +46,7 @@ git log -\<n\> | Show only the last n commits
 git log -p | Show the difference (the patch output) introduced in each commit
 git log --stat | Only show some abbreviated stats for each commit.
 git log --graph | Display an ASCII graph of the branch and merge history beside the log output.
-git log -S | Only show commits adding or removing code matching the string
+git log -S \<function name\> | Only show commits adding or removing code matching the string, *e.g.*, a function name
 
 ### 2. `git diff`: compare between files or commits
 
@@ -56,6 +56,7 @@ Usage | Remarks
 ------|---------
 git diff | Show only changes that are still unstaged.
 git diff --staged | Show changes added through `git add` command
+git diff \<version_1\> \<version_2\> -- \<path\> | Show changes between two versions
 git diff --check | Identifies possible whitespace errors and lists them for you.
 
 ### 3. `git commit --amend`: append to previous commit
@@ -164,7 +165,14 @@ But `git revert` can make it.
 
 `git revert` is used to record some new commits to reverse the effect of some earlier commits (often only a faulty one).
 
-### 8. `git tag`: release managements
+### 8. `git checkout --ours/--theirs`: fix merge confict in a fast way
+
+Fix merging conflicts is an annoy thing. Many times, you have to fix every confict line by line. Under some conditions, there is a fast way to handle it. The contents from a specific side of the merge can be checked out of the index by using --ours or --theirs
+
+If you are in charge of some modules, and you are quite sure about your local changes to them, then you can ignore remote changes quickly through `git checkout --ours <file path>`. Similarly, using `git checkout --theirs <file path>`, you can checkout your local changes to modules that you are not in charge of, but imported by mistakes.
+
+
+### 9. `git tag`: release managements
 
 Whenever your project reaches a milestone, you can release it through creating a tag.
 
@@ -223,9 +231,10 @@ Quotes a paragraph from `Pro Git` book here:
 
 ## Appendix
 
-Reference:
+**References**:
 
-1. [Pro Git 2nd Edition](https://git-scm.com/book/en/v2)
-2. [atlassian tutorial](https://www.atlassian.com/git/tutorials/learn-git-with-bitbucket-cloud)
+1. [git scm reference](https://git-scm.com/docs/)
+2. [Pro Git 2nd Edition](https://git-scm.com/book/en/v2)
+3. [atlassian tutorial](https://www.atlassian.com/git/tutorials/learn-git-with-bitbucket-cloud)
 
 
