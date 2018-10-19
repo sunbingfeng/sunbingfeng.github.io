@@ -4,6 +4,7 @@ title:  "Design a responsive radar view with libyue & observer pattern"
 date:   2018-03-13
 excerpt: "Introduction to libyue usage based on C++"
 image: "/images/cute-dolphin.jpg"
+comments: true
 ---
 
 ## Purpose

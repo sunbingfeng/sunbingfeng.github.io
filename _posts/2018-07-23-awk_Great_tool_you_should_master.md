@@ -4,6 +4,7 @@ title:  "awk: A Silver bullet you should have"
 date:   2018-07-23
 excerpt: "Intro to awk programming language"
 image: "/images/sed-awk.jpg"
+comments: true
 ---
 
 ## Hello world

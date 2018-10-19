@@ -4,6 +4,7 @@ title:  "Git: A sword that every programmer should have"
 date:   2018-08-08
 excerpt: "Most used git tips"
 image: "/images/git.png"
+comments: true
 ---
 
 
