@@ -48,8 +48,9 @@ location:           Shenzhen, China
 # phone:              310-318-5555
 email:              bingfeng.sun@perceptin.io
 
-# Gems
-gems:
+# This will require each of these plugins automatically.
+plugins:
+  - jekyll-github-comments
   - jekyll-mentions
   - jekyll-sitemap
   - jekyll-feed
