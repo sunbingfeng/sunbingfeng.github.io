@@ -1,7 +1,7 @@
 source "https://gems.ruby-china.com"
 
  group :jekyll_plugins do
-	gem "jekyll", "~> 3.2.1"
+	gem "jekyll", ">= 3.6.3"
 	gem "jekyll-sitemap"
 	gem "jekyll-gist"
 	gem "jekyll-mentions"
