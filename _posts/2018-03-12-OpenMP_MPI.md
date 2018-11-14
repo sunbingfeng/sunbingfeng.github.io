@@ -5,6 +5,7 @@ date:   2018-03-12
 excerpt: "Introduction to parallel programming"
 image: "/images/openmp.png"
 comments: true
+tags: OpenMP
 ---
 
 ## syntax

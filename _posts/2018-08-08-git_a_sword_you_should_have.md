@@ -5,6 +5,7 @@ date:   2018-08-08
 excerpt: "Most used git tips"
 image: "/images/git.png"
 comments: true
+tags: git tips
 ---
 
 
