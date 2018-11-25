@@ -50,7 +50,6 @@ email:              bingfeng.sun@perceptin.io
 
 # This will require each of these plugins automatically.
 plugins:
-  - jekyll-github-comments
   - jekyll-mentions
   - jekyll-sitemap
   - jekyll-feed
