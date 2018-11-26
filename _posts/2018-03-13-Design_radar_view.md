@@ -42,7 +42,8 @@ In this article, we use observable lib which can be found at [github](https://gi
 
 We design a test model which generate radar test data every second.
 
-```
+```cpp
+
 class TestModel
 {
   OBSERVABLE_PROPERTIES(TestModel)
@@ -109,6 +110,7 @@ private:
     }
   }
 }
+
 ```
 
 ## Draw with yue
@@ -117,7 +119,8 @@ private:
 
 A simple example listed below demonstrates how to draw a radar point.
 
-```
+```cpp
+
 void drawRadarObstacle(nu::Painter *painter, nu::PointF center, float radius)
 {
   painter->Save();
@@ -133,6 +136,7 @@ void drawRadarObstacle(nu::Painter *painter, nu::PointF center, float radius)
 
   painter->Restore();
 }
+
 ```
 
 ### redraw with callback
@@ -147,7 +151,8 @@ It consists of three steps:
 
 During the every redraw, we get the latest sensor data from model object.
 
-```
+```cpp
+
   scoped_refptr<nu::Container> radar_view(new nu::Container);
   radar_view->SetStyle("position", "absolute", "width", window_width, "height", window_height, "top", 0, "right", 0);
 
@@ -156,6 +161,7 @@ During the every redraw, we get the latest sensor data from model object.
     updateSonarArc(painter, &model);  
     updateRadarDetectedObjects(painter, &model);
   });
+  
 ```
 
 ## Conclusion

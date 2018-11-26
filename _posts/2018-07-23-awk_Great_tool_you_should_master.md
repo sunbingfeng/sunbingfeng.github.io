@@ -11,18 +11,18 @@ tags: awk logs
 ## Hello world
 awk is a field-oriented pattern processing language with a C-style syntax. We can write our first awk script demonstrating a simple output of "Hello world".
 
-```
+```viml
 echo "" | awk '{print "Hello world"}'
 ```
 
 A basic awk command is of the following form:
 
-```
+```viml
 awk options 'selection_criteria {action }' input-file > output-file
 ```
 Available options:
 
-```
+```viml
 -f program-file : Reads the AWK program source from the file 
                   program-file, instead of from the 
                   first command line argument.
@@ -53,7 +53,7 @@ You may find it a little tough, and have no idea where to start with. But if you
 
 I give you a simple bash code to implement above task, and you can take a reference.
 
-```
+```shell
 #!/usr/bin/env bash
   
 base="${1%/*}/"
@@ -72,7 +72,7 @@ Done!
 
 You are assigned a task to tranform every record in a csv file to comma seperated and filter out the records with zero heading or flag_h.
 
-```
+```viml
 time x y heading flag_p flag_h
 1531465177.6090000 800834.5063542 2499953.6377944 275.5880000 3 4
 1531465177.7030001 800834.2666566 2499953.6450343 275.4430000 3 4
@@ -92,7 +92,7 @@ You can probably write a c++ program or python code to do this job, and I am def
 
 Let me use awk instead.
 
-```
+```shell
 #!/usr/bin/env bash
   
 base="${1%/*}/"
@@ -104,7 +104,7 @@ Please note that the operation $1=$1 in it has no extra meaning except forcing t
 
 Output file:
 
-```
+```viml
 time,x,y,heading,flag_p,flag_h
 1531465177.6090000,800834.5063542,2499953.6377944,275.5880000,3,4
 1531465177.7030001,800834.2666566,2499953.6450343,275.4430000,3,4

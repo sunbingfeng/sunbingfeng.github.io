@@ -67,7 +67,7 @@ Changing your most recent commit is probably the most common rewriting of histor
 do. You’ll often want to do two basic things to your last commit: simply change the commit message,
 or change the actual content of the commit by adding, removing and modifying files.
 
-```
+```viml
 $ git commit -m 'initial commit'
 $ git add forgotten_file
 $ git commit --amend
@@ -77,7 +77,7 @@ You end up with a single commit — the second commit replaces the results of th
 
 ### 4. `git reset`: clean workspace with one command
 
-```
+```viml
 
 # Does not touch the index file or the working tree at all (but resets the head to <commit>, just like all modes do)
 $ git reset --soft <commit>
@@ -93,7 +93,7 @@ There are situations where you were adding a new feature in your dev branch and 
 
 Thus, you have to save your current working space and migrate to a new fix branch. You can possibly add these changes and commit it rightly, but it's not recommended because it may be quite buggy. The perfect method to do it is to use `git stash` command.
 
-```
+```viml
 # Normal usage, save working directory and index state
 $ git stash
 
@@ -122,12 +122,12 @@ Supposed that you are in c4 commit on dev branch, let me show you how to use `gi
 
 Using following command:
 
-```
+```viml
 $ git rebase -i HEAD~3
 ```
 Change default pick commands to follows in following interactive prompt:
 
-```
+```viml
 reword f7f3f6d c2
 fixup 310154e c3
 fixup a5f4a0d c4
@@ -178,7 +178,7 @@ If you are in charge of some modules, and you are quite sure about your local ch
 
 Whenever your project reaches a milestone, you can release it through creating a tag.
 
-```
+```viml
 # create a full tag with detailed message
 $ git tag -a v1.4 -m "my version 1.4"
 
@@ -195,13 +195,13 @@ You could configure some useful shortcuts through `git config`.
 
 For example, you can add an alias named `git st` to `git status`:
 
-```
+```viml
 $ git config --global alias.st status
 ```
 
 My global aliases are listed as follows, and you can take as a reference.
 
-```
+```viml
 alias.ci=commit
 alias.st=status
 alias.lg=log --graph
