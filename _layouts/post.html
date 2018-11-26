@@ -38,7 +38,9 @@ Jekyll integration by somiibo.com
                 <span>[
                   {% for tag in page.tags %}
                     {% capture tag_name %}{{ tag }}{% endcapture %}
-                    <a class="no-underline" href="/tag/{{ tag_name }}"><code class="highligher-rouge"><nobr>{{ tag_name }}</nobr></code>&nbsp;</a> 
+                    <a class="no-underline" href="/tag/{{ tag_name }}"><code class="inlinecode"><nobr>
+                    {{ tag_name }}
+                    </nobr></code>&nbsp;</a> 
                   {% endfor %}
                 ]</span>
                 <p>{{content}}</p>
