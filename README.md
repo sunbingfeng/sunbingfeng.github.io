@@ -1,4 +1,4 @@
-Bill's tech blog
+Bill's Tech Blog
 ================
 
 ## posts history
