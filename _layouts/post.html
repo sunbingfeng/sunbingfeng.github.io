@@ -8,6 +8,7 @@ Jekyll integration by somiibo.com
 <html>
 
 <head>
+    <link rel="stylesheet" href="/assets/css/footer.css">
     {% include head.html %}
 </head>
 
@@ -92,9 +93,25 @@ Jekyll integration by somiibo.com
 
             <!-- Footer -->
             <footer>
+                <div class="newsletter-container">
+                            <p class="newsletter-text">Get new posts to your inbox</p>
+                            <!-- <p class="newsletter-text"></p> -->
+                            <form class="newsletter-form" action="https://feedburner.google.com/fb/a/mailverify" method="post" target="popupwindow" onsubmit="window.open('https://feedburner.google.com/fb/a/mailverify?uri=BillsTechBlog', 'popupwindow', 'scrollbars=yes,width=550,height=520');return true">
+                                <input type="hidden" value="BillsTechBlog" name="uri" />
+
+                                <input type="hidden" name="loc" value="en_US" />
+                                
+                                <input class="newsletter-email" type="text" name="email" placeholder="name@example.com" />
+
+                                <input class="newsletter-submit" type="submit" value="Subscribe" />
+
+                            </form>
+                </div>
+
                 <ul class="actions">
                     <li><a href="{{ "/blog" | absolute_url }}" class="button">Return</a></li>
                 </ul>
+
             </footer>
         </div>
         <!-- Footer -->
@@ -102,5 +119,7 @@ Jekyll integration by somiibo.com
     <!-- Scripts -->
     {% include scripts-main.html %} {% include tracking.html %}
 </body>
+
+
 
 </html>
