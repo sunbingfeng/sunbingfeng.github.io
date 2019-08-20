@@ -7,4 +7,5 @@ source "https://gems.ruby-china.com"
 	gem "jekyll-mentions"
 	gem "jekyll-feed"
 	gem "jekyll-paginate"
+	gem "jekyll-feed"
  end
