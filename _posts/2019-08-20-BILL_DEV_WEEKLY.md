@@ -16,7 +16,7 @@ tags: DEV-RSS
 
 [Being a great engineering mentor](https://www.xkyle.com/Being-a-Great-Engineering-Mentor/): To me the most important thing is remembering “who to be”, and not as much as “how to act”.
 
-## Technical posts
+## Technical Posts
 
 [Long names are long](http://journal.stuffwithstuff.com/2016/06/16/long-names-are-long/): Naming is a headache, and you should stop using long variable or function identifier.
 
