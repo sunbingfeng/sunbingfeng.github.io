@@ -5,7 +5,7 @@ date:   2019-08-25
 excerpt: "Dev weekly"
 image: "/images/git.png"
 comments: true
-tags: DEV-RSS, 2019, 2019-08
+tags: DEV-RSS 2019 2019-08
 ---
 
 ## Words To You
