@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Bill's Dev Weekly 2019#41"
+title:  "Bill's Dev Weekly Y2019#41"
 date:   2019-10-07
 excerpt: "Dev weekly"
 image: "/images/git.png"
