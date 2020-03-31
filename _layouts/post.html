@@ -68,53 +68,41 @@ Jekyll integration by somiibo.com
             </section>
 
             {% if page.comments %}
-                <div id="disqus_thread"></div>
-                <script>
-
-                /**
-                *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
-                *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
-                /*
-                var disqus_config = function () {
-                this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
-                this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
-                };
-                */
-                (function() { // DON'T EDIT BELOW THIS LINE
-                var d = document, s = d.createElement('script');
-                s.src = 'https://sunbingfeng-blog.disqus.com/embed.js';
-                s.setAttribute('data-timestamp', +new Date());
-                (d.head || d.body).appendChild(s);
-                })();
+            <div>
+                <script src="https://utteranc.es/client.js"
+                repo="sunbingfeng/sunbingfeng.github.io"
+                issue-term="pathname"
+                label="comments"
+                theme="github-light"
+                crossorigin="anonymous"
+                async>
                 </script>
-                <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-            
+            </div>
             {% endif %}
 
             <!-- Footer -->
             <footer>
                 <div class="newsletter-container">
-                            <p class="newsletter-text">Get new posts to your inbox</p>
-                            <!-- <p class="newsletter-text"></p> -->
-                            <form class="newsletter-form" action="https://feedburner.google.com/fb/a/mailverify" method="post" target="popupwindow" onsubmit="window.open('https://feedburner.google.com/fb/a/mailverify?uri=BillsTechBlog', 'popupwindow', 'scrollbars=yes,width=550,height=520');return true">
-                                <input type="hidden" value="BillsTechBlog" name="uri" />
+                    <p class="newsletter-text">Get new posts to your inbox</p>
+                    <!-- <p class="newsletter-text"></p> -->
+                    <form class="newsletter-form" action="https://feedburner.google.com/fb/a/mailverify" method="post" target="popupwindow" onsubmit="window.open('https://feedburner.google.com/fb/a/mailverify?uri=BillsTechBlog', 'popupwindow', 'scrollbars=yes,width=550,height=520');return true">
+                        <input type="hidden" value="BillsTechBlog" name="uri" />
 
-                                <input type="hidden" name="loc" value="en_US" />
-                                
-                                <input class="newsletter-email" type="text" name="email" placeholder="name@example.com" />
+                        <input type="hidden" name="loc" value="en_US" />
+                        
+                        <input class="newsletter-email" type="text" name="email" placeholder="name@example.com" />
 
-                                <input class="newsletter-submit" type="submit" value="Subscribe" />
+                        <input class="newsletter-submit" type="submit" value="Subscribe" />
 
-                            </form>
+                    </form>     
                 </div>
 
                 <ul class="actions">
                     <li><a href="{{ "/blog" | absolute_url }}" class="button">Return</a></li>
                 </ul>
-
-            </footer>
+            </footer>                
         </div>
-        <!-- Footer -->
+        <!-- Footer -->    
     </div>
     <!-- Scripts -->
     {% include scripts-main.html %} {% include tracking.html %}
