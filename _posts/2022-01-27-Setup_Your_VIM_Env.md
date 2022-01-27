@@ -41,13 +41,13 @@ ln -s ~/.tmux/.tmux.conf ~/.tmux.conf
 
 The default prefix/leader key is `Control+o`, and you can change it to your preference.
 
-*Basic*:<br>
+**Basic**:<br>
 - `tmux` to create a new tmux session
 - `tmux a` to attach to an existed session
 - The prefix key must be typed before any commands
 - `Control+o` then `?` to bring up list of key mappings
 
-*Window managements*:<br>
+**Window managements**:<br>
 - `Control+o` then `s` to show list of windows available
 - `Control+o` then `f` to search window through keywords
 - `Control+o` then `,` to rename current window
@@ -58,7 +58,7 @@ The default prefix/leader key is `Control+o`, and you can change it to your pref
 - `Control+o` then `Control+a` switch between current and last window
 - `Control+o` then `[0-9]` to goto the numbered window
 
-*Pane managements*:<br>
+**Pane managements**:<br>
 - `Control+o` then `v` to split horizontally
 - `Control+o` then `b` to split vertically
 - `Control+o` then `;` to switch between current and last pane
@@ -66,7 +66,7 @@ The default prefix/leader key is `Control+o`, and you can change it to your pref
 - `Control+o` then `z` to maximum/restore current pane
 - `Control+o` then `x` to close current pane
 
-*Copy&Paste*:<br>
+**Copy&Paste**:<br>
 We use `xclip` be default, so you should install it through:
 ```sudo apt-get install xclip```
 

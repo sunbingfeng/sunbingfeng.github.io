@@ -8,22 +8,22 @@ comments: true
 tags: Y-2022 vim configuration tools summary
 ---
 
-##Install Vim configurations<br>
+## Install Vim configurations<br>
 We have uploaded our vim configurations to ![repo](https://github.com/sunbingfeng/dot-vim), and you can install with following script:
 ```shell
 $ wget -qO - https://raw.github.com/sunbingfeng/dot-vim/master/setup.sh | bash
 ```
 
-##Usage<br>
+## Usage<br>
 
-###**Basic**<br>
+### **Basic**<br>
 - Leader key is set to `,`, and you can change it to any character as you like
 - `:`: input a command manually
 - `,+h:`: show history vim commands, and it can boost the input speed of command
 
-###**NERDTree: the file explorer**<br>
+### **NERDTree: the file explorer**<br>
 A typical NERDTree workspace contains a manager pane, and several file panes.<br>
-Following is my blog project opened through NERDTree:
+Following is my blog project opened through NERDTree:<br>
 <a href="{{ site.url }}/images/nerdtree_split.webp" target="_blank"><img src="{{ site.url }}/images/nerdtree_split.webp"  alt="img" height="200px" align="center"/></a>
 
 Some key mappings used with high frequency:<br>
@@ -45,11 +45,11 @@ You can also press `m` at the NERDTree pane to toggle the menu:
 
 Thus, you can copy/move/delete file according to the tips.
 
-###**File navigation**<br>
-###**Bookmark management**<br>
+### **File navigation**<br>
+### **Bookmark management**<br>
 
-###**Search globally**<br>
+### **Search globally**<br>
 
-###**Code formatting**<br>
+### **Code formatting**<br>
 
-###**View code changes**<br>
+### **View code changes**<br>
