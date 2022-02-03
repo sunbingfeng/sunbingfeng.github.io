@@ -9,4 +9,5 @@ source "https://gems.ruby-china.com"
 	gem "jekyll-paginate"
  end
 
+gem "jekyll-theme-cayman"
 gem "webrick", "~> 1.7"

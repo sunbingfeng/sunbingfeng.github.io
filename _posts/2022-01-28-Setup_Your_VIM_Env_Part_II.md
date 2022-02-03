@@ -24,7 +24,8 @@ $ wget -qO - https://raw.github.com/sunbingfeng/dot-vim/master/setup.sh | bash
 ### NERDTree: the File Explorer<br>
 A typical NERDTree workspace contains a navigation pane, and several file panes.<br>
 Following is my blog project opened through NERDTree:<br>
-<a href="{{ site.url }}/images/nerdtree_split.webp" target="_blank"><img src="{{ site.url }}/images/nerdtree_split.webp"  alt="img" height="200px" align="center"/></a>
+
+<a href="{{ site.url }}/images/nerdtree_split.webp" target="_blank"><img src="{{ site.url }}/images/nerdtree_split.webp"  alt="img" height="400px" align="center"/></a>
 
 Some key mappings used with high frequency:<br>
 - `,+n`: toggle NERDTree pane
@@ -41,7 +42,8 @@ When the cursor is at the NERDTree pane, you can:<br>
 - `t`: open the file under cursor in a new tab
 
 You can also press `m` at the NERDTree pane to toggle the menu:
-<a href="{{ site.url }}/images/nerdtree_menu.webp" target="_blank"><img src="{{ site.url }}/images/nerdtree_menu.webp"  alt="img" height="200px" align="center"/></a>
+
+<a href="{{ site.url }}/images/nerdtree_menu.webp" target="_blank"><img src="{{ site.url }}/images/nerdtree_menu.webp"  alt="img" height="400px" align="center"/></a>
 
 Thus, you can copy/move/delete file according to the tips.
 
@@ -50,18 +52,19 @@ Modern IDEs provide many useful shortcuts to make you code easier, e.g., `goto d
 If Vim can't do that, it definitely will drop out. However, basic Vim doesn't have these features. Luckily, we can realize these functions through plugins, e.g., `FZF` in our configuration.
 
 **High Frequency Usage**<br>
-- `Control+p`: search file by name
-<a href="{{ site.url }}/images/fzf_goto_file.webp" target="_blank"><img src="{{ site.url }}/images/fzf_goto_file.webp"  alt="img" height="200px" align="center"/></a>
-- `Control+g`: search symbols at global range
-<a href="{{ site.url }}/images/fzf_search_symbols.webp" target="_blank"><img src="{{ site.url }}/images/fzf_search_symbols.webp"  alt="img" height="200px" align="center"/></a>
-- `Control+f`: list symbols in current file, and you can view functions/members easily. Mote that you should create tags first according to tips in [README](https://github.com/sunbingfeng/dot-vim/blob/master/README.md)
-<a href="{{ site.url }}/images/fzf_list_tags.webp" target="_blank"><img src="{{ site.url }}/images/fzf_list_tags.webp"  alt="img" height="200px" align="center"/></a>
+- `Control+p`: search file by name<br>
+<a href="{{ site.url }}/images/fzf_goto_file.webp" target="_blank"><img src="{{ site.url }}/images/fzf_goto_file.webp"  alt="img" height="400px" align="center"/></a>
+- `Control+g`: search symbols at global range<br>
+<a href="{{ site.url }}/images/fzf_search_symbols.webp" target="_blank"><img src="{{ site.url }}/images/fzf_search_symbols.webp"  alt="img" height="400px" align="center"/></a>
+- `Control+f`: list symbols in current file, and you can view functions/members easily. Mote that you should create tags first according to tips in [README](https://github.com/sunbingfeng/dot-vim/blob/master/README.md)<br>
+<a href="{{ site.url }}/images/fzf_list_tags.webp" target="_blank"><img src="{{ site.url }}/images/fzf_list_tags.webp"  alt="img" height="400px" align="center"/></a>
 - `,+b`: list opened buffers, and previous accessed file will be at the highest priority. You can press `Enter` to switch back and forward.
 - `,hh`: list history accessed files
 
 **Bookmark Management**<br>
 You can also bookmark at where you add a `TODO`, or the line of code you want to access quickly later.<br>
-<a href="{{ site.url }}/images/bookmark.webp" target="_blank"><img src="{{ site.url }}/images/bookmark.webp"  alt="img" height="200px" align="center"/></a>
+
+<a href="{{ site.url }}/images/bookmark.webp" target="_blank"><img src="{{ site.url }}/images/bookmark.webp"  alt="img" height="400px" align="center"/></a>
 - `mm`: toggle bookmark at current line
 - `mc`: clear all bookmarks
 - `ma`: list all bookmarks
