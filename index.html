@@ -3,85 +3,79 @@ layout: null
 title: Bill's Tech Blog
 description: tech posts in-summary
 sitemap:
-    priority: 1.0
-    lastmod: 2018-03-12
-    changefreq: weekly
+priority: 1.0
+lastmod: 2018-03-12
+changefreq: weekly
 ---
-
 <!DOCTYPE HTML>
 <!--
-	Massively by HTML5 UP
-	html5up.net | @ajlkn
+Massively by HTML5 UP
+html5up.net | @ajlkn
 Jekyll integration by somiibo.com
-	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
 -->
-
 <head>
     <title>Bill's Tech Blog</title>
 </head>
 <html>
-
-<head>
-    {% include head.html %}
-    <!-- <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous"> -->
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css">
-</head>
-
-<body class="is-loading">
-    <!-- Wrapper -->
-    <div id="wrapper" class="fade-in">
-        <!-- Intro -->
-        <div id="intro">
-            <h1>{{site.title}}</h1>
-            <h2>Small step to make difference</h2>
-            <ul class="actions">
-                <li><a href="#header" class="button icon solo fas fa-arrow-down scrolly">Continue</a></li>
-            </ul>
-        </div>
-        <!-- Header -->
-        <header id="header">
-            <a href="{{ "/" | absolute_url }}" class="logo">{{site.title}}</a>
-        </header>
-        <!-- Nav -->
-        <nav id="nav">
-            {% include nav.html %}
-            <ul class="icons">
-                <li><a href="https://twitter.com/{{site.twitter}}" class="no_border_bottom" rel="nofollow"><i class="fab fa-twitter-square fa-2x"></i></a></li>
-                <li><a href="https://dev.to/sunbingfeng" class="no_border_bottom" rel="nofollow"><i class="fab fa-dev fa-2x"></i></a></li>
-                <li><a href="https://github.com/{{site.github}}" class="no_border_bottom" rel="nofollow"><i class="fab fa-github-square fa-2x"></i></a></li>
-            </ul>
-        </nav>
-        <!-- Main -->
-        <div id="main">
-            <!-- Featured Post -->
-<!--             <article class="post featured">
-                <header class="major">
-                    <h2><a href="#">Fighting!</a></h2>
-                    <p>Everything around you that you call life was made up by people that were no smarter than you and you can change it, you can influence it, you can build your own things that other people can use.</p>
-                </header>
-            </article> -->
-            <!-- Posts -->
-            <section class="posts">
-                {% for post in site.posts limit:5 %} {% assign mod3 = forloop.index | modulo: 5 %}
-                <article>
-                    <header>
-                        <span class="date">{{ post.date | date_to_string }}</span>
-                        <h2><a href="{{ post.url | absolute_url }}">{{ post.title }}</h2>
+    <head>
+        {% include head.html %}
+        <!-- <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous"> -->
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css">
+    </head>
+    <body class="is-loading">
+        <!-- Wrapper -->
+        <div id="wrapper" class="fade-in">
+            <!-- Intro -->
+            <div id="intro">
+                <h1>{{site.title}}</h1>
+                <h2>Small step to make difference</h2>
+                <ul class="actions">
+                    <li><a href="#header" class="button icon solo fas fa-arrow-down scrolly">Continue</a></li>
+                </ul>
+            </div>
+            <!-- Header -->
+            <header id="header">
+                <a href="{{ "/" | absolute_url }}" class="logo">{{site.title}}</a>
+            </header>
+            <!-- Nav -->
+            <nav id="nav">
+                {% include nav.html %}
+                <ul class="icons">
+                    <li><a href="https://twitter.com/{{site.twitter}}" class="no_border_bottom" rel="nofollow"><i class="fab fa-twitter-square fa-2x"></i></a></li>
+                    <li><a href="https://dev.to/sunbingfeng" class="no_border_bottom" rel="nofollow"><i class="fab fa-dev fa-2x"></i></a></li>
+                    <li><a href="https://github.com/{{site.github}}" class="no_border_bottom" rel="nofollow"><i class="fab fa-github-square fa-2x"></i></a></li>
+                </ul>
+            </nav>
+            <!-- Main -->
+            <div id="main">
+                <!-- Featured Post -->
+                <!--             <article class="post featured">
+                    <header class="major">
+                        <h2><a href="#">Fighting!</a></h2>
+                        <p>Everything around you that you call life was made up by people that were no smarter than you and you can change it, you can influence it, you can build your own things that other people can use.</p>
                     </header>
-                    
-                    <span>[
-                    {% for tag in post.tags %}
-                        {% capture tag_name %}{{ tag }}{% endcapture %}
-                        <i><nobr>{{ tag_name }}</nobr>&nbsp;</i>
-                    {% endfor %}
-                    ]</span>
-                    
-                    <p style="text-align: center;" >{{ post.excerpt }}</p>  
-
-                    <ul class="actions">
-                        <li><a href="{{ post.url | absolute_url }}" class="button">Full Story</a></li>
-                    </ul>
-                </article>
+                </article> -->
+                <!-- Posts -->
+                <section class="posts">
+                    {% for post in site.posts limit:5 %} {% assign mod3 = forloop.index | modulo: 5 %}
+                        <article>
+                            <header>
+                                <span class="date">{{ post.date | date_to_string }}</span>
+                                <h2>{{ post.title }}</h2>
+                            </header>
+                            
+                            <div>
+                                {% for tag in post.tags %}
+                                {% capture tag_name %}{{ tag }}{% endcapture %}
+                                    <i class="tag"><nobr>{{ tag_name }}</nobr>&nbsp;</i>
+                                {% endfor %}
+                            </div>
+                            <p style="text-align: center;" >{{ post.excerpt }}</p>
+                            <ul class="actions">
+                                <li><a href="{{ post.url | absolute_url }}" class="button">Full Story</a></li>
+                            </ul>
+                    </article>
                 {% endfor %}
                 <article>
                     <ul class="actions">
@@ -96,5 +90,4 @@ Jekyll integration by somiibo.com
     <!-- Scripts -->
     {% include scripts-main.html %} {% include tracking.html %}
 </body>
-
 </html>

@@ -21,7 +21,7 @@ Jekyll integration by somiibo.com
     <div id="wrapper" class="fade-in">
         <!-- Header -->
         <header id="header">
-            <a href="{{ " / " | absolute_url }}" class="logo">{{site.title}}</a>
+            <a href="{{ "/" | absolute_url }}" class="logo">{{site.title}}</a>
         </header>
         <!-- Nav -->
         <nav id="nav">
@@ -46,9 +46,8 @@ Jekyll integration by somiibo.com
                 <article>
                     <header>
                         <span class="date">{{ post.date | date_to_string }}</span>
-                        <h2><a href="{{ post.url | absolute_url }}">{{ post.title }}</h2>
+                        <h2>{{ post.title }}</h2>
                     </header>
-                    <!-- <a href="{{ post.url | absolute_url }}" class="image fit"><img src="{{ post.image | absolute_url }}" alt="" /></a> -->
                     <p style="text-align: center;">{{ post.excerpt }}</p>
                     <ul class="actions">
                         <li><a href="{{ post.url | absolute_url }}" class="button">Full Story</a></li>

@@ -3298,6 +3298,11 @@
 	border-bottom: inherit;
 }
 
+.tag {
+  background: #ecf0f5;
+	border-radius: 0.2em;
+}
+
 /* Header */
 
 	#header {
