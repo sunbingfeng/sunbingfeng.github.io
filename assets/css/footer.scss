@@ -4,12 +4,12 @@
 footer {
 
     .newsletter-container {
-        border-radius: 1em;
+        border-radius: 0.5em;
         display: flex;
         flex-direction: column;
         justify-content: center;
         padding: 1em 0;
-        background: #CACFD2;
+        background: rgba(244, 246, 249, 1.0);
         box-shadow: 0 4px 6px 0 rgba(0, 0, 0, 0.2);
         margin-bottom: 2em;
     }
@@ -30,7 +30,6 @@ footer {
     }
     .newsletter-text {
         font-weight: 600;
-        color: #fff;
         text-align: center;
     }
     .newsletter-email,

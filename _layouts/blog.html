@@ -13,6 +13,7 @@ Jekyll integration by somiibo.com
 
 <head>
     {% include head.html %}
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css">
 </head>
 
 <body class="is-loading">
@@ -26,9 +27,9 @@ Jekyll integration by somiibo.com
         <nav id="nav">
             {% include nav.html %}
             <ul class="icons">
-                <li><a href="https://twitter.com/{{site.twitter}}" class="icon fa-twitter" rel="nofollow"><span class="label">Twitter</span></a></li>
-                <li><a href="https://facebook.com/{{site.facebook}}" class="icon fa-facebook" rel="nofollow"><span class="label">Facebook</span></a></li>
-                <li><a href="https://github.com/{{site.github}}" class="icon fa-github" rel="nofollow"><span class="label">GitHub</span></a></li>
+                <li><a href="https://twitter.com/{{site.twitter}}" class="no_border_bottom" rel="nofollow"><i class="fab fa-twitter-square fa-2x"></i></a></li>
+                <li><a href="https://dev.to/sunbingfeng" class="no_border_bottom" rel="nofollow"><i class="fab fa-dev fa-2x"></i></a></li>
+                <li><a href="https://github.com/{{site.github}}" class="no_border_bottom" rel="nofollow"><i class="fab fa-github-square fa-2x"></i></a></li>
             </ul>
         </nav>
         <!-- Main -->
@@ -48,7 +49,7 @@ Jekyll integration by somiibo.com
                         <h2><a href="{{ post.url | absolute_url }}">{{ post.title }}</h2>
                     </header>
                     <!-- <a href="{{ post.url | absolute_url }}" class="image fit"><img src="{{ post.image | absolute_url }}" alt="" /></a> -->
-                    <p>{{ post.excerpt }}</p>
+                    <p style="text-align: center;">{{ post.excerpt }}</p>
                     <ul class="actions">
                         <li><a href="{{ post.url | absolute_url }}" class="button">Full Story</a></li>
                     </ul>

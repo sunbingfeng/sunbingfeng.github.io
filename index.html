@@ -23,7 +23,8 @@ Jekyll integration by somiibo.com
 
 <head>
     {% include head.html %}
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+    <!-- <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous"> -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css">
 </head>
 
 <body class="is-loading">
@@ -34,7 +35,7 @@ Jekyll integration by somiibo.com
             <h1>{{site.title}}</h1>
             <h2>Small step to make difference</h2>
             <ul class="actions">
-                <li><a href="#header" class="button icon solo fa-arrow-down scrolly">Continue</a></li>
+                <li><a href="#header" class="button icon solo fas fa-arrow-down scrolly">Continue</a></li>
             </ul>
         </div>
         <!-- Header -->
@@ -45,9 +46,9 @@ Jekyll integration by somiibo.com
         <nav id="nav">
             {% include nav.html %}
             <ul class="icons">
-                <li><a href="https://twitter.com/{{site.twitter}}" rel="nofollow"><i class="fab fa-twitter-square fa-2x"></i></a></li>
-                <li><a href="https://dev.to/sunbingfeng" rel="nofollow"><i class="fab fa-dev fa-2x"></i></a></li>
-                <li><a href="https://github.com/{{site.github}}" rel="nofollow"><i class="fab fa-github-square fa-2x"></i></a></li>
+                <li><a href="https://twitter.com/{{site.twitter}}" class="no_border_bottom" rel="nofollow"><i class="fab fa-twitter-square fa-2x"></i></a></li>
+                <li><a href="https://dev.to/sunbingfeng" class="no_border_bottom" rel="nofollow"><i class="fab fa-dev fa-2x"></i></a></li>
+                <li><a href="https://github.com/{{site.github}}" class="no_border_bottom" rel="nofollow"><i class="fab fa-github-square fa-2x"></i></a></li>
             </ul>
         </nav>
         <!-- Main -->
@@ -84,7 +85,7 @@ Jekyll integration by somiibo.com
                 {% endfor %}
                 <article>
                     <ul class="actions">
-                        <li><a href="{{ "/blog/" | absolute_url }}" class="button">Read more</a></li>
+                        <li style="padding: 8em;"><a href="{{ "/blog/" | absolute_url }}" class="button">Read more</a></li>
                     </ul>
                 </article>
             </section>
