@@ -53,7 +53,7 @@ If Vim can't do that, it definitely will drop out. However, basic Vim doesn't ha
 
 **High Frequency Usage**<br>
 - `Control+p`: search file by name<br>
-<a href="{{ site.url }}/images/fzf_goto_file.webp" target="_blank"><img src="{{ site.url }}/images/fzf_goto_file.webp"  alt="img" height="400px" align="center"/></a>
+<img src="{{ site.url }}/images/fzf_goto_file.webp"  alt="img" height="400px" align="center"/>
 - `Control+g`: search symbols at global range<br>
 <a href="{{ site.url }}/images/fzf_search_symbols.webp" target="_blank"><img src="{{ site.url }}/images/fzf_search_symbols.webp"  alt="img" height="400px" align="center"/></a>
 - `Control+f`: list symbols in current file, and you can view functions/members easily. Mote that you should create tags first according to tips in [README](https://github.com/sunbingfeng/dot-vim/blob/master/README.md)<br>

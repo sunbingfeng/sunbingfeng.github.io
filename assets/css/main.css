@@ -1750,6 +1750,12 @@
 		font-size: 0.8rem;
 	}
 
+	img {
+	  width: 60%;
+	  margin: auto;
+	  display: block;
+	}
+
 	sub {
 		font-size: 0.8rem;
 		position: relative;
@@ -1765,8 +1771,9 @@
 	blockquote {
 		border-left: solid 4px;
 		font-style: italic;
+		font-weight: bold;
 		margin: 0 0 2rem 0;
-		padding: 0.5rem 0 0.5rem 2rem;
+		padding: 0 0.5rem;
 	}
 
 	code {
@@ -1774,7 +1781,7 @@
 		font-family: "Courier New", monospace;
 		font-size: 0.9rem;
 		margin: 0 0.25rem;
-		padding: 0.25rem 0.65rem;
+		padding: 0.1rem 0.2rem;
 	}
 
 	pre {
