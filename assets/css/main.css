@@ -1750,12 +1750,6 @@
 		font-size: 0.8rem;
 	}
 
-	img {
-	  width: 60%;
-	  margin: auto;
-	  display: block;
-	}
-
 	sub {
 		font-size: 0.8rem;
 		position: relative;
@@ -2421,6 +2415,12 @@
 		}
 
 /* Image */
+
+	.center_img {
+	  width: 60%;
+	  margin: auto;
+	  display: block;
+	}
 
 	.image {
 		border: 0;

@@ -17,7 +17,7 @@ tags: Y-2022 thesis word tips summary
 > 建议 1: 采用git对论文进行工程化管理<br>
 
 首先给大家展示下我的工程文件夹结构：<br>
-<img src="{{ site.url }}/images/2022-02-06/folder_structure.png"  alt="img" align="center"/>
+<img src="{{ site.url }}/images/2022-02-06/folder_structure.png"  alt="img" align="center" class="center_img" />
 
 其主要由几部分组成：<br>
 - `images`: 主要存放一些静态图片，比如：框图、流程图等
@@ -27,7 +27,7 @@ tags: Y-2022 thesis word tips summary
 - `thesis`: 论文文件（文件名拼写有笔误）
 
 论文来来回回需要不断的修改更新，只要涉及到更新，就会有版本管理的问题。请问，你还在使用传统的版本管理方式，比如，拷贝一个文件夹备份，并命名`初稿_1`，`初稿_2`或者`最终版的最终版`吗？如果是，请你一定要跟这种方式告别，是时候采用自动化的版本控制工具了。我这里推荐的是基于`git`进行版本控制，也建议没有编程背景的童鞋Google一下基础的git操作，学习它会让你受益终身。采用这种自动化工具的直接收益是可以极大的方便我们做管理更新。你每写一段内容、一个章节，甚至插入几张图片，都可以提交一个新的版本，从而实现增量式的更新。对于不满意的修改还可以直接快速回滚到之前的版本。下面给大家展示一下我的一部分提交历史：<br>
-<img src="{{ site.url }}/images/2022-02-06/history.png"  alt="img" align="center"/>
+<img src="{{ site.url }}/images/2022-02-06/history.png"  alt="img" align="center" class="center_img" />
 
 至于提交频率，这个依个人习惯。建议多提交，小步迭代，勤打tag。也即是说，阶段性的完成一个章节，或者完成初稿、终稿等时，打上一个版本标签，方便回溯管理。详细的使用说明，这里不做过多阐述，大家可以在写论文的过程中逐渐学习体会。
 
@@ -56,7 +56,7 @@ tags: Y-2022 thesis word tips summary
 - `SEQ equation \r \h`：公式编号
 
 下面以插入一个图示编号为例，其他类型的编号方法一样:<br>
-<img src="{{ site.url }}/images/2022-02-06/insert_field.png"  alt="img" align="center"/>
+<img src="{{ site.url }}/images/2022-02-06/insert_field.png"  alt="img" align="center" class="center_img" />
 
 首先在需要插入编号的地方，插入一个域`SEQ chapter \c`表征当前章节号，然后输入间隔符`.`，接着是图示编号`SEQ figure`，完毕。后续如果插入了新的图示，其会自动编号，也可以手动刷新编号。由于添加域的情况很多，因此我绑定了一个自定义快捷键(InsertField)，以快速调出插入域的窗口。
 
@@ -65,13 +65,13 @@ tags: Y-2022 thesis word tips summary
 > 建议 3: 不要怕麻烦，利用书签实现交叉引用管理<br>
 
 那么如何使用书签实现交叉引用的管理？很简单，对每一个被引的元素添加书签，在引用的地方插入一个交叉引用。当被引用的元素编号更新后，该引用会同步更新。另外，关于书签的命名，建议按照自己的习惯统一命名，这样方便管理和插入。我采用的是`类型-说明`的方法，比如，如下所示的图示书签名为`fig_phase_k`， 供参考<br>
-<img src="{{ site.url }}/images/2022-02-06/bookmark.png"  alt="img" align="center"/>
+<img src="{{ site.url }}/images/2022-02-06/bookmark.png"  alt="img" align="center" class="center_img" />
 
 论文中交叉引用的地方多了，插入书签会变得很繁琐，甚至你会觉得是不是可以偷懒一下。但是，如果你手动输入一个交叉引用，其实就相对于埋了一个地雷。当对应的引用更新了，这个交叉引用没有更新，排查起来非常困难。使用插入书签的方式，前期是麻烦一点，但是后期维护起来会很轻松，总的来说还是很有意义的。
 
 ### 多图片排版
 为了增加论文的可读性，经常需要加入各种图示。一张图片，还好处理。当涉及到多张对比图需要水平布局时，如果没有一个好的方法，会让你分分钟叫爹妈。<br>
-<img src="{{ site.url }}/images/2022-02-06/multi_images.png"  alt="img" align="center"/>
+<img src="{{ site.url }}/images/2022-02-06/multi_images.png"  alt="img" align="center" class="center_img" />
 
 > 建议 4: 建议采用表格来管理多张图片的排版<br>
 
@@ -79,7 +79,7 @@ tags: Y-2022 thesis word tips summary
 
 ### 多用快捷键
 前面已经提到了，我们很多操作都绑定了自定义的快捷键。我建议大家按照自己的使用习惯，多设置一些快捷键，这样可以加快码字速度。额外还有一个福利，那就是省去了鼠标点击的动作，你的手指不会酸。这个真的很关键，尤其是对于一个经常要码字码代码的人来说。<br>
-<img src="{{ site.url }}/images/2022-02-06/custom_keymapping.png"  alt="img" align="center"/>
+<img src="{{ site.url }}/images/2022-02-06/custom_keymapping.png"  alt="img" align="center" class="center_img" />
 
 下面我总结一下我经常用到的快捷键：<br>
 - 插入1/2/3级标题(ApplyHeading1/2/3)
@@ -92,11 +92,11 @@ tags: Y-2022 thesis word tips summary
 - 去除表格边框(BorderNone)
 
 那么多快捷键，需要你采用统一的组合规范，从而可以帮助你快速记忆这些快捷键。除此之外，也建议大家把常用的快捷键写在小便签纸上，贴在视线范围之内，一抬头就可以看到。这样可以保证在用的时候不至于卡壳。<br>
-<img src="{{ site.url }}/images/2022-02-06/shortcuts.jpg"  alt="img" align="center"/>
+<img src="{{ site.url }}/images/2022-02-06/shortcuts.jpg"  alt="img" align="center" class="center_img"/>
 
 ## 绘图
 关于论文中的绘图问题，那些需要写代码绘制的，这里不做展开介绍。这里主要分享下使用[draw.io](https://app.diagrams.net/)绘制论文中需要的图片。<br>
-<img src="{{ site.url }}/images/2022-02-06/draw.io.png"  alt="img" align="center"/>
+<img src="{{ site.url }}/images/2022-02-06/draw.io.png"  alt="img" align="center" class="center_img" />
 
 `draw.io`是一个online的绘制工具，用过Visio的童鞋可以很快上手。相比Visio，其更轻量，个人认为也比Visio更好用。除了在线绘制图片外，建议大家下载桌面版使用，这样在没有网络的情况下也可以使用。
 为了方便大家使用，其也提供了相应的[Word插件](https://appsource.microsoft.com/en-us/product/office/WA200000113?src=office&tab=Overview)，可以在编辑过程中直接导入draw.io中的画布。这样一来，可以规避画布导出图片文件然后导入到Word后图片分辨率低的问题。
@@ -105,17 +105,17 @@ tags: Y-2022 thesis word tips summary
 
 ## 文献管理
 另外一个让我对Word很抵触的原因是参考文献管理。在写本科论文的时候，曾经深受其害。当时Word的功能还没有现在这么丰富，而且也是初次使用Word写那么长的文章，没什么经验。所有的参考文献都是一条一条手动敲进去的，包括：文献名称，类型，页码等等。这还不是最头疼的，最头疼的是如何让正文中的文献编号与参考文献目录中的对应，在插入了一条新的文献后还可以保持正确的编号顺序。如果处理的不好，牵一发就动全身，瞬间让你想合上电脑睡觉。后来，工作中也少有需要管理超过20篇参考文献的情况，也没有去做深入研究。直到自己再次面临写毕业论文，实在是绕不开这个坎后，开始沉下心去做调查研究。如果不解决这个参考文献管理的问题，越往后插入的文献越多，维护成本会呈几何级数增加，稍有不慎简直就是个灾难现场。功夫不负有心人，经过一番研究，发现了Mendeley提供的Word下面的一个管理文献[Mendeley Cite](https://appsource.microsoft.com/en-us/product/office/WA104382081?src=office&tab=Overview)的插件，甚是符合我的需求。大家有兴趣可以去Google一下Mendeley，其是学术出版大佬爱思唯尔(Elsevier)下面的产品，主要提供参考文献管理软件服务。除了Word下面的插件外，其也提供了相应的Mendeley桌面版程序搭配使用。<br>
-<img src="{{ site.url }}/images/2022-02-06/bib.png"  alt="img" align="center"/>
+<img src="{{ site.url }}/images/2022-02-06/bib.png"  alt="img" align="center" class="center_img" />
 
 > 建议 5: 建议采用自动化软件来管理论文中所有的参考文献<br>
 
 通过使用Mendeley桌面版程序，大家可以根据自己的情况设置对应的文献样式，管理所有的参考文献。至于样式，其默认提供了很多标准体，比如：IEEE/Science/Nature样式，本人基于国标进行了少量修改，有需要可以直接导入使用(详见[Bill的文献样式](https://csl.mendeley.com/styles/639430361/GB7714-Bill))。
 
 至于如何管理文献，建议大家在GoogleScholar中找到对应文献，然后拷贝对应的bib信息到自己的.bib文件中。完了就可以直接使用Mendeley桌面版程序直接导入文献了。<br>
-<img src="{{ site.url }}/images/2022-02-06/import_bib.png"  alt="img" align="center"/>
+<img src="{{ site.url }}/images/2022-02-06/import_bib.png"  alt="img" align="center" class="center_img" />
 
 接下来，在Word中需要插入文献的地方，使用Mendeley Cite的`Insert Citation`按钮直接插入文献即可。而且，很关键的一点，可以通过关键字或者bib中的Key直接索引你想要插入的文献。给大家展示一下常见的两种文献(会议论文`[C]`和期刊`[J]`)的显示格式：<br>
-<img src="{{ site.url }}/images/2022-02-06/cite_examples.png"  alt="img" height="100px" align="center"/>
+<img src="{{ site.url }}/images/2022-02-06/cite_examples.png"  alt="img" align="center" class="center_img" />
 
 最后，在文章末尾需要插入参考文献书目的地方，点击`Insert Bibliography`就可以插入所有引用文献。这种一键生成目录的方式，有一种莫名的快感。强烈推荐大家去体验。
 
