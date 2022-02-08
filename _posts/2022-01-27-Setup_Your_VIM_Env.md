@@ -14,7 +14,7 @@ If you don't use `Tmux` alike screen manager, it will be totally a nightmare.<br
 
 Following demonstrates a typical scene. You open a window to view the code project, and another one to build it. Apart from them, you can also open some other auxiliary windows, e.g, `htop` window, to watch the real-time CPU performance.
 
-<a href="{{ site.url }}/images/tmux.webp" target="_blank"><img src="{{ site.url }}/images/tmux.webp"  alt="img" height="400px" align="center"/></a>
+<a href="{{ site.url }}/images/tmux.webp" target="_blank"><img src="{{ site.url }}/images/tmux.webp"  alt="img" align="center"/></a>
 
 What's more, if you are a DevOps engineer who should ssh to remote machine to do some developments, you will find `Tmux` useful. It offers you the mechanism to close the session temporarily without any concern, and reattach to it in an easy manner. `Tmux` will manage the sessions until your next access.
 
