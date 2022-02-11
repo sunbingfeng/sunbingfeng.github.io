@@ -1993,8 +1993,8 @@
 			button,
 			.button {
 				font-size: 0.9rem;
-				height: 3.25rem;
-				line-height: 3.25rem;
+				height: 3rem;
+				line-height: 3rem;
 			}
 
 				input[type="submit"].big,
@@ -2073,8 +2073,8 @@
 		-webkit-flex-wrap: wrap;
 		-ms-flex-wrap: wrap;
 		flex-wrap: wrap;
-		width: calc(100% + 3rem);
-		margin: -1.5rem 0 2rem -1.5rem;
+		width: calc(80% + 3rem);
+		margin: -1.5rem 0 1.5rem 0;
 	}
 
 		form > .field {
@@ -2306,6 +2306,10 @@
 
 	input[type="radio"] + label:before {
 		border-radius: 100%;
+	}
+
+	input.newsletter-email, input.newsletter-submit {
+		margin-bottom: 10px;
 	}
 
 	::-webkit-input-placeholder {
