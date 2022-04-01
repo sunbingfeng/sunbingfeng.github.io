@@ -56,6 +56,10 @@ plugins:
   - jekyll-gist
   - jekyll-paginate
   - jekyll-toc
+  - jemoji
+
+emoji:
+  src: "https://github.githubassets.com/images/icons/"
   
 # TOC Settings
 toc:

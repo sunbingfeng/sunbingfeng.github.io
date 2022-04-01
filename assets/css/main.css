@@ -1778,8 +1778,8 @@
 		padding: 0.1rem 0.2rem;
 	}
 
-	img {
-	  width: 60%;
+	a img, li img {
+	  max-width: 60%;
 	  margin: auto;
 	  display: block;
 	}
@@ -4535,4 +4535,8 @@
 #toc a {
 	text-decoration: underline;
 	border-bottom: inherit;
+}
+
+.emoji {
+	display: initial;
 }
