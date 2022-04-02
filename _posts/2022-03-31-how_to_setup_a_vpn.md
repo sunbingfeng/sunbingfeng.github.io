@@ -114,7 +114,7 @@ docker run -v $OVPN_DATA:/etc/openvpn --rm -it kylemanna/openvpn ovpn_initpki
 docker run  --network host -d -v /etc/frp/frpc.ini:/etc/frp/frpc.ini -p 1149:1149/udp --name frpc snowdreamtech/frpc
 
 # launch openvpn service
-export OVPN_DATA="ovpn-data-agilex"
+export OVPN_DATA="my-openvpn-volume"
 docker run -v $OVPN_DATA:/etc/openvpn -d -p 1194:1194/udp --cap-add=NET_ADMIN kylemanna/openvpn
 ```
 
