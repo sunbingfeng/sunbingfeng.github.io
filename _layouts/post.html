@@ -8,6 +8,7 @@ Jekyll integration by somiibo.com
 <html>
 
 <head>
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
     <link rel="stylesheet" href="/assets/css/footer.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css">
     <script async src="https://api.countapi.xyz/hit/bingfeng.tech/{{page.url | replace:'/','-'}}?callback=countscallback"></script>
@@ -55,6 +56,8 @@ Jekyll integration by somiibo.com
                     </nobr></code>&nbsp;</a> 
                   {% endfor %}
                 ]</span>
+
+                {% toc %}
                 <p>{{content}}</p>
             </section>
 
