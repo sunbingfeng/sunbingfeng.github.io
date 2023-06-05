@@ -1,4 +1,4 @@
-source "https://gems.ruby-china.com"
+source "https://mirrors.tuna.tsinghua.edu.cn/rubygems/"
 
 group :jekyll_plugins do
 	gem "jekyll", ">= 3.6.3"
