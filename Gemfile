@@ -12,4 +12,3 @@ end
 
 gem "jekyll-theme-cayman"
 gem "webrick", "~> 1.7"
-gem 'jekyll-toc'
