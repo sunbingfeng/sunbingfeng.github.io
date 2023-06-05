@@ -55,6 +55,7 @@ plugins:
   - jekyll-feed
   - jekyll-gist
   - jekyll-paginate
+  - jekyll-seo-tag
   - jemoji
 
 emoji:
