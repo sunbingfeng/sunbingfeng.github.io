@@ -2,7 +2,7 @@
 # Site
 title:              Bill's Tech Blog
 bio:                'Code To Death'
-description:        "Bill is an excellent programmer driving an autonomous car"
+description:        "To Be Excellent"
 locale:             en_cn
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "https://sunbingfeng.github.io" # the base hostname & protocol for your site
