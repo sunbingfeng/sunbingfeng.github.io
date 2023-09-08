@@ -12,4 +12,4 @@ group :jekyll_plugins do
 end
 
 gem "jekyll-theme-cayman"
-gem "webrick", ">= 2.2.8"
+gem "webrick"
