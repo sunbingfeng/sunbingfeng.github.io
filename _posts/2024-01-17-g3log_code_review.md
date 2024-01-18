@@ -24,21 +24,18 @@ tags: Y-2024 c++ g3log
 ## 关于g3log的基础使用
 
 1 首先构造一个LogWorker，并初始化g3log：
-
    ```cpp
      const std::string directory = "./";
      const std::string name = "TestLogFile";
      auto worker = g3::LogWorker::createLogWorker();
      auto handle = worker->addDefaultLogger(name, directory);    
    ```
-
 2. 添加日志：
 
    日志操作很简单，推荐使用基于Stream的方式，比如：
    ```cpp
    LOG(DEBUG) << "Hello world!.";
    ```
-
 3. 如果需要更复杂的日志操作，可以添加自定义的Sink，具体可以参考作者给出的[示例][g3sinks]
 
 ## g3log的整体设计
