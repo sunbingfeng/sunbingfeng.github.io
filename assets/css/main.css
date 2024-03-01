@@ -2431,6 +2431,12 @@
 	  display: block;
 	}
 
+	.center_img_small {
+	  width: 30%;
+	  margin: auto;
+	  display: block;
+	}
+
 	.image {
 		border: 0;
 		display: inline-block;
