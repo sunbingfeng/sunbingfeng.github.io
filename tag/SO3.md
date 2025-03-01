@@ -1,6 +1,6 @@
 ---
 layout: tagpage
-title: "Tag: 随笔"
-tag: 随笔
+title: "Tag: SO3"
+tag: SO3
 robots: noindex
 ---
