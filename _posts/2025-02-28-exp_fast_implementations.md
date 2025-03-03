@@ -176,3 +176,43 @@ float result3 = fast_exp(x);
 
 The fast approximation method is often good enough for most applications while being much faster than standard library exp().
 
+## Experiment
+下面来测试下Fast approximation方法的性能。我让AI给我写了一个简易的测试benchmark：
+```c
+    const int N = 100000;
+    float x = 0;
+    TicToc timer;
+    timer.tic();
+    for(int i = 0; i < N; ++i) {
+        x += std::exp(-0.01 * i);
+    }
+    printf("x = %f\n", x);
+    printf("one exp time = %fms\n", timer.toc() / N);
+```
+在一款Cortex-M4核（96MHz）的嵌入式核心上评估，结果如下所示：
+
+| 方法 | 单次exp耗时 | x |
+|------|------|------|
+| 标准库 | 0.043ms | 100.5005 |
+| 快速近似 | 0.0032ms | #.# |
+
+
+可以发现fast approximation方法的单次exp耗时只有标准库的1/13，提升效果还是明显的，但是最终结果出现表征错误。那是为什么呢？下面进一步分析。
+
+仔细分析，就会发现，由于float精度的限制，不考虑符号，其只能表征约$$2^{-126}$$到$$2^127$。因此，其幂指数超过127时，就会出现溢出，从而导致结果错误。当N设置为1000时，再次评估，就可以得到正确的结果了。
+
+下面评估下fast approximation方法的精度
+
+<figure>
+<img src="{{ site.url }}/images/2025-Q1/fast_exp.png"  alt="img" align="center" class="center_img" />
+</figure>
+
+可以发现，当x=100时，fast approximation方法的精度已经非常差了。如果x值不大，精度还是可以接受的。
+<figure>
+<img src="{{ site.url }}/images/2025-Q1/fast_exp_2.png"  alt="img" align="center" class="center_img" />
+</figure>
+
+
+## Conclusion
+
+- 在嵌入式平台上，如果对精度要求不高，fast approximation方法是一个不错的选择，可以显著提升计算效率。
