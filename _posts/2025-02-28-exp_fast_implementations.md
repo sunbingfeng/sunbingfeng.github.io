@@ -104,7 +104,7 @@ $$
 
 3. Fast Approximation (most efficient but less accurate):
 
-    ```c
+{% highlight c %}
     float fast_exp(float x) {
         // Based on the identity: e^x = 2^(x/ln(2))
         union {
@@ -134,7 +134,7 @@ $$
         return u.f * y;
     }
     ```
-
+{% endhighlight %}
 
 **Usage comparison:**
 
@@ -199,7 +199,7 @@ The fast approximation method is often good enough for most applications while b
 
 可以发现fast approximation方法的单次exp耗时只有标准库的1/13，提升效果还是明显的，但是最终结果出现表征错误。那是为什么呢？下面进一步分析。
 
-仔细分析，就会发现，由于float精度的限制，不考虑符号，其只能表征约$$2^{-126}$$到$$2^127$。因此，其幂指数超过127时，就会出现溢出，从而导致结果错误。当N设置为1000时，再次评估，就可以得到正确的结果了。
+仔细分析，就会发现，由于float精度的限制，不考虑符号，其只能表征约$$2^{-126}$$到 $$2^{127}$$。因此，其幂指数超过127时，就会出现溢出，从而导致结果错误。当N设置为1000时，再次评估，就可以得到正确的结果了。
 
 下面评估下fast approximation方法的精度
 
