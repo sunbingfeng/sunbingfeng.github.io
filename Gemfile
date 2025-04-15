@@ -9,7 +9,7 @@ group :jekyll_plugins do
 	gem "jekyll-paginate"
 	gem 'jemoji'
 	gem 'jekyll-seo-tag'
-	gem 'nokogiri', '~> 1.17.2'
+	gem "nokogiri", ">= 1.18.4"
 end
 
 gem "jekyll-theme-cayman"
