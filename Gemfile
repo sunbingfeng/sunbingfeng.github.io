@@ -9,6 +9,7 @@ group :jekyll_plugins do
 	gem "jekyll-paginate"
 	gem 'jemoji'
 	gem 'jekyll-seo-tag'
+	gem 'nokogiri', '~> 1.17.2'
 end
 
 gem "jekyll-theme-cayman"
