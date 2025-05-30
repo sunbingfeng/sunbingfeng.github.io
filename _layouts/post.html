@@ -62,13 +62,8 @@ layout: default
         border-radius: 1rem;
         font-size: 0.75rem;
         font-weight: 500;
-        text-decoration: none;
         backdrop-filter: blur(10px);
-        transition: background-color 0.3s ease;
-    }
-
-    .tag:hover {
-        background: rgba(255, 255, 255, 0.2);
+        display: inline-block;
     }
 
     .post-content {
@@ -403,6 +398,30 @@ layout: default
             padding: 1rem;
         }
     }
+
+    .comments-section {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 2rem;
+    }
+
+    .comments-container {
+        background: var(--card-background);
+        border-radius: 1rem;
+        padding: 2rem;
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    }
+
+    .comments-container h2 {
+        font-size: 1.5rem;
+        font-weight: 600;
+        margin-bottom: 1.5rem;
+        color: var(--text-color);
+    }
+
+    [data-theme="dark"] .comments-container {
+        background: var(--card-background);
+    }
 </style>
 
 <article class="post">
@@ -415,11 +434,11 @@ layout: default
             </div>
             <div class="post-tags">
                 {% for tag in page.tags %}
-                <a href="#" class="tag" data-tag="{{ tag }}">{{ tag }}</a>
+                <span class="tag">{{ tag }}</span>
                 {% endfor %}
             </div>
         </div>
-    </header>
+        </header>
 
     <div class="post-container">
         <div class="post-content">
@@ -444,6 +463,21 @@ layout: default
         {% endif %}
     </nav>
 </article>
+
+<!-- Comments Section -->
+<div class="comments-section">
+    <div class="comments-container">
+        <h2>Comments</h2>
+                <script src="https://utteranc.es/client.js"
+                repo="sunbingfeng/sunbingfeng.github.io"
+                issue-term="pathname"
+                label="comment"
+                theme="github-light"
+                crossorigin="anonymous"
+                async>
+                </script>
+            </div>
+</div>
 
 <!-- Prism.js for syntax highlighting -->
 <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet" />
@@ -542,14 +576,5 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Highlight all code blocks
     Prism.highlightAll();
-});
-
-// Tag click handling
-document.querySelectorAll('.tag').forEach(tag => {
-    tag.addEventListener('click', (e) => {
-        e.preventDefault();
-        const tagName = tag.dataset.tag;
-        window.location.href = '/blog?tag=' + encodeURIComponent(tagName);
-    });
 });
 </script> 

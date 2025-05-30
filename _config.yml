@@ -5,6 +5,7 @@ description:        "To Be Excellent"
 locale:             en_cn
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "https://sunbingfeng.github.io" # the base hostname & protocol for your site
+github_repo:        "sunbingfeng/sunbingfeng.github.io" # for Utterances comments
 
 # Enable custom plugins
 safe: false

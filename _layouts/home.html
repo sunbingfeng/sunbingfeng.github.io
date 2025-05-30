@@ -37,18 +37,15 @@ layout: default
         }
 
         .hero {
-            min-height: 80vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            padding: 2rem;
             background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
             color: white;
+            padding: 4rem 2rem;
+            text-align: center;
             position: relative;
-            overflow: hidden;
-            margin-top: calc(-1 * var(--header-height));
+            min-height: 40vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         .hero::before {
@@ -249,6 +246,76 @@ layout: default
         </article>
         {% endfor %}
     </div>
+
+    <div class="subscribe-section">
+        <div class="subscribe-container">
+            <h2>Subscribe to My Newsletter</h2>
+            <p>Get the latest posts delivered right to your inbox</p>
+            <a href="https://bingfeng.substack.com" class="subscribe-button" target="_blank" rel="noopener">
+                Subscribe to my Substack
+            </a>
+        </div>
+    </div>
+
+    <style>
+        .subscribe-section {
+            background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+            padding: 4rem 2rem;
+            text-align: center;
+            color: white;
+            margin-top: 4rem;
+        }
+
+        .subscribe-container {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .subscribe-section h2 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: white;
+        }
+
+        .subscribe-section p {
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        .subscribe-button {
+            display: inline-block;
+            background: white;
+            color: var(--primary-color);
+            padding: 1rem 2rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            margin-top: 1rem;
+        }
+
+        .subscribe-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            background: #f8fafc;
+        }
+
+        @media (max-width: 768px) {
+            .subscribe-section {
+                padding: 3rem 1rem;
+            }
+            
+            .subscribe-section h2 {
+                font-size: 1.75rem;
+            }
+            
+            .subscribe-section p {
+                font-size: 1rem;
+            }
+        }
+    </style>
 
     <script>
         // Theme toggle functionality
