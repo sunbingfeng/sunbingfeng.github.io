@@ -6,6 +6,8 @@ locale:             en_cn
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "https://sunbingfeng.github.io" # the base hostname & protocol for your site
 
+# Enable custom plugins
+safe: false
 
 defaults:
 - scope:

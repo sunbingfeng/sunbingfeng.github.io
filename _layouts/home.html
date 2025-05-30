@@ -239,7 +239,7 @@ layout: default
             <h2><a href="{{ post.url | relative_url }}">{{ post.title }}</a></h2>
             <div class="post-tags">
                 {% for tag in post.tags %}
-                <a href="{{ '/tag/' | append: tag | relative_url }}" class="tag">{{ tag }}</a>
+                <a href="#" class="tag" data-tag="{{ tag }}">{{ tag }}</a>
                 {% endfor %}
             </div>
             <div class="post-excerpt">
@@ -267,6 +267,15 @@ layout: default
         themeToggle.addEventListener('click', () => {
             const newTheme = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
             setTheme(newTheme);
+        });
+
+        // Tag click handling
+        document.querySelectorAll('.tag').forEach(tag => {
+            tag.addEventListener('click', (e) => {
+                e.preventDefault();
+                const tagName = tag.dataset.tag;
+                window.location.href = '/blog?tag=' + encodeURIComponent(tagName);
+            });
         });
     </script>
 </body>

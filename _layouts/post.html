@@ -415,7 +415,7 @@ layout: default
             </div>
             <div class="post-tags">
                 {% for tag in page.tags %}
-                <a href="/blog/tag/{{ tag | slugify }}" class="tag">{{ tag }}</a>
+                <a href="#" class="tag" data-tag="{{ tag }}">{{ tag }}</a>
                 {% endfor %}
             </div>
         </div>
@@ -542,5 +542,14 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Highlight all code blocks
     Prism.highlightAll();
+});
+
+// Tag click handling
+document.querySelectorAll('.tag').forEach(tag => {
+    tag.addEventListener('click', (e) => {
+        e.preventDefault();
+        const tagName = tag.dataset.tag;
+        window.location.href = '/blog?tag=' + encodeURIComponent(tagName);
+    });
 });
 </script> 

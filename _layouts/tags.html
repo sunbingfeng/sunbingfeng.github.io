@@ -211,7 +211,7 @@ layout: default
                 <div>...</div>
                 {% endif %}
             </div>
-            <a href="{{ '/tag/' | append: tag_name | relative_url }}"></a>
+            <a href="{{ '/blog/tag/' | append: tag_name | slugify | relative_url }}"></a>
         </div>
         {% endfor %}
     </div>

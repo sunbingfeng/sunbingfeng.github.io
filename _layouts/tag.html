@@ -1,1 +1,260 @@
- 
+---
+layout: default
+---
+<style>
+    .tag-header {
+        background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+        color: white;
+        padding: 6rem 2rem 4rem;
+        text-align: center;
+        margin-top: calc(-1 * var(--header-height));
+        position: relative;
+    }
+
+    .tag-header::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: radial-gradient(circle at center, transparent 0%, rgba(0,0,0,0.2) 100%);
+        z-index: 1;
+    }
+
+    .tag-header-content {
+        position: relative;
+        z-index: 2;
+        max-width: 800px;
+        margin: 0 auto;
+    }
+
+    .tag-header h1 {
+        font-size: 2.5rem;
+        font-weight: 800;
+        margin: 0;
+        background: linear-gradient(to right, #fff, #e2e8f0);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+
+    .tag-meta {
+        display: flex;
+        justify-content: center;
+        gap: 2rem;
+        margin-top: 1rem;
+        font-size: 0.875rem;
+        opacity: 0.9;
+    }
+
+    .tag-description {
+        margin-top: 1rem;
+        font-size: 1.1rem;
+        opacity: 0.9;
+    }
+
+    .tag-content {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 4rem 2rem;
+    }
+
+    .tag-posts {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        gap: 2rem;
+        margin-top: 2rem;
+    }
+
+    .post-card {
+        background: var(--card-background);
+        border-radius: 1rem;
+        overflow: hidden;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    }
+
+    .post-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    .post-card-content {
+        padding: 1.5rem;
+    }
+
+    .post-card-meta {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 1rem;
+        font-size: 0.875rem;
+        color: var(--text-muted);
+    }
+
+    .post-card-title {
+        font-size: 1.25rem;
+        font-weight: 600;
+        margin: 0 0 1rem;
+        line-height: 1.4;
+    }
+
+    .post-card-title a {
+        color: var(--text-color);
+        text-decoration: none;
+        transition: color 0.3s ease;
+    }
+
+    .post-card-title a:hover {
+        color: var(--primary-color);
+    }
+
+    .post-card-excerpt {
+        font-size: 0.875rem;
+        color: var(--text-muted);
+        margin-bottom: 1rem;
+        line-height: 1.6;
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+    }
+
+    .post-card-tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+    }
+
+    .post-card-tag {
+        font-size: 0.75rem;
+        padding: 0.25rem 0.75rem;
+        background: var(--card-background);
+        border: 1px solid var(--border-color);
+        border-radius: 1rem;
+        color: var(--text-color);
+        text-decoration: none;
+        transition: all 0.3s ease;
+    }
+
+    .post-card-tag:hover {
+        background: var(--primary-color);
+        border-color: var(--primary-color);
+        color: white;
+    }
+
+    .tag-cloud {
+        background: var(--card-background);
+        border-radius: 1rem;
+        padding: 2rem;
+        margin-bottom: 3rem;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    }
+
+    .tag-cloud-title {
+        font-size: 1.5rem;
+        font-weight: 600;
+        margin-bottom: 1.5rem;
+        color: var(--text-color);
+    }
+
+    .tag-cloud-list {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1rem;
+    }
+
+    .tag-cloud-link {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 0.5rem 1rem;
+        background: var(--background-color);
+        border: 1px solid var(--border-color);
+        border-radius: 0.5rem;
+        color: var(--text-color);
+        text-decoration: none;
+        transition: all 0.3s ease;
+    }
+
+    .tag-cloud-link:hover {
+        background: var(--primary-color);
+        border-color: var(--primary-color);
+        color: white;
+        transform: translateY(-2px);
+    }
+
+    .tag-cloud-count {
+        font-size: 0.875rem;
+        opacity: 0.8;
+    }
+
+    @media (max-width: 768px) {
+        .tag-header {
+            padding: 5rem 1rem 3rem;
+        }
+
+        .tag-header h1 {
+            font-size: 2rem;
+        }
+
+        .tag-content {
+            padding: 2rem 1rem;
+        }
+
+        .tag-posts {
+            grid-template-columns: 1fr;
+        }
+    }
+</style>
+
+<div class="tag-header">
+    <div class="tag-header-content">
+        <h1>#{{ page.title }}</h1>
+        <div class="tag-meta">
+            <span>{{ page.posts | size }} posts</span>
+        </div>
+        <div class="tag-description">
+            Browse all posts tagged with "{{ page.title }}"
+        </div>
+    </div>
+</div>
+
+<div class="tag-content">
+    <div class="tag-cloud">
+        <h2 class="tag-cloud-title">All Tags</h2>
+        <div class="tag-cloud-list">
+            {% assign tags_list = site.tags | sort %}
+            {% for tag in tags_list %}
+            {% assign tag_name = tag[0] %}
+            {% assign tag_posts = tag[1] | size %}
+            <a href="/blog/tag/{{ tag_name | slugify }}" class="tag-cloud-link {% if tag_name == page.title %}active{% endif %}">
+                {{ tag_name }}
+                <span class="tag-cloud-count">({{ tag_posts }})</span>
+            </a>
+            {% endfor %}
+        </div>
+    </div>
+
+    <div class="tag-posts">
+        {% for post in page.posts %}
+        <article class="post-card">
+            <div class="post-card-content">
+                <div class="post-card-meta">
+                    <span>{{ post.date | date: "%B %d, %Y" }}</span>
+                    <span>{{ post.reading_time }} min read</span>
+                </div>
+                <h3 class="post-card-title">
+                    <a href="{{ post.url }}">{{ post.title }}</a>
+                </h3>
+                <p class="post-card-excerpt">{{ post.excerpt | strip_html | truncatewords: 30 }}</p>
+                <div class="post-card-tags">
+                    {% for tag in post.tags %}
+                    <a href="/blog/tag/{{ tag | slugify }}" class="post-card-tag">{{ tag }}</a>
+                    {% endfor %}
+                </div>
+            </div>
+        </article>
+        {% endfor %}
+    </div>
+</div> 
