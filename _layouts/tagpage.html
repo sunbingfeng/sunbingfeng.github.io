@@ -1,22 +1,278 @@
 ---
 layout: default
 ---
+<style>
+    .tag-header {
+        background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+        color: white;
+        padding: 6rem 2rem 4rem;
+        text-align: center;
+        margin-top: calc(-1 * var(--header-height));
+        position: relative;
+    }
 
-<div class="post">
-<h1 class="tag-title">Tag: {{ page.tag }}</h1>
-<ul>
-{% for post in site.tags[page.tag] %}
-  {% if post.lang %}
-  <li lang="{{post.lang}}">
-  {% else %}
-  <li>
-  {% endif %}
-  	<a href="{{ post.url }}">{{ post.title }}</a> ({{ post.date | date_to_string }})<br>
-  	{{ post.excerpt }}
-  	<!-- Tags: {{ post.tags | join: ", " }} -->
-  </li>
-{% endfor %}
-</ul>
+    .tag-header::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: radial-gradient(circle at center, transparent 0%, rgba(0,0,0,0.2) 100%);
+        z-index: 1;
+    }
+
+    .tag-header-content {
+        position: relative;
+        z-index: 2;
+        max-width: 800px;
+        margin: 0 auto;
+    }
+
+    .tag-header h1 {
+        font-size: 3rem;
+        font-weight: 800;
+        margin: 0;
+        background: linear-gradient(to right, #fff, #e2e8f0);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 1rem;
+    }
+
+    .tag-header .tag-icon {
+        font-size: 2.5rem;
+        color: var(--primary-color);
+    }
+
+    .tag-header p {
+        font-size: 1.25rem;
+        margin: 1rem 0 0;
+        opacity: 0.9;
+    }
+
+    .tag-content {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 4rem 2rem;
+    }
+
+    .post-list {
+        display: flex;
+        flex-direction: column;
+        gap: 2rem;
+    }
+
+    .post-item {
+        background: var(--card-background);
+        border-radius: 1rem;
+        padding: 2rem;
+        transition: all 0.3s ease;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .post-item::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+        opacity: 0;
+        transition: opacity 0.3s ease;
+        z-index: 1;
+    }
+
+    .post-item:hover::before {
+        opacity: 0.05;
+    }
+
+    .post-item:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    .post-item a {
+        text-decoration: none;
+        color: inherit;
+    }
+
+    .post-item h2 {
+        font-size: 1.5rem;
+        font-weight: 700;
+        margin: 0 0 1rem;
+        color: var(--text-color);
+        position: relative;
+        z-index: 2;
+    }
+
+    .post-meta {
+        display: flex;
+        align-items: center;
+        gap: 1.5rem;
+        margin-bottom: 1rem;
+        font-size: 0.875rem;
+        color: var(--text-color);
+        opacity: 0.8;
+        position: relative;
+        z-index: 2;
+    }
+
+    .post-meta-item {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+    }
+
+    .post-meta-item i {
+        color: var(--primary-color);
+    }
+
+    .post-excerpt {
+        color: var(--text-color);
+        opacity: 0.9;
+        line-height: 1.6;
+        position: relative;
+        z-index: 2;
+    }
+
+    .post-tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+        margin-top: 1rem;
+        position: relative;
+        z-index: 2;
+    }
+
+    .post-tag {
+        background: var(--tag-background);
+        color: var(--tag-color);
+        padding: 0.25rem 0.75rem;
+        border-radius: 1rem;
+        font-size: 0.75rem;
+        font-weight: 500;
+        transition: all 0.2s ease;
+    }
+
+    .post-tag:hover {
+        background: var(--primary-color);
+        color: white;
+    }
+
+    .back-to-tags {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        color: var(--text-color);
+        text-decoration: none;
+        margin-bottom: 2rem;
+        font-weight: 500;
+        transition: all 0.2s ease;
+    }
+
+    .back-to-tags:hover {
+        color: var(--primary-color);
+    }
+
+    @media (max-width: 768px) {
+        .tag-header {
+            padding: 5rem 1rem 3rem;
+        }
+
+        .tag-header h1 {
+            font-size: 2rem;
+        }
+
+        .tag-content {
+            padding: 2rem 1rem;
+        }
+
+        .post-item {
+            padding: 1.5rem;
+        }
+
+        .post-meta {
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+    }
+</style>
+
+<div class="tag-header">
+    <div class="tag-header-content">
+        <h1>
+            {% assign tag_icon = 'fa-tag' %}
+            {% case page.tag %}
+                {% when 'c++' %}
+                    {% assign tag_icon = 'fa-code' %}
+                {% when 'git' %}
+                    {% assign tag_icon = 'fa-code-branch' %}
+                {% when 'linux' %}
+                    {% assign tag_icon = 'fa-linux' %}
+                {% when 'Review' %}
+                    {% assign tag_icon = 'fa-star' %}
+                {% when 'tips' %}
+                    {% assign tag_icon = 'fa-lightbulb' %}
+                {% when 'thesis' %}
+                    {% assign tag_icon = 'fa-graduation-cap' %}
+                {% when 'comics' %}
+                    {% assign tag_icon = 'fa-smile' %}
+                {% when 'gossip' %}
+                    {% assign tag_icon = 'fa-comments' %}
+                {% when 'demo' %}
+                    {% assign tag_icon = 'fa-play-circle' %}
+                {% when 'summary' %}
+                    {% assign tag_icon = 'fa-list' %}
+                {% when 'g3log' %}
+                    {% assign tag_icon = 'fa-bug' %}
+            {% endcase %}
+            <i class="fas {{ tag_icon }} tag-icon"></i>
+            {{ page.tag }}
+        </h1>
+        <p>{{ page.posts.size }} post{% if page.posts.size != 1 %}s{% endif %} tagged with "{{ page.tag }}"</p>
+    </div>
+</div>
+
+<div class="tag-content">
+    <a href="{{ '/tags' | relative_url }}" class="back-to-tags">
+        <i class="fas fa-arrow-left"></i>
+        Back to all tags
+    </a>
+
+    <div class="post-list">
+        {% for post in page.posts %}
+        <article class="post-item">
+            <a href="{{ post.url | relative_url }}">
+                <h2>{{ post.title }}</h2>
+            </a>
+            <div class="post-meta">
+                <div class="post-meta-item">
+                    <i class="far fa-calendar"></i>
+                    {{ post.date | date: "%B %d, %Y" }}
+                </div>
+                <div class="post-meta-item">
+                    <i class="far fa-clock"></i>
+                    {% include reading-time.html content=post.content %}
+                </div>
+            </div>
+            <div class="post-excerpt">
+                {{ post.excerpt | strip_html | truncatewords: 50 }}
+            </div>
+            <div class="post-tags">
+                {% for tag in post.tags %}
+                <a href="{{ '/tag/' | append: tag | relative_url }}" class="post-tag">
+                    {{ tag }}
+                </a>
+                {% endfor %}
+            </div>
+        </article>
+        {% endfor %}
+    </div>
 </div>
 
 <hr>

@@ -1,4 +1,3 @@
-
 # Site
 title:              Bill's Tech Blog
 bio:                'Code To Death'
@@ -61,7 +60,7 @@ plugins:
 emoji:
   src: "https://github.githubassets.com/images/icons/"
   
-paginate: 6
+paginate: 10
 paginate_path: "/blog/page:num/"
 
 jekyll-mentions:
@@ -69,5 +68,3 @@ jekyll-mentions:
 
 # Exclude list
 exclude: [README.md, Gemfile, Gemfile.lock, node_modules, gulpfile.js, package.json, _site, src, vendor, CNAME, LICENSE, Rakefile, old]
-
-theme: jekyll-theme-cayman

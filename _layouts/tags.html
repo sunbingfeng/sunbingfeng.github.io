@@ -1,0 +1,218 @@
+---
+layout: default
+---
+<style>
+    .tags-header {
+        background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+        color: white;
+        padding: 6rem 2rem 4rem;
+        text-align: center;
+        margin-top: calc(-1 * var(--header-height));
+        position: relative;
+    }
+
+    .tags-header::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: radial-gradient(circle at center, transparent 0%, rgba(0,0,0,0.2) 100%);
+        z-index: 1;
+    }
+
+    .tags-header-content {
+        position: relative;
+        z-index: 2;
+        max-width: 800px;
+        margin: 0 auto;
+    }
+
+    .tags-header h1 {
+        font-size: 3rem;
+        font-weight: 800;
+        margin: 0;
+        background: linear-gradient(to right, #fff, #e2e8f0);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+
+    .tags-header p {
+        font-size: 1.25rem;
+        margin: 1rem 0 0;
+        opacity: 0.9;
+    }
+
+    .tags-content {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 4rem 2rem;
+    }
+
+    .tags-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+        gap: 2rem;
+    }
+
+    .tag-card {
+        background: var(--card-background);
+        border-radius: 1rem;
+        padding: 2rem;
+        transition: all 0.3s ease;
+        position: relative;
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        cursor: pointer;
+    }
+
+    .tag-card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+        opacity: 0;
+        transition: opacity 0.3s ease;
+        z-index: 1;
+    }
+
+    .tag-card:hover::before {
+        opacity: 0.1;
+    }
+
+    .tag-card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    .tag-icon {
+        font-size: 2rem;
+        margin-bottom: 1rem;
+        color: var(--primary-color);
+        position: relative;
+        z-index: 2;
+    }
+
+    .tag-name {
+        font-size: 1.25rem;
+        font-weight: 600;
+        margin: 0.5rem 0;
+        color: var(--text-color);
+        position: relative;
+        z-index: 2;
+    }
+
+    .tag-count {
+        font-size: 0.875rem;
+        color: var(--text-color);
+        opacity: 0.8;
+        position: relative;
+        z-index: 2;
+    }
+
+    .tag-posts {
+        margin-top: 1rem;
+        font-size: 0.875rem;
+        color: var(--text-color);
+        opacity: 0.8;
+        position: relative;
+        z-index: 2;
+    }
+
+    .tag-card a {
+        text-decoration: none;
+        color: inherit;
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        z-index: 3;
+    }
+
+    @media (max-width: 768px) {
+        .tags-header {
+            padding: 5rem 1rem 3rem;
+        }
+
+        .tags-header h1 {
+            font-size: 2rem;
+        }
+
+        .tags-content {
+            padding: 2rem 1rem;
+        }
+
+        .tags-grid {
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 1rem;
+        }
+
+        .tag-card {
+            padding: 1.5rem;
+        }
+    }
+</style>
+
+<div class="tags-header">
+    <div class="tags-header-content">
+        <h1>Tags</h1>
+        <p>Browse posts by topic</p>
+    </div>
+</div>
+
+<div class="tags-content">
+    <div class="tags-grid">
+        {% assign tags_list = site.tags | sort %}
+        {% for tag in tags_list %}
+        {% assign tag_name = tag[0] %}
+        {% assign posts = tag[1] %}
+        {% assign tag_icon = 'fa-tag' %}
+        {% case tag_name %}
+            {% when 'c++' %}
+                {% assign tag_icon = 'fa-code' %}
+            {% when 'git' %}
+                {% assign tag_icon = 'fa-code-branch' %}
+            {% when 'linux' %}
+                {% assign tag_icon = 'fa-linux' %}
+            {% when 'Review' %}
+                {% assign tag_icon = 'fa-star' %}
+            {% when 'tips' %}
+                {% assign tag_icon = 'fa-lightbulb' %}
+            {% when 'thesis' %}
+                {% assign tag_icon = 'fa-graduation-cap' %}
+            {% when 'comics' %}
+                {% assign tag_icon = 'fa-smile' %}
+            {% when 'gossip' %}
+                {% assign tag_icon = 'fa-comments' %}
+            {% when 'demo' %}
+                {% assign tag_icon = 'fa-play-circle' %}
+            {% when 'summary' %}
+                {% assign tag_icon = 'fa-list' %}
+            {% when 'g3log' %}
+                {% assign tag_icon = 'fa-bug' %}
+        {% endcase %}
+        <div class="tag-card">
+            <i class="fas {{ tag_icon }} tag-icon"></i>
+            <h2 class="tag-name">{{ tag_name }}</h2>
+            <div class="tag-count">{{ posts.size }} post{% if posts.size != 1 %}s{% endif %}</div>
+            <div class="tag-posts">
+                {% for post in posts limit:3 %}
+                <div>{{ post.title }}</div>
+                {% endfor %}
+                {% if posts.size > 3 %}
+                <div>...</div>
+                {% endif %}
+            </div>
+            <a href="{{ '/tag/' | append: tag_name | relative_url }}"></a>
+        </div>
+        {% endfor %}
+    </div>
+</div> 

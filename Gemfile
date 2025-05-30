@@ -12,7 +12,7 @@ group :jekyll_plugins do
 	gem 'nokogiri', '~> 1.17.2'
 end
 
-gem "jekyll-theme-cayman"
+# gem "jekyll-theme-cayman"  # Removed as we're using custom theme
 gem "webrick"
 
 gem 'wdm', '>= 0.1.0' if Gem.win_platform?

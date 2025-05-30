@@ -1,61 +1,180 @@
-<!DOCTYPE HTML>
-<!--
-	Massively by HTML5 UP
-	html5up.net | @ajlkn
-  Jekyll integration by somiibo.com
-	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
--->
-<html>
-	<head>
-    {% include head.html %}
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css">
-    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
-	</head>
-	<body class="is-loading">
+---
+layout: default
+---
+<style>
+    .page-header {
+        background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+        color: white;
+        padding: 6rem 2rem 4rem;
+        text-align: center;
+        margin-top: calc(-1 * var(--header-height));
+        position: relative;
+    }
 
-		<!-- Wrapper -->
-			<div id="wrapper" class="fade-in">
+    .page-header::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: radial-gradient(circle at center, transparent 0%, rgba(0,0,0,0.2) 100%);
+        z-index: 1;
+    }
 
-				<!-- Header -->
-				<header id="header">
-					<a href="{{ "/" | absolute_url }}" class="logo">{{site.title}}</a>
-				</header>
+    .page-header-content {
+        position: relative;
+        z-index: 2;
+        max-width: 800px;
+        margin: 0 auto;
+    }
 
-				<!-- Nav -->
-					<nav id="nav">
+    .page-header h1 {
+        font-size: 3rem;
+        font-weight: 800;
+        margin: 0;
+        background: linear-gradient(to right, #fff, #e2e8f0);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
 
-            {% include nav.html %}
-				    <ul class="icons">
-                <li><a href="https://twitter.com/{{site.twitter}}" class="no_border_bottom" rel="nofollow"><i class="fab fa-twitter-square fa-2x"></i></a></li>
-                <li><a href="https://dev.to/sunbingfeng" class="no_border_bottom" rel="nofollow"><i class="fab fa-dev fa-2x"></i></a></li>
-                <li><a href="https://github.com/{{site.github}}" class="no_border_bottom" rel="nofollow"><i class="fab fa-github-square fa-2x"></i></a></li>
-            </ul>
-					</nav>
+    .page-header p {
+        font-size: 1.25rem;
+        margin: 1rem 0 0;
+        opacity: 0.9;
+    }
 
-				<!-- Main -->
-				<div id="main">
+    .page-content {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 4rem 2rem;
+    }
 
-					<!-- Post -->
-					<section class="post">
-						<p>{{content}}</p>
-					</section>
+    .page-content h2 {
+        font-size: 1.875rem;
+        font-weight: 700;
+        margin: 2rem 0 1rem;
+        color: var(--text-color);
+    }
 
-					<!-- Footer -->
-						<footer>
-              <ul class="actions">
-								<li><a href="{{ "/blog" | absolute_url }}" class="button">Back to Blog</a></li>
-              </ul>
-						</footer>
-					</div>
+    .page-content h3 {
+        font-size: 1.5rem;
+        font-weight: 600;
+        margin: 1.5rem 0 1rem;
+        color: var(--text-color);
+    }
 
-				<!-- Footer -->
-        {% include foot.html %}
+    .page-content p {
+        margin: 1rem 0;
+        line-height: 1.8;
+    }
 
-			</div>
+    .page-content a {
+        color: var(--primary-color);
+        text-decoration: none;
+        transition: color 0.3s ease;
+    }
 
-			<!-- Scripts -->
-			{% include scripts-main.html %}
-			{% include tracking.html %}
+    .page-content a:hover {
+        color: var(--secondary-color);
+    }
 
-	</body>
-</html>
+    .page-content img {
+        max-width: 100%;
+        height: auto;
+        border-radius: 0.5rem;
+        margin: 2rem 0;
+    }
+
+    .page-content ul, .page-content ol {
+        margin: 1rem 0;
+        padding-left: 1.5rem;
+    }
+
+    .page-content li {
+        margin: 0.5rem 0;
+    }
+
+    .social-links {
+        display: flex;
+        gap: 1rem;
+        margin-top: 2rem;
+        justify-content: center;
+    }
+
+    .social-links a {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 0.75rem 1.5rem;
+        background: var(--card-background);
+        color: var(--text-color);
+        text-decoration: none;
+        border-radius: 0.5rem;
+        transition: all 0.3s ease;
+    }
+
+    .social-links a:hover {
+        background: var(--primary-color);
+        color: white;
+        transform: translateY(-2px);
+    }
+
+    .social-links i {
+        font-size: 1.25rem;
+    }
+
+    @media (max-width: 768px) {
+        .page-header {
+            padding: 5rem 1rem 3rem;
+        }
+
+        .page-header h1 {
+            font-size: 2rem;
+        }
+
+        .page-content {
+            padding: 2rem 1rem;
+        }
+
+        .social-links {
+            flex-direction: column;
+        }
+    }
+</style>
+
+<div class="page-header">
+    <div class="page-header-content">
+        <h1>{{ page.title }}</h1>
+        {% if page.description %}
+        <p>{{ page.description }}</p>
+        {% endif %}
+    </div>
+</div>
+
+<div class="page-content">
+    {{ content }}
+
+    {% if page.title == "About" %}
+    <div class="social-links">
+        {% if site.github %}
+        <a href="https://github.com/{{ site.github }}" target="_blank" rel="noopener">
+            <i class="fab fa-github"></i>
+            <span>GitHub</span>
+        </a>
+        {% endif %}
+        {% if site.twitter %}
+        <a href="https://twitter.com/{{ site.twitter }}" target="_blank" rel="noopener">
+            <i class="fab fa-twitter"></i>
+            <span>Twitter</span>
+        </a>
+        {% endif %}
+        {% if site.linkedin %}
+        <a href="https://linkedin.com/in/{{ site.linkedin }}" target="_blank" rel="noopener">
+            <i class="fab fa-linkedin"></i>
+            <span>LinkedIn</span>
+        </a>
+        {% endif %}
+    </div>
+    {% endif %}
+</div> 

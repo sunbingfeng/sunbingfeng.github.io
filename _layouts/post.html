@@ -1,107 +1,546 @@
-<!DOCTYPE HTML>
-<!--
-  Massively by HTML5 UP
-  html5up.net | @ajlkn
-Jekyll integration by somiibo.com
-  Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
--->
-<html>
+---
+layout: default
+---
+<style>
+    .post-header {
+        background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+        color: white;
+        padding: 6rem 2rem 4rem;
+        text-align: center;
+        margin-top: calc(-1 * var(--header-height));
+        position: relative;
+    }
 
-<head>
-    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
-    <link rel="stylesheet" href="/assets/css/footer.css">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css">
-    <script async src="https://api.countapi.xyz/hit/bingfeng.tech/{{page.url | replace:'/','-'}}?callback=countscallback"></script>
-    <script type="text/javascript">
-        function countscallback(response) {
-            document.getElementById('visits').innerText = response.value;
-        }        
-    </script>
-    <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
-    {% include head.html %}
+    .post-header::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: radial-gradient(circle at center, transparent 0%, rgba(0,0,0,0.2) 100%);
+        z-index: 1;
+    }
 
-    {% seo %}
-</head>
+    .post-header-content {
+        position: relative;
+        z-index: 2;
+        max-width: 800px;
+        margin: 0 auto;
+    }
 
-<body class="is-loading">
-    <!-- Wrapper -->
-    <div id="wrapper" class="fade-in">
-        <!-- Header -->
-        <header id="header">
-            <a href="{{ "/" | absolute_url }}" class="logo">{{site.title}}</a>
-        </header>
-        <!-- Nav -->
-        <nav id="nav">
-            {% include nav.html %}
-            <ul class="icons">
-                <li><a href="https://twitter.com/{{site.twitter}}" class="no_border_bottom" rel="nofollow"><i class="fab fa-twitter-square fa-2x"></i></a></li>
-                <li><a href="https://dev.to/sunbingfeng" class="no_border_bottom" rel="nofollow"><i class="fab fa-dev fa-2x"></i></a></li>
-                <li><a href="https://github.com/{{site.github}}" class="no_border_bottom" rel="nofollow"><i class="fab fa-github-square fa-2x"></i></a></li>
-            </ul>
-        </nav>
-        <!-- Main -->
-        <div id="main">
-            <section class="post">
-                <header class="major">
-                    <span class="date">{{page.date | date_to_string}}</span>
-                    <h1>{{page.title}}</h1>
-                    <p style="font-style: normal;">{{page.excerpt}}</p>
-                </header>
-                <span>[
-                  {% for tag in page.tags %}
-                    {% capture tag_name %}{{ tag }}{% endcapture %}
-                    <a class="no_border_bottom" href="/tag/{{ tag_name }}"><code class="inlinecode"><nobr>
-                    {{ tag_name }}
-                    </nobr></code>&nbsp;</a> 
-                  {% endfor %}
-                ]</span>
+    .post-header h1 {
+        font-size: 2.5rem;
+        font-weight: 800;
+        margin: 0;
+        background: linear-gradient(to right, #fff, #e2e8f0);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
 
-                <p>{{content}}</p>
-            </section>
+    .post-meta {
+        display: flex;
+        justify-content: center;
+        gap: 2rem;
+        margin-top: 1rem;
+        font-size: 0.875rem;
+        opacity: 0.9;
+    }
 
-            {% if page.comments %}
-            <div>
-                <script src="https://utteranc.es/client.js"
-                repo="sunbingfeng/sunbingfeng.github.io"
-                issue-term="pathname"
-                label="comments"
-                theme="github-light"
-                crossorigin="anonymous"
-                async>
-                </script>
+    .post-tags {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+        margin-top: 1rem;
+    }
+
+    .tag {
+        background: rgba(255, 255, 255, 0.1);
+        color: white;
+        padding: 0.25rem 0.75rem;
+        border-radius: 1rem;
+        font-size: 0.75rem;
+        font-weight: 500;
+        text-decoration: none;
+        backdrop-filter: blur(10px);
+        transition: background-color 0.3s ease;
+    }
+
+    .tag:hover {
+        background: rgba(255, 255, 255, 0.2);
+    }
+
+    .post-content {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 4rem 2rem;
+    }
+
+    .post-content h2 {
+        font-size: 1.875rem;
+        font-weight: 700;
+        margin: 2rem 0 1rem;
+        color: var(--text-color);
+    }
+
+    .post-content h3 {
+        font-size: 1.5rem;
+        font-weight: 600;
+        margin: 1.5rem 0 1rem;
+        color: var(--text-color);
+    }
+
+    .post-content p {
+        margin: 1rem 0;
+        line-height: 1.8;
+    }
+
+    .post-content a {
+        color: var(--primary-color);
+        text-decoration: none;
+        transition: color 0.3s ease;
+    }
+
+    .post-content a:hover {
+        color: var(--secondary-color);
+    }
+
+    .post-content img {
+        max-width: 100%;
+        height: auto;
+        border-radius: 0.5rem;
+        margin: 2rem 0;
+    }
+
+    .post-content pre {
+        background: #f8fafc;
+        padding: 1.5rem;
+        border-radius: 0.5rem;
+        overflow-x: auto;
+        margin: 1.5rem 0;
+        position: relative;
+        border: 1px solid rgba(0, 0, 0, 0.1);
+    }
+
+    [data-theme="dark"] .post-content pre {
+        background: #1f2937;
+        border-color: rgba(255, 255, 255, 0.1);
+    }
+
+    .post-content pre code {
+        font-family: 'Fira Code', monospace;
+        font-size: 0.875rem;
+        line-height: 1.5;
+        background: none;
+        padding: 0;
+        white-space: pre;
+        display: block;
+    }
+
+    /* Light mode syntax highlighting */
+    .token.comment,
+    .token.prolog,
+    .token.doctype,
+    .token.cdata {
+        color: #6b7280;
+    }
+
+    .token.punctuation {
+        color: #4b5563;
+    }
+
+    .token.property,
+    .token.tag,
+    .token.boolean,
+    .token.number,
+    .token.constant,
+    .token.symbol {
+        color: #db2777;
+    }
+
+    .token.selector,
+    .token.attr-name,
+    .token.string,
+    .token.char,
+    .token.builtin {
+        color: #059669;
+    }
+
+    .token.operator,
+    .token.entity,
+    .token.url,
+    .language-css .token.string,
+    .style .token.string {
+        color: #d97706;
+    }
+
+    .token.atrule,
+    .token.attr-value,
+    .token.keyword {
+        color: #2563eb;
+    }
+
+    .token.function {
+        color: #4f46e5;
+    }
+
+    .token.regex,
+    .token.important,
+    .token.variable {
+        color: #dc2626;
+    }
+
+    /* Dark mode syntax highlighting */
+    [data-theme="dark"] .token.comment,
+    [data-theme="dark"] .token.prolog,
+    [data-theme="dark"] .token.doctype,
+    [data-theme="dark"] .token.cdata {
+        color: #9ca3af;
+    }
+
+    [data-theme="dark"] .token.punctuation {
+        color: #d1d5db;
+    }
+
+    [data-theme="dark"] .token.property,
+    [data-theme="dark"] .token.tag,
+    [data-theme="dark"] .token.boolean,
+    [data-theme="dark"] .token.number,
+    [data-theme="dark"] .token.constant,
+    [data-theme="dark"] .token.symbol {
+        color: #f472b6;
+    }
+
+    [data-theme="dark"] .token.selector,
+    [data-theme="dark"] .token.attr-name,
+    [data-theme="dark"] .token.string,
+    [data-theme="dark"] .token.char,
+    [data-theme="dark"] .token.builtin {
+        color: #34d399;
+    }
+
+    [data-theme="dark"] .token.operator,
+    [data-theme="dark"] .token.entity,
+    [data-theme="dark"] .token.url,
+    [data-theme="dark"] .language-css .token.string,
+    [data-theme="dark"] .style .token.string {
+        color: #fbbf24;
+    }
+
+    [data-theme="dark"] .token.atrule,
+    [data-theme="dark"] .token.attr-value,
+    [data-theme="dark"] .token.keyword {
+        color: #60a5fa;
+    }
+
+    [data-theme="dark"] .token.function {
+        color: #818cf8;
+    }
+
+    [data-theme="dark"] .token.regex,
+    [data-theme="dark"] .token.important,
+    [data-theme="dark"] .token.variable {
+        color: #f87171;
+    }
+
+    .post-content blockquote {
+        border-left: 4px solid var(--primary-color);
+        margin: 1.5rem 0;
+        padding: 1rem 1.5rem;
+        background: var(--card-background);
+        border-radius: 0 0.5rem 0.5rem 0;
+    }
+
+    .post-content ul, .post-content ol {
+        margin: 1rem 0;
+        padding-left: 1.5rem;
+    }
+
+    .post-content li {
+        margin: 0.5rem 0;
+    }
+
+    .post-navigation {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 2rem;
+        display: flex;
+        justify-content: space-between;
+        gap: 1rem;
+    }
+
+    .post-navigation a {
+        padding: 1rem 1.5rem;
+        background: var(--card-background);
+        color: var(--text-color);
+        text-decoration: none;
+        border-radius: 0.5rem;
+        transition: all 0.3s ease;
+        flex: 1;
+        text-align: center;
+    }
+
+    .post-navigation a:hover {
+        background: var(--primary-color);
+        color: white;
+        transform: translateY(-2px);
+    }
+
+    @media (max-width: 768px) {
+        .post-header {
+            padding: 5rem 1rem 3rem;
+        }
+
+        .post-header h1 {
+            font-size: 2rem;
+        }
+
+        .post-meta {
+            flex-direction: column;
+            gap: 0.5rem;
+            align-items: center;
+        }
+
+        .post-content {
+            padding: 2rem 1rem;
+        }
+
+        .post-navigation {
+            flex-direction: column;
+        }
+    }
+
+    .post-container {
+        display: grid;
+        grid-template-columns: 1fr 300px;
+        gap: 2rem;
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 2rem;
+    }
+
+    .post-content {
+        max-width: none;
+        margin: 0;
+        padding: 0;
+    }
+
+    .post-toc {
+        position: sticky;
+        top: 2rem;
+        height: fit-content;
+        max-height: calc(100vh - 4rem);
+        overflow-y: auto;
+        padding: 1.5rem;
+        background: var(--card-background);
+        border-radius: 1rem;
+        box-shadow: 0 4px 16px rgba(37,99,235,0.07);
+    }
+
+    .toc-title {
+        font-size: 1.1rem;
+        font-weight: 600;
+        color: var(--text-color);
+        margin-bottom: 1rem;
+        padding-bottom: 0.5rem;
+        border-bottom: 2px solid var(--primary-color);
+    }
+
+    .toc-list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    .toc-item {
+        margin: 0.5rem 0;
+    }
+
+    .toc-link {
+        color: var(--text-color);
+        text-decoration: none;
+        font-size: 0.95rem;
+        opacity: 0.8;
+        transition: all 0.3s ease;
+        display: block;
+        padding: 0.3rem 0;
+    }
+
+    .toc-link:hover {
+        opacity: 1;
+        color: var(--primary-color);
+        transform: translateX(5px);
+    }
+
+    .toc-link.active {
+        color: var(--primary-color);
+        opacity: 1;
+        font-weight: 500;
+    }
+
+    .toc-sublist {
+        list-style: none;
+        padding-left: 1rem;
+        margin: 0.3rem 0;
+    }
+
+    @media (max-width: 1024px) {
+        .post-container {
+            grid-template-columns: 1fr;
+        }
+
+        .post-toc {
+            position: relative;
+            top: 0;
+            max-height: none;
+            margin-top: 2rem;
+        }
+    }
+
+    @media (max-width: 768px) {
+        .post-container {
+            padding: 1rem;
+        }
+    }
+</style>
+
+<article class="post">
+    <header class="post-header">
+        <div class="post-header-content">
+            <h1>{{ page.title }}</h1>
+            <div class="post-meta">
+                <span>{{ page.date | date: "%B %d, %Y" }}</span>
+                <span>{{ page.reading_time }} min read</span>
             </div>
-            {% endif %}
-
-            <!-- Footer -->
-            <footer>
-                <div class="newsletter-container">
-                    <ul class="icons">
-                        <li><i class="fas fa-rss"></i>RSS</li>
-                    </ul>
-                    <!-- <p class="newsletter-text"></p> -->
-                    <form class="newsletter-form" action="https://feedburner.google.com/fb/a/mailverify" method="post" target="popupwindow" onsubmit="window.open('https://feedburner.google.com/fb/a/mailverify?uri=BillsTechBlog', 'popupwindow', 'scrollbars=yes,width=550,height=520');return true">
-                        <input type="hidden" value="BillsTechBlog" name="uri" />
-
-                        <input type="hidden" name="loc" value="en_US" />
-                        
-                        <input class="newsletter-email" type="text" name="email" placeholder="name@example.com" />
-
-                        <input class="newsletter-submit" type="submit" value="Subscribe" />
-
-                    </form>     
-                </div>
-
-                <ul class="actions" style="margin-top: 10px;">
-                    <li><a href="{{ "/blog" | absolute_url }}" class="button">Return</a></li>
-                </ul>
-            </footer>                
+            <div class="post-tags">
+                {% for tag in page.tags %}
+                <a href="/blog/tag/{{ tag | slugify }}" class="tag">{{ tag }}</a>
+                {% endfor %}
+            </div>
         </div>
-        <!-- Footer -->    
+    </header>
+
+    <div class="post-container">
+        <div class="post-content">
+            {{ content }}
+        </div>
+        <nav class="post-toc">
+            <div class="toc-title">Table of Contents</div>
+            <div id="toc"></div>
+        </nav>
     </div>
-    <!-- Scripts -->
-    {% include scripts-main.html %} {% include tracking.html %}
-</body>
 
+    <nav class="post-navigation">
+        {% if page.previous.url %}
+        <a href="{{ page.previous.url }}" class="prev">
+            ← {{ page.previous.title }}
+        </a>
+        {% endif %}
+        {% if page.next.url %}
+        <a href="{{ page.next.url }}" class="next">
+            {{ page.next.title }} →
+        </a>
+        {% endif %}
+    </nav>
+</article>
 
+<!-- Prism.js for syntax highlighting -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-javascript.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-css.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-markup.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-bash.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-json.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-yaml.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-ruby.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-java.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-cpp.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-csharp.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-go.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-rust.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-swift.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-kotlin.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-sql.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-typescript.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-jsx.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-tsx.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-git.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-docker.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-shell.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-ini.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-toml.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-diff.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-regex.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-markdown.min.js"></script>
 
-</html>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const toc = document.getElementById('toc');
+    if (!toc) return;
+
+    const content = document.querySelector('.post-content');
+    const headings = content.querySelectorAll('h1, h2, h3, h4, h5, h6');
+    
+    if (headings.length === 0) {
+        toc.parentElement.style.display = 'none';
+        return;
+    }
+
+    const tocList = document.createElement('ul');
+    tocList.className = 'toc-list';
+    
+    headings.forEach((heading, index) => {
+        // Add ID to heading if not present
+        if (!heading.id) {
+            heading.id = `heading-${index}`;
+        }
+
+        const listItem = document.createElement('li');
+        listItem.className = 'toc-item';
+        
+        const link = document.createElement('a');
+        link.href = `#${heading.id}`;
+        link.textContent = heading.textContent;
+        link.className = 'toc-link';
+        
+        // Add padding based on heading level
+        const level = parseInt(heading.tagName[1]);
+        link.style.paddingLeft = `${(level - 1) * 1}rem`;
+        
+        listItem.appendChild(link);
+        tocList.appendChild(listItem);
+
+        // Add click event for smooth scrolling
+        link.addEventListener('click', (e) => {
+            e.preventDefault();
+            heading.scrollIntoView({ behavior: 'smooth' });
+        });
+    });
+
+    toc.appendChild(tocList);
+
+    // Highlight active section
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const id = entry.target.id;
+                const activeLink = toc.querySelector(`a[href="#${id}"]`);
+                if (activeLink) {
+                    toc.querySelectorAll('.toc-link').forEach(link => {
+                        link.classList.remove('active');
+                    });
+                    activeLink.classList.add('active');
+                }
+            }
+        });
+    }, { threshold: 0.5 });
+
+    headings.forEach(heading => observer.observe(heading));
+
+    // Highlight all code blocks
+    Prism.highlightAll();
+});
+</script> 
