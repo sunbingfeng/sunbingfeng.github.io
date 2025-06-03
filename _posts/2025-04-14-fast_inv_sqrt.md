@@ -1,11 +1,12 @@
 ---
+toc: true
 layout: post
 title:  "Fast Inverse sqrt"
 date:   2025-04-14
 excerpt: "AI Chat Series"
 image: ""
 comments: true
-toc: false
+toc: true
 tags: Y-2025 inv_sqrt AI_Assistant_Programming
 ---
 

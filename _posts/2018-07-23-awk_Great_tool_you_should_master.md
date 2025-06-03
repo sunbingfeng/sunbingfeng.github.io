@@ -1,4 +1,5 @@
 ---
+toc: true
 layout: post
 title:  "awk: A Silver bullet you should have"
 date:   2018-07-23

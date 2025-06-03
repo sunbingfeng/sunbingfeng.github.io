@@ -1,4 +1,5 @@
 ---
+toc: true
 layout: post
 title:  "OpenMP && MPI introduction"
 date:   2018-03-12

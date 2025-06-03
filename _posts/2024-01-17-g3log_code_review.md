@@ -1,11 +1,12 @@
 ---
+toc: true
 layout: post
 title:  "g3log代码分析"
 date:   2024-01-17
 excerpt: "glog的异步平替"
 image: ""
 comments: true
-toc: false
+toc: true
 tags: Y-2024 c++ g3log
 ---
 

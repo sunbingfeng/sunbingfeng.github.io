@@ -1,11 +1,12 @@
 ---
+toc: true
 layout: post
 title:  "Fast exp implementations"
 date:   2025-02-28
 excerpt: "AI Chat Series"
 image: ""
 comments: true
-toc: false
+toc: true
 tags: Y-2025 exp AI_Assistant_Programming
 ---
 

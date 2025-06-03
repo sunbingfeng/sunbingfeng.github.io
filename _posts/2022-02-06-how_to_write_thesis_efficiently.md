@@ -1,4 +1,5 @@
 ---
+toc: true
 layout: post
 title:  "如何高效的写毕业论文"
 date:   2022-02-06

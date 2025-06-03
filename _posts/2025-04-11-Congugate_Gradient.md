@@ -1,11 +1,12 @@
 ---
+toc: true
 layout: post
 title:  "Conjugate Gradient Method"
 date:   2025-04-11
 excerpt: "AI Chat Series"
 image: ""
 comments: true
-toc: false
+toc: true
 tags: Y-2025 CG AI_Assistant_Programming
 ---
 

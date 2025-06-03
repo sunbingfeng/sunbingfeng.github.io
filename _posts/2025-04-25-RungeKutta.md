@@ -1,11 +1,12 @@
 ---
+toc: true
 layout: post
 title:  "4th-order Rugge-Kutta"
 date:   2025-04-25
 excerpt: "AI Chat Series"
 image: ""
 comments: true
-toc: false
+toc: true
 tags: Y-2025 rk4 AI_Assistant_Programming
 ---
 

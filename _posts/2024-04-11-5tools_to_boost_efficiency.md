@@ -1,11 +1,12 @@
 ---
+toc: true
 layout: post
 title:  "5个提升Linux开发效率的工具"
 date:   2024-04-11
 excerpt: "吐血推荐"
 image: ""
 comments: true
-toc: false
+toc: true
 tags: Y-2024 linux tool
 ---
 

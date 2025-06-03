@@ -1,4 +1,5 @@
 ---
+toc: true
 layout: post
 title:  "Setup Your Pure VIM Dev Environment--Part I"
 date:   2022-01-27

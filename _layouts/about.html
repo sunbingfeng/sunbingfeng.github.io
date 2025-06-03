@@ -8,7 +8,7 @@ layout: default
     .about-header {
         background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
         color: white;
-        padding: 6rem 2rem 4rem;
+        padding: clamp(3rem, 8vw, 6rem) clamp(1rem, 3vw, 2rem) clamp(2rem, 6vw, 4rem);
         text-align: center;
         margin-top: calc(-1 * var(--header-height));
         position: relative;
@@ -30,38 +30,42 @@ layout: default
         z-index: 2;
         max-width: 800px;
         margin: 0 auto;
+        width: 100%;
     }
 
     .about-header h1 {
-        font-size: 3rem;
+        font-size: clamp(2rem, 5vw, 3rem);
         font-weight: 800;
         margin: 0;
         background: linear-gradient(to right, #fff, #e2e8f0);
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
+        line-height: 1.2;
     }
 
     .about-header p {
-        font-size: 1.25rem;
+        font-size: clamp(1rem, 3vw, 1.25rem);
         margin: 1rem 0 0;
         opacity: 0.9;
+        padding: 0 1rem;
     }
 
     .about-section {
         max-width: 800px;
         margin: 0 auto;
-        padding: 4rem 2rem;
+        padding: clamp(2rem, 5vw, 4rem) clamp(1rem, 3vw, 2rem);
     }
 
     .about-section h2 {
-        font-size: 2rem;
+        font-size: clamp(1.5rem, 4vw, 2rem);
         font-weight: 700;
         margin-bottom: 1.5rem;
         color: var(--text-color);
+        line-height: 1.3;
     }
 
     .about-section p {
-        font-size: 1.1rem;
+        font-size: clamp(1rem, 2.5vw, 1.1rem);
         line-height: 1.8;
         margin-bottom: 1.5rem;
         color: var(--text-color);
@@ -69,8 +73,8 @@ layout: default
 
     .social-section {
         text-align: center;
-        margin: 4rem auto;
-        padding: 2rem;
+        margin: clamp(2rem, 5vw, 4rem) auto;
+        padding: clamp(1.5rem, 4vw, 2rem);
         max-width: 800px;
         background: var(--card-background);
         border-radius: 1rem;
@@ -78,15 +82,16 @@ layout: default
     }
 
     .social-section h2 {
-        font-size: 2rem;
-        margin-bottom: 2rem;
+        font-size: clamp(1.5rem, 4vw, 2rem);
+        margin-bottom: clamp(1.5rem, 3vw, 2rem);
         color: var(--text-color);
+        line-height: 1.3;
     }
 
     .social-links {
         display: flex;
         justify-content: center;
-        gap: 2rem;
+        gap: clamp(1rem, 3vw, 2rem);
         flex-wrap: wrap;
     }
 
@@ -96,11 +101,11 @@ layout: default
         align-items: center;
         text-decoration: none;
         color: var(--text-color);
-        padding: 1rem;
+        padding: clamp(0.75rem, 2vw, 1rem);
         border-radius: 0.5rem;
         background: var(--background-color);
         transition: all 0.3s ease;
-        min-width: 100px;
+        min-width: clamp(80px, 15vw, 100px);
         position: relative;
     }
 
@@ -111,12 +116,12 @@ layout: default
     }
 
     .social-links i {
-        font-size: 2rem;
+        font-size: clamp(1.5rem, 4vw, 2rem);
         margin-bottom: 0.5rem;
     }
 
     .social-links span {
-        font-size: 0.9rem;
+        font-size: clamp(0.8rem, 2vw, 0.9rem);
         font-weight: 500;
     }
 
@@ -135,26 +140,18 @@ layout: default
         opacity: 1;
     }
 
-    @media (max-width: 768px) {
+    @media (max-width: 480px) {
         .about-header {
-            padding: 5rem 1rem 3rem;
-        }
-
-        .about-header h1 {
-            font-size: 2.5rem;
+            padding: 2rem 1rem;
         }
 
         .about-section {
-            padding: 3rem 1rem;
-        }
-
-        .about-section h2 {
-            font-size: 1.75rem;
+            padding: 2rem 1rem;
         }
 
         .social-section {
-            margin: 3rem 1rem;
-            padding: 1.5rem;
+            margin: 2rem 1rem;
+            padding: 1.5rem 1rem;
         }
 
         .social-links {
@@ -165,10 +162,12 @@ layout: default
             min-width: 80px;
             padding: 0.75rem;
         }
+    }
 
-        .social-links i {
-            font-size: 1.75rem;
-        }
+    /* Add viewport meta tag to ensure proper scaling */
+    @viewport {
+        width: device-width;
+        zoom: 1.0;
     }
 </style>
 

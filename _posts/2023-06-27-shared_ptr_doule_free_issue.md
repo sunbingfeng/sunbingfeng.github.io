@@ -1,11 +1,12 @@
 ---
+toc: true
 layout: post
 title:  "你真的会用shared_ptr吗？"
 date:   2023-06-27
 excerpt: "小心有坑"
 image: ""
 comments: true
-toc: false
+toc: true
 tags: Y-2023 c++
 ---
 

@@ -1,4 +1,5 @@
 ---
+toc: true
 layout: post
 title:  "Design a responsive radar view with libyue & observer pattern"
 date:   2018-03-13

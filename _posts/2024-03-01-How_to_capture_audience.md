@@ -1,11 +1,12 @@
 ---
+toc: true
 layout: post
 title:  "和观众保持情绪共鸣"
 date:   2024-03-01
 excerpt: "情绪价值很重要"
 image: ""
 comments: true
-toc: false
+toc: true
 tags: Y-2024 gossip
 ---
 

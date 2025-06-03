@@ -1,11 +1,12 @@
 ---
+toc: true
 layout: post
 title:  "自动更新Github个人介绍页"
 date:   2023-06-05
 excerpt: "王婆卖瓜系列"
 image: ""
 comments: true
-toc: false
+toc: true
 tags: Y-2023 杂货铺
 ---
 

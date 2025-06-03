@@ -1,14 +1,27 @@
 ---
 layout: default
 ---
+<!-- Add Font Awesome for TOC icon -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
 <style>
+    .post-container {
+        display: grid;
+        grid-template-columns: 1fr 300px;
+        gap: 2rem;
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 1rem;
+    }
+
     .post-header {
         background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
         color: white;
-        padding: 6rem 2rem 4rem;
+        padding: clamp(3rem, 8vw, 6rem) clamp(1rem, 3vw, 2rem) clamp(2rem, 6vw, 4rem);
         text-align: center;
         margin-top: calc(-1 * var(--header-height));
         position: relative;
+        grid-column: 1 / -1;
     }
 
     .post-header::before {
@@ -22,221 +35,146 @@ layout: default
         z-index: 1;
     }
 
-    .post-header-content {
+    .post-content-wrapper {
         position: relative;
         z-index: 2;
         max-width: 800px;
         margin: 0 auto;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
     }
 
-    .post-header h1 {
-        font-size: 2.5rem;
+    .post-title {
+        font-size: clamp(1.75rem, 4vw, 2.5rem);
         font-weight: 800;
         margin: 0;
+        line-height: 1.3;
         background: linear-gradient(to right, #fff, #e2e8f0);
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
     }
 
     .post-meta {
-        display: flex;
-        justify-content: center;
-        gap: 2rem;
-        margin-top: 1rem;
-        font-size: 0.875rem;
-        opacity: 0.9;
+        font-size: clamp(0.875rem, 2vw, 1rem);
+        color: rgba(255, 255, 255, 0.9);
+        margin: 0;
     }
 
     .post-tags {
         display: flex;
-        justify-content: center;
         flex-wrap: wrap;
         gap: 0.5rem;
-        margin-top: 1rem;
+        justify-content: center;
+        margin: 0;
     }
 
-    .tag {
-        background: rgba(255, 255, 255, 0.1);
+    .post-tags .tag {
+        background: rgba(255, 255, 255, 0.15);
         color: white;
         padding: 0.25rem 0.75rem;
         border-radius: 1rem;
-        font-size: 0.75rem;
-        font-weight: 500;
-        backdrop-filter: blur(10px);
-        display: inline-block;
+        font-size: 0.875rem;
+        transition: all 0.3s ease;
+    }
+
+    .post-tags .tag:hover {
+        background: rgba(255, 255, 255, 0.25);
+        transform: translateY(-1px);
     }
 
     .post-content {
-        max-width: 800px;
-        margin: 0 auto;
-        padding: 4rem 2rem;
-    }
-
-    .post-content h2 {
-        font-size: 1.875rem;
-        font-weight: 700;
-        margin: 2rem 0 1rem;
-        color: var(--text-color);
-    }
-
-    .post-content h3 {
-        font-size: 1.5rem;
-        font-weight: 600;
-        margin: 1.5rem 0 1rem;
-        color: var(--text-color);
-    }
-
-    .post-content p {
-        margin: 1rem 0;
+        font-size: clamp(1rem, 2.5vw, 1.1rem);
         line-height: 1.8;
     }
 
-    .post-content a {
-        color: var(--primary-color);
-        text-decoration: none;
-        transition: color 0.3s ease;
+    /* TOC Styles */
+    .toc-container {
+        position: sticky;
+        top: calc(var(--header-height) + 1rem);
+        max-height: calc(100vh - var(--header-height) - 2rem);
+        overflow-y: auto;
+        padding: 1.5rem;
+        background: var(--card-background);
+        border-radius: 0.5rem;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        font-size: 0.9rem;
+        display: none; /* Hide by default on mobile */
     }
 
-    .post-content a:hover {
-        color: var(--secondary-color);
+    .toc-container h2 {
+        font-size: 1.25rem;
+        margin: 0 0 1rem 0;
+        color: var(--text-color);
+        padding-bottom: 0.5rem;
+        border-bottom: 2px solid var(--primary-color);
+    }
+
+    .toc {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    .toc ul {
+        list-style: none;
+        padding-left: 1rem;
+        margin: 0.5rem 0;
+    }
+
+    .toc li {
+        margin: 0.5rem 0;
+    }
+
+    .toc a {
+        color: var(--text-color);
+        text-decoration: none;
+        transition: all 0.3s ease;
+        display: block;
+        padding: 0.25rem 0;
+        opacity: 0.8;
+    }
+
+    .toc a:hover {
+        color: var(--primary-color);
+        opacity: 1;
+        transform: translateX(5px);
+    }
+
+    .toc a.active {
+        color: var(--primary-color);
+        font-weight: 600;
+        opacity: 1;
+    }
+
+    /* Post content styles */
+    .post-content h1,
+    .post-content h2,
+    .post-content h3,
+    .post-content h4 {
+        scroll-margin-top: calc(var(--header-height) + 2rem);
     }
 
     .post-content img {
         max-width: 100%;
         height: auto;
         border-radius: 0.5rem;
-        margin: 2rem 0;
+        margin: 1.5rem 0;
     }
 
     .post-content pre {
-        background: #f8fafc;
-        padding: 1.5rem;
-        border-radius: 0.5rem;
         overflow-x: auto;
+        padding: 1rem;
+        border-radius: 0.5rem;
         margin: 1.5rem 0;
-        position: relative;
-        border: 1px solid rgba(0, 0, 0, 0.1);
+        font-size: 0.9rem;
     }
 
-    [data-theme="dark"] .post-content pre {
-        background: #1f2937;
-        border-color: rgba(255, 255, 255, 0.1);
-    }
-
-    .post-content pre code {
-        font-family: 'Fira Code', monospace;
-        font-size: 0.875rem;
-        line-height: 1.5;
-        background: none;
-        padding: 0;
-        white-space: pre;
-        display: block;
-    }
-
-    /* Light mode syntax highlighting */
-    .token.comment,
-    .token.prolog,
-    .token.doctype,
-    .token.cdata {
-        color: #6b7280;
-    }
-
-    .token.punctuation {
-        color: #4b5563;
-    }
-
-    .token.property,
-    .token.tag,
-    .token.boolean,
-    .token.number,
-    .token.constant,
-    .token.symbol {
-        color: #db2777;
-    }
-
-    .token.selector,
-    .token.attr-name,
-    .token.string,
-    .token.char,
-    .token.builtin {
-        color: #059669;
-    }
-
-    .token.operator,
-    .token.entity,
-    .token.url,
-    .language-css .token.string,
-    .style .token.string {
-        color: #d97706;
-    }
-
-    .token.atrule,
-    .token.attr-value,
-    .token.keyword {
-        color: #2563eb;
-    }
-
-    .token.function {
-        color: #4f46e5;
-    }
-
-    .token.regex,
-    .token.important,
-    .token.variable {
-        color: #dc2626;
-    }
-
-    /* Dark mode syntax highlighting */
-    [data-theme="dark"] .token.comment,
-    [data-theme="dark"] .token.prolog,
-    [data-theme="dark"] .token.doctype,
-    [data-theme="dark"] .token.cdata {
-        color: #9ca3af;
-    }
-
-    [data-theme="dark"] .token.punctuation {
-        color: #d1d5db;
-    }
-
-    [data-theme="dark"] .token.property,
-    [data-theme="dark"] .token.tag,
-    [data-theme="dark"] .token.boolean,
-    [data-theme="dark"] .token.number,
-    [data-theme="dark"] .token.constant,
-    [data-theme="dark"] .token.symbol {
-        color: #f472b6;
-    }
-
-    [data-theme="dark"] .token.selector,
-    [data-theme="dark"] .token.attr-name,
-    [data-theme="dark"] .token.string,
-    [data-theme="dark"] .token.char,
-    [data-theme="dark"] .token.builtin {
-        color: #34d399;
-    }
-
-    [data-theme="dark"] .token.operator,
-    [data-theme="dark"] .token.entity,
-    [data-theme="dark"] .token.url,
-    [data-theme="dark"] .language-css .token.string,
-    [data-theme="dark"] .style .token.string {
-        color: #fbbf24;
-    }
-
-    [data-theme="dark"] .token.atrule,
-    [data-theme="dark"] .token.attr-value,
-    [data-theme="dark"] .token.keyword {
-        color: #60a5fa;
-    }
-
-    [data-theme="dark"] .token.function {
-        color: #818cf8;
-    }
-
-    [data-theme="dark"] .token.regex,
-    [data-theme="dark"] .token.important,
-    [data-theme="dark"] .token.variable {
-        color: #f87171;
+    .post-content code {
+        font-size: 0.9em;
+        padding: 0.2em 0.4em;
+        border-radius: 0.25rem;
     }
 
     .post-content blockquote {
@@ -247,334 +185,349 @@ layout: default
         border-radius: 0 0.5rem 0.5rem 0;
     }
 
-    .post-content ul, .post-content ol {
-        margin: 1rem 0;
-        padding-left: 1.5rem;
-    }
-
-    .post-content li {
-        margin: 0.5rem 0;
-    }
-
-    .post-navigation {
-        max-width: 800px;
-        margin: 0 auto;
-        padding: 2rem;
-        display: flex;
-        justify-content: space-between;
-        gap: 1rem;
-    }
-
-    .post-navigation a {
-        padding: 1rem 1.5rem;
-        background: var(--card-background);
-        color: var(--text-color);
-        text-decoration: none;
-        border-radius: 0.5rem;
-        transition: all 0.3s ease;
-        flex: 1;
-        text-align: center;
-    }
-
-    .post-navigation a:hover {
+    /* Mobile TOC Toggle */
+    .toc-toggle {
+        display: none;
+        position: fixed;
+        bottom: 2rem;
+        right: 2rem;
         background: var(--primary-color);
         color: white;
-        transform: translateY(-2px);
-    }
-
-    @media (max-width: 768px) {
-        .post-header {
-            padding: 5rem 1rem 3rem;
-        }
-
-        .post-header h1 {
-            font-size: 2rem;
-        }
-
-        .post-meta {
-            flex-direction: column;
-            gap: 0.5rem;
-            align-items: center;
-        }
-
-        .post-content {
-            padding: 2rem 1rem;
-        }
-
-        .post-navigation {
-            flex-direction: column;
-        }
-    }
-
-    .post-container {
-        display: grid;
-        grid-template-columns: 1fr 300px;
-        gap: 2rem;
-        max-width: 1200px;
-        margin: 0 auto;
-        padding: 2rem;
-    }
-
-    .post-content {
-        max-width: none;
-        margin: 0;
-        padding: 0;
-    }
-
-    .post-toc {
-        position: sticky;
-        top: 2rem;
-        height: fit-content;
-        max-height: calc(100vh - 4rem);
-        overflow-y: auto;
-        padding: 1.5rem;
-        background: var(--card-background);
-        border-radius: 1rem;
-        box-shadow: 0 4px 16px rgba(37,99,235,0.07);
-    }
-
-    .toc-title {
-        font-size: 1.1rem;
-        font-weight: 600;
-        color: var(--text-color);
-        margin-bottom: 1rem;
-        padding-bottom: 0.5rem;
-        border-bottom: 2px solid var(--primary-color);
-    }
-
-    .toc-list {
-        list-style: none;
-        padding: 0;
-        margin: 0;
-    }
-
-    .toc-item {
-        margin: 0.5rem 0;
-    }
-
-    .toc-link {
-        color: var(--text-color);
-        text-decoration: none;
-        font-size: 0.95rem;
-        opacity: 0.8;
-        transition: all 0.3s ease;
-        display: block;
-        padding: 0.3rem 0;
-    }
-
-    .toc-link:hover {
-        opacity: 1;
-        color: var(--primary-color);
-        transform: translateX(5px);
-    }
-
-    .toc-link.active {
-        color: var(--primary-color);
-        opacity: 1;
-        font-weight: 500;
-    }
-
-    .toc-sublist {
-        list-style: none;
-        padding-left: 1rem;
-        margin: 0.3rem 0;
+        padding: 0.75rem;
+        border-radius: 50%;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+        z-index: 1000;
+        cursor: pointer;
+        border: none;
+        width: 3rem;
+        height: 3rem;
+        font-size: 1.25rem;
     }
 
     @media (max-width: 1024px) {
         .post-container {
             grid-template-columns: 1fr;
+            padding: 0 1rem;
         }
 
-        .post-toc {
-            position: relative;
-            top: 0;
-            max-height: none;
-            margin-top: 2rem;
+        .toc-container {
+            display: none; /* Hide TOC by default on tablet */
         }
     }
 
     @media (max-width: 768px) {
-        .post-container {
-            padding: 1rem;
+        .post-content {
+            padding: 2rem 0;
+        }
+
+        .toc-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            max-height: 100vh;
+            margin: 0;
+            border-radius: 0;
+            z-index: 1000;
+            transform: translateX(-100%);
+            transition: transform 0.3s ease;
+            padding: 2rem 1rem;
+        }
+
+        .toc-container.active {
+            transform: translateX(0);
+        }
+
+        .toc-toggle {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .toc-toggle.active {
+            background: var(--secondary-color);
+        }
+
+        .post-content h1 {
+            font-size: clamp(1.5rem, 4vw, 2rem);
+        }
+
+        .post-content h2 {
+            font-size: clamp(1.25rem, 3.5vw, 1.75rem);
+        }
+
+        .post-content h3 {
+            font-size: clamp(1.1rem, 3vw, 1.5rem);
+        }
+
+        .post-content h4 {
+            font-size: clamp(1rem, 2.5vw, 1.25rem);
+        }
+
+        .post-header {
+            padding: 2rem 1rem;
+        }
+
+        .post-content-wrapper {
+            gap: 0.75rem;
+        }
+
+        .post-tags {
+            gap: 0.375rem;
+        }
+
+        .post-tags .tag {
+            font-size: 0.8125rem;
+            padding: 0.2rem 0.625rem;
         }
     }
 
-    .comments-section {
-        max-width: 800px;
-        margin: 0 auto;
-        padding: 2rem;
+    @media (max-width: 480px) {
+        .post-header {
+            padding: 2rem 1rem;
+        }
+
+        .post-content {
+            padding: 1.5rem 0;
+        }
+
+        .toc-toggle {
+            bottom: 1rem;
+            right: 1rem;
+            width: 2.5rem;
+            height: 2.5rem;
+            font-size: 1rem;
+        }
+    }
+
+    /* Comments Section Styles */
+    .comments-wrapper {
+        width: 100%;
+        background: var(--background-color);
+        border-top: 1px solid var(--border-color);
+        margin-top: 3rem;
+        padding: 3rem 0;
     }
 
     .comments-container {
-        background: var(--card-background);
-        border-radius: 1rem;
-        padding: 2rem;
-        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 0 1rem;
     }
 
     .comments-container h2 {
         font-size: 1.5rem;
         font-weight: 600;
-        margin-bottom: 1.5rem;
+        margin-bottom: 2rem;
         color: var(--text-color);
+        text-align: center;
     }
 
-    [data-theme="dark"] .comments-container {
+    .utterances-container {
         background: var(--card-background);
+        border-radius: 0.5rem;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        overflow: hidden;
+    }
+
+    /* Utterances specific styles */
+    .utterances-container iframe {
+        width: 100% !important;
+        border: none !important;
+    }
+
+    [data-theme="dark"] .utterances-container {
+        background: var(--card-background);
+    }
+
+    @media (max-width: 1024px) {
+        .comments-wrapper {
+            margin-top: 2rem;
+            padding: 2rem 0;
+        }
+    }
+
+    @media (max-width: 768px) {
+        .comments-wrapper {
+            margin-top: 1.5rem;
+            padding: 1.5rem 0;
+        }
+
+        .comments-container {
+            padding: 0 1rem;
+        }
+
+        .comments-container h2 {
+            font-size: 1.25rem;
+            margin-bottom: 1.5rem;
+        }
     }
 </style>
 
-<article class="post">
-    <header class="post-header">
-        <div class="post-header-content">
-            <h1>{{ page.title }}</h1>
+<div class="post-container">
+    <div class="post-header">
+        <div class="post-content-wrapper">
+            <h1 class="post-title">{{ page.title }}</h1>
             <div class="post-meta">
                 <span>{{ page.date | date: "%B %d, %Y" }}</span>
-                <span>{{ page.reading_time }} min read</span>
             </div>
+            {% if page.tags.size > 0 %}
             <div class="post-tags">
                 {% for tag in page.tags %}
                 <span class="tag">{{ tag }}</span>
                 {% endfor %}
             </div>
+            {% endif %}
         </div>
-        </header>
-
-    <div class="post-container">
-        <div class="post-content">
-            {{ content }}
-        </div>
-        <nav class="post-toc">
-            <div class="toc-title">Table of Contents</div>
-            <div id="toc"></div>
-        </nav>
     </div>
 
-    <nav class="post-navigation">
-        {% if page.previous.url %}
-        <a href="{{ page.previous.url }}" class="prev">
-            ← {{ page.previous.title }}
-        </a>
-        {% endif %}
-        {% if page.next.url %}
-        <a href="{{ page.next.url }}" class="next">
-            {{ page.next.title }} →
-        </a>
-        {% endif %}
-    </nav>
-</article>
+    <div class="post-content">
+        {{ content }}
+    </div>
 
-<!-- Comments Section -->
-<div class="comments-section">
+    {% if page.toc %}
+    <button class="toc-toggle" aria-label="Toggle Table of Contents" aria-expanded="false">
+        <i class="fas fa-list"></i>
+    </button>
+    <div class="toc-container">
+        <h2>Table of Contents</h2>
+        <nav class="toc">
+            {% include toc.html html=content sanitize=true class="inline_toc" id="my_toc" h_min=2 h_max=3 %}
+        </nav>
+    </div>
+    {% endif %}
+</div>
+
+<!-- Comments Section - Outside the post-container for full width -->
+<div class="comments-wrapper">
     <div class="comments-container">
         <h2>Comments</h2>
+        <div class="utterances-container">
                 <script src="https://utteranc.es/client.js"
                 repo="sunbingfeng/sunbingfeng.github.io"
                 issue-term="pathname"
-                label="comment"
+                    label="comment"
                 theme="github-light"
                 crossorigin="anonymous"
                 async>
                 </script>
             </div>
+    </div>
 </div>
 
-<!-- Prism.js for syntax highlighting -->
-<link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet" />
-<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-javascript.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-css.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-markup.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-bash.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-json.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-yaml.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-ruby.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-java.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-cpp.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-csharp.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-go.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-rust.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-swift.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-kotlin.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-sql.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-typescript.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-jsx.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-tsx.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-git.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-docker.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-shell.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-ini.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-toml.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-diff.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-regex.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-markdown.min.js"></script>
-
 <script>
-document.addEventListener('DOMContentLoaded', function() {
-    const toc = document.getElementById('toc');
-    if (!toc) return;
-
-    const content = document.querySelector('.post-content');
-    const headings = content.querySelectorAll('h1, h2, h3, h4, h5, h6');
-    
-    if (headings.length === 0) {
-        toc.parentElement.style.display = 'none';
-        return;
-    }
-
-    const tocList = document.createElement('ul');
-    tocList.className = 'toc-list';
-    
-    headings.forEach((heading, index) => {
-        // Add ID to heading if not present
-        if (!heading.id) {
-            heading.id = `heading-${index}`;
+    document.addEventListener('DOMContentLoaded', function() {
+        const tocContainer = document.querySelector('.toc-container');
+        const tocToggle = document.querySelector('.toc-toggle');
+        const tocLinks = document.querySelectorAll('.toc a');
+        const headers = document.querySelectorAll('.post-content h1, .post-content h2, .post-content h3, .post-content h4');
+        
+        // Show TOC by default on desktop
+        if (window.innerWidth > 1024 && tocContainer) {
+            tocContainer.style.display = 'block';
         }
 
-        const listItem = document.createElement('li');
-        listItem.className = 'toc-item';
-        
-        const link = document.createElement('a');
-        link.href = `#${heading.id}`;
-        link.textContent = heading.textContent;
-        link.className = 'toc-link';
-        
-        // Add padding based on heading level
-        const level = parseInt(heading.tagName[1]);
-        link.style.paddingLeft = `${(level - 1) * 1}rem`;
-        
-        listItem.appendChild(link);
-        tocList.appendChild(listItem);
-
-        // Add click event for smooth scrolling
-        link.addEventListener('click', (e) => {
-            e.preventDefault();
-            heading.scrollIntoView({ behavior: 'smooth' });
-        });
-    });
-
-    toc.appendChild(tocList);
-
-    // Highlight active section
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                const id = entry.target.id;
-                const activeLink = toc.querySelector(`a[href="#${id}"]`);
-                if (activeLink) {
-                    toc.querySelectorAll('.toc-link').forEach(link => {
-                        link.classList.remove('active');
-                    });
-                    activeLink.classList.add('active');
+        // TOC Toggle for mobile
+        if (tocToggle) {
+            tocToggle.addEventListener('click', function() {
+                const isExpanded = tocToggle.getAttribute('aria-expanded') === 'true';
+                tocContainer.classList.toggle('active');
+                tocToggle.classList.toggle('active');
+                tocToggle.setAttribute('aria-expanded', !isExpanded);
+                
+                // Toggle display for mobile
+                if (window.innerWidth <= 1024) {
+                    tocContainer.style.display = isExpanded ? 'none' : 'block';
                 }
+            });
+
+            // Close TOC when clicking outside
+            document.addEventListener('click', function(e) {
+                if (tocContainer && 
+                    tocContainer.classList.contains('active') && 
+                    !tocContainer.contains(e.target) && 
+                    !tocToggle.contains(e.target)) {
+                    tocContainer.classList.remove('active');
+                    tocToggle.classList.remove('active');
+                    tocToggle.setAttribute('aria-expanded', 'false');
+                    if (window.innerWidth <= 1024) {
+                        tocContainer.style.display = 'none';
+                    }
+                }
+            });
+        }
+
+        // Update active TOC item on scroll
+        function updateTOC() {
+            if (!tocLinks.length) return;
+            
+            const scrollPosition = window.scrollY;
+            let currentSection = null;
+            
+            headers.forEach((header) => {
+                const headerTop = header.offsetTop - 100;
+                const headerBottom = headerTop + header.offsetHeight;
+                
+                if (scrollPosition >= headerTop && scrollPosition < headerBottom) {
+                    currentSection = header.id;
+                }
+            });
+
+            if (currentSection) {
+                tocLinks.forEach(link => {
+                    link.classList.remove('active');
+                    if (link.getAttribute('href') === `#${currentSection}`) {
+                        link.classList.add('active');
+                        // Scroll TOC to active item on mobile
+                        if (window.innerWidth <= 1024 && tocContainer) {
+                            link.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                        }
+                    }
+                });
+            }
+        }
+
+        // Smooth scroll for TOC links
+        tocLinks.forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href').substring(1);
+                const targetElement = document.getElementById(targetId);
+                
+                if (targetElement) {
+                    const headerOffset = 80;
+                    const elementPosition = targetElement.getBoundingClientRect().top;
+                    const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+
+                    window.scrollTo({
+                        top: offsetPosition,
+                        behavior: 'smooth'
+                    });
+
+                    // Close TOC on mobile after clicking
+                    if (window.innerWidth <= 1024) {
+                        tocContainer.classList.remove('active');
+                        tocToggle.classList.remove('active');
+                        tocToggle.setAttribute('aria-expanded', 'false');
+                        tocContainer.style.display = 'none';
+                    }
+                }
+            });
+        });
+
+        // Update TOC on scroll
+        window.addEventListener('scroll', updateTOC);
+        // Initial TOC update
+        updateTOC();
+
+        // Handle window resize
+        window.addEventListener('resize', function() {
+            if (window.innerWidth > 1024) {
+                tocContainer.style.display = 'block';
+            } else if (!tocContainer.classList.contains('active')) {
+                tocContainer.style.display = 'none';
             }
         });
-    }, { threshold: 0.5 });
-
-    headings.forEach(heading => observer.observe(heading));
-
-    // Highlight all code blocks
-    Prism.highlightAll();
-});
+    });
 </script> 

@@ -1,4 +1,5 @@
 ---
+toc: true
 layout: post
 title:  "Bill's Dev Weekly Y2019#41"
 date:   2019-10-07
