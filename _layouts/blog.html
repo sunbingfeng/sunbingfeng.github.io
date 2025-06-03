@@ -90,18 +90,19 @@ layout: default
         font-size: 0.8rem;
     }
 
+    .tags-cloud-container {
+        position: relative;
+        max-width: 1000px;
+        margin: 2rem auto;
+        padding: 0 1rem;
+    }
+
     .tags-cloud {
         display: flex;
         flex-wrap: wrap;
         gap: 1rem;
-        justify-content: center;
-        margin: 2rem 0;
-        padding: 0 1rem;
+        justify-content: space-between;
         position: relative;
-    }
-
-    .tags-cloud.expanded {
-        max-height: none;
     }
 
     .tags-cloud:not(.expanded) {
@@ -109,6 +110,10 @@ layout: default
         overflow: hidden;
         mask-image: linear-gradient(to bottom, black 80%, transparent 100%);
         -webkit-mask-image: linear-gradient(to bottom, black 80%, transparent 100%);
+    }
+
+    .tags-cloud.expanded {
+        display: none;
     }
 
     .expand-tags {
@@ -123,9 +128,11 @@ layout: default
         font-size: 0.9rem;
         cursor: pointer;
         transition: all 0.3s ease;
-        margin-top: 1rem;
+        margin: 1rem auto 0;
         border: none;
         backdrop-filter: blur(10px);
+        width: fit-content;
+        min-width: 150px;
     }
 
     .expand-tags:hover {
@@ -374,49 +381,107 @@ layout: default
 
     @media (max-width: 768px) {
         .blog-header {
-            padding: 5rem 1rem 3rem;
+            padding: 7rem 1rem 4rem;
+            margin-top: calc(-1 * var(--header-height));
+        }
+        .blog-header h1 {
+            font-size: 2.2rem;
+            line-height: 1.3;
+            padding: 0 0.5rem;
+            word-wrap: break-word;
+        }
+        .blog-content {
+            padding: 2rem 1rem;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        .blog-grid {
+            grid-template-columns: 1fr;
+            gap: 2rem;
+            padding: 0 0.5rem;
+        }
+        .post-card {
+            padding: 1.5rem;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        .post-card h2 {
+            font-size: 1.4rem;
+            line-height: 1.4;
+            word-wrap: break-word;
+            padding: 0 0.5rem;
+        }
+        .post-excerpt {
+            font-size: 0.95rem;
+            line-height: 1.5;
+            padding: 0 0.5rem;
+        }
+        .tags-cloud-container {
+            padding: 0 0.5rem;
+        }
+        .tags-cloud {
+            justify-content: center;
+            gap: 0.75rem;
+        }
+        .expand-tags {
+            font-size: 0.85rem;
+            padding: 0.4rem 0.8rem;
+            margin-top: 0.75rem;
+            width: auto;
+            min-width: 140px;
+        }
+        .tag-stat {
+            font-size: 0.85rem;
+            padding: 0.4rem 0.8rem;
+            white-space: nowrap;
+        }
+        .pagination {
+            justify-content: center;
+            padding: 0 0.5rem;
+        }
+        .selected-tags {
+            justify-content: center;
+            padding: 0 0.5rem;
+        }
+        .post-meta {
+            padding: 0 0.5rem;
+            flex-wrap: wrap;
+        }
+        .post-tags {
+            padding: 0 0.5rem;
+        }
+        .cta-button {
+            margin: 0.5rem;
+            width: calc(100% - 1rem);
+            text-align: center;
+        }
+    }
+
+    @media (max-width: 480px) {
+        .blog-header {
+            padding: 6rem 0.5rem 3rem;
         }
         .blog-header h1 {
             font-size: 2rem;
         }
-        .blog-content {
-            padding: 2rem 1rem;
-        }
-        .blog-grid {
-            grid-template-columns: 1fr;
-            gap: 1.5rem;
-        }
-        .blog-grid:has(.post-card.visible:only-child),
-        .blog-grid:has(.post-card.visible:nth-child(2)) {
-            grid-template-columns: 1fr;
-        }
         .post-card {
-            padding: 1.5rem;
+            padding: 1.2rem;
         }
-        .tags-cloud:not(.expanded) {
-            max-height: 100px;
+        .post-card h2 {
+            font-size: 1.3rem;
+        }
+        .tags-cloud {
+            gap: 0.5rem;
+        }
+        .expand-tags {
+            font-size: 0.8rem;
+            padding: 0.35rem 0.7rem;
+            margin-top: 0.5rem;
+            min-width: 130px;
         }
         .tag-stat {
             font-size: 0.8rem;
-            padding: 0.4rem 0.8rem;
-        }
-        .pagination-info {
-            margin: 3rem 0 1.5rem 0;
-            font-size: 1rem;
-        }
-        .pagination {
-            gap: 0.25rem;
-        }
-        .pagination-item {
-            padding: 0.4rem 0.8rem;
-            font-size: 0.9rem;
-        }
-        .selected-tags {
-            margin: 0.5rem 0;
-        }
-        .selected-tag {
-            font-size: 0.8rem;
-            padding: 0.2rem 0.6rem;
+            padding: 0.35rem 0.7rem;
         }
     }
 </style>
@@ -425,102 +490,104 @@ layout: default
     <div class="blog-header-content">
         <h1>Latest Posts</h1>
         <div class="selected-tags"></div>
-        <div class="tags-cloud">
-            <a href="#" class="tag-stat active" data-tag="all">
-                <i class="fas fa-th-large"></i>
-                All Posts
-                <span class="tag-count">{{ site.posts.size }}</span>
-            </a>
-            {% assign sorted_tags = site.tags | sort %}
-            {% assign tag_sizes = '' | split: '' %}
-            {% for tag in sorted_tags %}
-                {% assign tag_size = tag[1] | size %}
-                {% assign tag_with_size = tag[0] | append: ':' | append: tag_size %}
-                {% assign tag_sizes = tag_sizes | push: tag_with_size %}
-            {% endfor %}
-            {% assign tag_sizes = tag_sizes | sort_natural | reverse %}
-            {% assign initial_tags = tag_sizes | slice: 0, 8 %}
-            {% for tag_with_size in initial_tags %}
-                {% assign tag_parts = tag_with_size | split: ':' %}
-                {% assign tag_name = tag_parts[0] %}
-                {% assign posts = site.tags[tag_name] %}
-                {% assign tag_icon = 'fa-tag' %}
-                {% case tag_name %}
-                    {% when 'c++' %}
-                        {% assign tag_icon = 'fa-code' %}
-                    {% when 'git' %}
-                        {% assign tag_icon = 'fa-code-branch' %}
-                    {% when 'linux' %}
-                        {% assign tag_icon = 'fa-linux' %}
-                    {% when 'Review' %}
-                        {% assign tag_icon = 'fa-star' %}
-                    {% when 'tips' %}
-                        {% assign tag_icon = 'fa-lightbulb' %}
-                    {% when 'thesis' %}
-                        {% assign tag_icon = 'fa-graduation-cap' %}
-                    {% when 'comics' %}
-                        {% assign tag_icon = 'fa-smile' %}
-                    {% when 'gossip' %}
-                        {% assign tag_icon = 'fa-comments' %}
-                    {% when 'demo' %}
-                        {% assign tag_icon = 'fa-play-circle' %}
-                    {% when 'summary' %}
-                        {% assign tag_icon = 'fa-list' %}
-                    {% when 'g3log' %}
-                        {% assign tag_icon = 'fa-bug' %}
-                {% endcase %}
-                <a href="#" class="tag-stat" data-tag="{{ tag_name }}">
-                    <i class="fas {{ tag_icon }}"></i>
-                    {{ tag_name }}
-                    <span class="tag-count">{{ posts.size }}</span>
+        <div class="tags-cloud-container">
+            <div class="tags-cloud">
+                <a href="#" class="tag-stat active" data-tag="all">
+                    <i class="fas fa-th-large"></i>
+                    All Posts
+                    <span class="tag-count">{{ site.posts.size }}</span>
                 </a>
-            {% endfor %}
+                {% assign sorted_tags = site.tags | sort %}
+                {% assign tag_sizes = '' | split: '' %}
+                {% for tag in sorted_tags %}
+                    {% assign tag_size = tag[1] | size %}
+                    {% assign tag_with_size = tag[0] | append: ':' | append: tag_size %}
+                    {% assign tag_sizes = tag_sizes | push: tag_with_size %}
+                {% endfor %}
+                {% assign tag_sizes = tag_sizes | sort_natural | reverse %}
+                {% assign initial_tags = tag_sizes | slice: 0, 8 %}
+                {% for tag_with_size in initial_tags %}
+                    {% assign tag_parts = tag_with_size | split: ':' %}
+                    {% assign tag_name = tag_parts[0] %}
+                    {% assign posts = site.tags[tag_name] %}
+                    {% assign tag_icon = 'fa-tag' %}
+                    {% case tag_name %}
+                        {% when 'c++' %}
+                            {% assign tag_icon = 'fa-code' %}
+                        {% when 'git' %}
+                            {% assign tag_icon = 'fa-code-branch' %}
+                        {% when 'linux' %}
+                            {% assign tag_icon = 'fa-linux' %}
+                        {% when 'Review' %}
+                            {% assign tag_icon = 'fa-star' %}
+                        {% when 'tips' %}
+                            {% assign tag_icon = 'fa-lightbulb' %}
+                        {% when 'thesis' %}
+                            {% assign tag_icon = 'fa-graduation-cap' %}
+                        {% when 'comics' %}
+                            {% assign tag_icon = 'fa-smile' %}
+                        {% when 'gossip' %}
+                            {% assign tag_icon = 'fa-comments' %}
+                        {% when 'demo' %}
+                            {% assign tag_icon = 'fa-play-circle' %}
+                        {% when 'summary' %}
+                            {% assign tag_icon = 'fa-list' %}
+                        {% when 'g3log' %}
+                            {% assign tag_icon = 'fa-bug' %}
+                    {% endcase %}
+                    <a href="#" class="tag-stat" data-tag="{{ tag_name }}">
+                        <i class="fas {{ tag_icon }}"></i>
+                        {{ tag_name }}
+                        <span class="tag-count">{{ posts.size }}</span>
+                    </a>
+                {% endfor %}
+            </div>
             {% if tag_sizes.size > 8 %}
             <button class="expand-tags" aria-label="Show more tags">
                 <span>Show More Tags</span>
                 <i class="fas fa-chevron-down"></i>
             </button>
             {% endif %}
+            {% if tag_sizes.size > 8 %}
+            <div class="tags-cloud expanded">
+                {% for tag_with_size in tag_sizes offset:8 %}
+                    {% assign tag_parts = tag_with_size | split: ':' %}
+                    {% assign tag_name = tag_parts[0] %}
+                    {% assign posts = site.tags[tag_name] %}
+                    {% assign tag_icon = 'fa-tag' %}
+                    {% case tag_name %}
+                        {% when 'c++' %}
+                            {% assign tag_icon = 'fa-code' %}
+                        {% when 'git' %}
+                            {% assign tag_icon = 'fa-code-branch' %}
+                        {% when 'linux' %}
+                            {% assign tag_icon = 'fa-linux' %}
+                        {% when 'Review' %}
+                            {% assign tag_icon = 'fa-star' %}
+                        {% when 'tips' %}
+                            {% assign tag_icon = 'fa-lightbulb' %}
+                        {% when 'thesis' %}
+                            {% assign tag_icon = 'fa-graduation-cap' %}
+                        {% when 'comics' %}
+                            {% assign tag_icon = 'fa-smile' %}
+                        {% when 'gossip' %}
+                            {% assign tag_icon = 'fa-comments' %}
+                        {% when 'demo' %}
+                            {% assign tag_icon = 'fa-play-circle' %}
+                        {% when 'summary' %}
+                            {% assign tag_icon = 'fa-list' %}
+                        {% when 'g3log' %}
+                            {% assign tag_icon = 'fa-bug' %}
+                    {% endcase %}
+                    <a href="#" class="tag-stat" data-tag="{{ tag_name }}">
+                        <i class="fas {{ tag_icon }}"></i>
+                        {{ tag_name }}
+                        <span class="tag-count">{{ posts.size }}</span>
+                    </a>
+                {% endfor %}
+            </div>
+            {% endif %}
         </div>
-        {% if tag_sizes.size > 8 %}
-        <div class="tags-cloud expanded" style="display: none;">
-            {% for tag_with_size in tag_sizes offset:8 %}
-                {% assign tag_parts = tag_with_size | split: ':' %}
-                {% assign tag_name = tag_parts[0] %}
-                {% assign posts = site.tags[tag_name] %}
-                {% assign tag_icon = 'fa-tag' %}
-                {% case tag_name %}
-                    {% when 'c++' %}
-                        {% assign tag_icon = 'fa-code' %}
-                    {% when 'git' %}
-                        {% assign tag_icon = 'fa-code-branch' %}
-                    {% when 'linux' %}
-                        {% assign tag_icon = 'fa-linux' %}
-                    {% when 'Review' %}
-                        {% assign tag_icon = 'fa-star' %}
-                    {% when 'tips' %}
-                        {% assign tag_icon = 'fa-lightbulb' %}
-                    {% when 'thesis' %}
-                        {% assign tag_icon = 'fa-graduation-cap' %}
-                    {% when 'comics' %}
-                        {% assign tag_icon = 'fa-smile' %}
-                    {% when 'gossip' %}
-                        {% assign tag_icon = 'fa-comments' %}
-                    {% when 'demo' %}
-                        {% assign tag_icon = 'fa-play-circle' %}
-                    {% when 'summary' %}
-                        {% assign tag_icon = 'fa-list' %}
-                    {% when 'g3log' %}
-                        {% assign tag_icon = 'fa-bug' %}
-                {% endcase %}
-                <a href="#" class="tag-stat" data-tag="{{ tag_name }}">
-                    <i class="fas {{ tag_icon }}"></i>
-                    {{ tag_name }}
-                    <span class="tag-count">{{ posts.size }}</span>
-                </a>
-            {% endfor %}
-        </div>
-        {% endif %}
     </div>
 </div>
 

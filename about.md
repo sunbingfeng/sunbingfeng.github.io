@@ -78,7 +78,7 @@ At the core, I'm a developer who loves coding and solving complex technical chal
 
 <div class="quote-container">
     <div class="quote-text">
-        Most good programmers do programming not because they expect to get paid or get adulation by the public, but because it is fun to program.
+  Most good programmers do programming not because they expect to get paid or get adulation by the public, but because it is fun to program.
     </div>
     <div class="quote-author">
         Linus Torvalds
