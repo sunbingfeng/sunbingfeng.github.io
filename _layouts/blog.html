@@ -97,6 +97,48 @@ layout: default
         justify-content: center;
         margin: 2rem 0;
         padding: 0 1rem;
+        position: relative;
+    }
+
+    .tags-cloud.expanded {
+        max-height: none;
+    }
+
+    .tags-cloud:not(.expanded) {
+        max-height: 120px;
+        overflow: hidden;
+        mask-image: linear-gradient(to bottom, black 80%, transparent 100%);
+        -webkit-mask-image: linear-gradient(to bottom, black 80%, transparent 100%);
+    }
+
+    .expand-tags {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.5rem;
+        background: rgba(255, 255, 255, 0.2);
+        color: white;
+        padding: 0.5rem 1rem;
+        border-radius: 2rem;
+        font-size: 0.9rem;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        margin-top: 1rem;
+        border: none;
+        backdrop-filter: blur(10px);
+    }
+
+    .expand-tags:hover {
+        background: rgba(255, 255, 255, 0.3);
+        transform: translateY(-2px);
+    }
+
+    .expand-tags i {
+        transition: transform 0.3s ease;
+    }
+
+    .expand-tags.expanded i {
+        transform: rotate(180deg);
     }
 
     .tag-stat {
@@ -351,8 +393,8 @@ layout: default
         .post-card {
             padding: 1.5rem;
         }
-        .tags-cloud {
-            gap: 0.5rem;
+        .tags-cloud:not(.expanded) {
+            max-height: 100px;
         }
         .tag-stat {
             font-size: 0.8rem;
@@ -390,42 +432,96 @@ layout: default
                 All Posts
                 <span class="tag-count">{{ site.posts.size }}</span>
             </a>
-            {% assign all_tags = site.tags | sort %}
-            {% for tag in all_tags %}
-            {% assign tag_name = tag[0] %}
-            {% assign posts = tag[1] %}
-            {% assign tag_icon = 'fa-tag' %}
-            {% case tag_name %}
-                {% when 'c++' %}
-                    {% assign tag_icon = 'fa-code' %}
-                {% when 'git' %}
-                    {% assign tag_icon = 'fa-code-branch' %}
-                {% when 'linux' %}
-                    {% assign tag_icon = 'fa-linux' %}
-                {% when 'Review' %}
-                    {% assign tag_icon = 'fa-star' %}
-                {% when 'tips' %}
-                    {% assign tag_icon = 'fa-lightbulb' %}
-                {% when 'thesis' %}
-                    {% assign tag_icon = 'fa-graduation-cap' %}
-                {% when 'comics' %}
-                    {% assign tag_icon = 'fa-smile' %}
-                {% when 'gossip' %}
-                    {% assign tag_icon = 'fa-comments' %}
-                {% when 'demo' %}
-                    {% assign tag_icon = 'fa-play-circle' %}
-                {% when 'summary' %}
-                    {% assign tag_icon = 'fa-list' %}
-                {% when 'g3log' %}
-                    {% assign tag_icon = 'fa-bug' %}
-            {% endcase %}
-            <a href="#" class="tag-stat" data-tag="{{ tag_name }}">
-                <i class="fas {{ tag_icon }}"></i>
-                {{ tag_name }}
-                <span class="tag-count">{{ posts.size }}</span>
-            </a>
+            {% assign sorted_tags = site.tags | sort %}
+            {% assign tag_sizes = '' | split: '' %}
+            {% for tag in sorted_tags %}
+                {% assign tag_size = tag[1] | size %}
+                {% assign tag_with_size = tag[0] | append: ':' | append: tag_size %}
+                {% assign tag_sizes = tag_sizes | push: tag_with_size %}
+            {% endfor %}
+            {% assign tag_sizes = tag_sizes | sort_natural | reverse %}
+            {% assign initial_tags = tag_sizes | slice: 0, 8 %}
+            {% for tag_with_size in initial_tags %}
+                {% assign tag_parts = tag_with_size | split: ':' %}
+                {% assign tag_name = tag_parts[0] %}
+                {% assign posts = site.tags[tag_name] %}
+                {% assign tag_icon = 'fa-tag' %}
+                {% case tag_name %}
+                    {% when 'c++' %}
+                        {% assign tag_icon = 'fa-code' %}
+                    {% when 'git' %}
+                        {% assign tag_icon = 'fa-code-branch' %}
+                    {% when 'linux' %}
+                        {% assign tag_icon = 'fa-linux' %}
+                    {% when 'Review' %}
+                        {% assign tag_icon = 'fa-star' %}
+                    {% when 'tips' %}
+                        {% assign tag_icon = 'fa-lightbulb' %}
+                    {% when 'thesis' %}
+                        {% assign tag_icon = 'fa-graduation-cap' %}
+                    {% when 'comics' %}
+                        {% assign tag_icon = 'fa-smile' %}
+                    {% when 'gossip' %}
+                        {% assign tag_icon = 'fa-comments' %}
+                    {% when 'demo' %}
+                        {% assign tag_icon = 'fa-play-circle' %}
+                    {% when 'summary' %}
+                        {% assign tag_icon = 'fa-list' %}
+                    {% when 'g3log' %}
+                        {% assign tag_icon = 'fa-bug' %}
+                {% endcase %}
+                <a href="#" class="tag-stat" data-tag="{{ tag_name }}">
+                    <i class="fas {{ tag_icon }}"></i>
+                    {{ tag_name }}
+                    <span class="tag-count">{{ posts.size }}</span>
+                </a>
+            {% endfor %}
+            {% if tag_sizes.size > 8 %}
+            <button class="expand-tags" aria-label="Show more tags">
+                <span>Show More Tags</span>
+                <i class="fas fa-chevron-down"></i>
+            </button>
+            {% endif %}
+        </div>
+        {% if tag_sizes.size > 8 %}
+        <div class="tags-cloud expanded" style="display: none;">
+            {% for tag_with_size in tag_sizes offset:8 %}
+                {% assign tag_parts = tag_with_size | split: ':' %}
+                {% assign tag_name = tag_parts[0] %}
+                {% assign posts = site.tags[tag_name] %}
+                {% assign tag_icon = 'fa-tag' %}
+                {% case tag_name %}
+                    {% when 'c++' %}
+                        {% assign tag_icon = 'fa-code' %}
+                    {% when 'git' %}
+                        {% assign tag_icon = 'fa-code-branch' %}
+                    {% when 'linux' %}
+                        {% assign tag_icon = 'fa-linux' %}
+                    {% when 'Review' %}
+                        {% assign tag_icon = 'fa-star' %}
+                    {% when 'tips' %}
+                        {% assign tag_icon = 'fa-lightbulb' %}
+                    {% when 'thesis' %}
+                        {% assign tag_icon = 'fa-graduation-cap' %}
+                    {% when 'comics' %}
+                        {% assign tag_icon = 'fa-smile' %}
+                    {% when 'gossip' %}
+                        {% assign tag_icon = 'fa-comments' %}
+                    {% when 'demo' %}
+                        {% assign tag_icon = 'fa-play-circle' %}
+                    {% when 'summary' %}
+                        {% assign tag_icon = 'fa-list' %}
+                    {% when 'g3log' %}
+                        {% assign tag_icon = 'fa-bug' %}
+                {% endcase %}
+                <a href="#" class="tag-stat" data-tag="{{ tag_name }}">
+                    <i class="fas {{ tag_icon }}"></i>
+                    {{ tag_name }}
+                    <span class="tag-count">{{ posts.size }}</span>
+                </a>
             {% endfor %}
         </div>
+        {% endif %}
     </div>
 </div>
 
@@ -691,5 +787,26 @@ document.addEventListener('DOMContentLoaded', function() {
             showPage(page);
         }
     });
+
+    // Add expand tags functionality
+    const expandButton = document.querySelector('.expand-tags');
+    const expandedTags = document.querySelector('.tags-cloud.expanded');
+    const tagsCloud = document.querySelector('.tags-cloud:not(.expanded)');
+
+    if (expandButton && expandedTags) {
+        expandButton.addEventListener('click', function() {
+            const isExpanded = expandButton.classList.contains('expanded');
+            expandButton.classList.toggle('expanded');
+            expandButton.querySelector('span').textContent = isExpanded ? 'Show More Tags' : 'Show Less Tags';
+            
+            if (isExpanded) {
+                expandedTags.style.display = 'none';
+                tagsCloud.style.display = 'flex';
+            } else {
+                expandedTags.style.display = 'flex';
+                tagsCloud.style.display = 'none';
+            }
+        });
+    }
 });
 </script> 
