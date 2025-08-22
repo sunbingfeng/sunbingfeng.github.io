@@ -5,20 +5,52 @@ layout: default
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 <style>
     .post-container {
+        display: flex;                    /* Use flexbox instead of grid */
         gap: 2rem;
         max-width: 1200px;
-        margin: 0 auto;
+        margin: 2rem auto 0;              /* Add top margin for spacing from header */
         padding: 0 1rem;
     }
 
+    /* Main content area (left column) */
+    .post-content-wrapper {
+        flex: 1;                          /* Take remaining space */
+        min-width: 0;                     /* Allow shrinking */
+    }
+
+    /* TOC area (right column) */
+    .toc-container {
+        flex: 0 0 300px;                  /* Fixed width, don't grow/shrink */
+        position: sticky;                  /* Make it stick when scrolling */
+        top: 2rem;                        /* Distance from top when sticky */
+        height: fit-content;               /* Only take needed height */
+    }
+
+    /* Ensure TOC doesn't show on mobile */
+    @media (max-width: 768px) {
+        .post-container {
+            flex-direction: column;        /* Stack vertically on mobile */
+        }
+        
+        .toc-container {
+            flex: none;                    /* Reset flex properties */
+            position: static;              /* Remove sticky positioning */
+            width: 100%;                   /* Full width on mobile */
+            order: -1;                     /* Show TOC before content on mobile */
+        }
+    }
+
     .post-header {
-        background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+        background: linear-gradient(135deg, var(--gradient-start), var(--gradient-start), var(--gradient-end));
         color: white;
         padding: clamp(5rem, 12vw, 10rem) clamp(1rem, 3vw, 2rem) clamp(4rem, 10vw, 7rem);
         text-align: center;
-        margin-top: calc(-1 * var(--header-height));
+        margin-top: 0;                          /* Remove negative margin */
         position: relative;
-        grid-column: 1 / -1;
+        width: 100vw;                           /* Full viewport width */
+        margin-left: calc(-50vw + 50%);         /* Break out of container */
+        margin-right: calc(-50vw + 50%);        /* Break out of container */
+        margin-bottom: 2rem;                    /* Add space below header */
     }
 
     .post-header::before {
@@ -97,6 +129,7 @@ layout: default
         margin: 0 auto;
         width: 100%;
         padding: 2rem 1rem;
+        margin-top: 1rem;                       /* Add space above content */
     }
 
     /* TOC Styles */
@@ -460,23 +493,25 @@ layout: default
     }
 </style>
 
-<div class="post-container">
-    <div class="post-header">
-        <div class="post-content-wrapper">
-            <h1 class="post-title">{{ page.title }}</h1>
-            <div class="post-meta">
-                <span>{{ page.date | date: "%B %d, %Y" }}</span>
-            </div>
-            {% if page.tags.size > 0 %}
-            <div class="post-tags">
-                {% for tag in page.tags %}
-                <span class="tag">{{ tag }}</span>
-                {% endfor %}
-            </div>
-            {% endif %}
+<!-- Post Header - Outside the flexbox container -->
+<div class="post-header">
+    <div class="post-content-wrapper">
+        <h1 class="post-title">{{ page.title }}</h1>
+        <div class="post-meta">
+            <span>{{ page.date | date: "%B %d, %Y" }}</span>
         </div>
+        {% if page.tags.size > 0 %}
+        <div class="post-tags">
+            {% for tag in page.tags %}
+            <span class="tag">{{ tag }}</span>
+            {% endfor %}
+        </div>
+        {% endif %}
     </div>
+</div>
 
+<!-- Post Container - Only for content and TOC -->
+<div class="post-container">
     <div class="post-content">
         {{ content }}
     </div>
