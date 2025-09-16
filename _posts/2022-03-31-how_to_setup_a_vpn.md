@@ -7,7 +7,7 @@ excerpt: "15分钟无脑搭建"
 image: ""
 comments: true
 toc: true
-tags: Y-2022 tips vpn
+tags: Y-2022 tips
 ---
 
 如果你是一个软硬件爱好者，喜欢在家里捣鼓各种设备，比如：搭建NAS服务器等等，那么你可能会有需求从外网访问内部设备，或者开放内网服务可以在公网中无限制的访问。

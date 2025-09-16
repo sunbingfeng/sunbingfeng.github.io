@@ -7,7 +7,7 @@ excerpt: "VIM SETUP"
 image: ""
 comments: true
 toc: true
-tags: Y-2022 vim configuration tools summary
+tags: Y-2022 tools vim
 ---
 
 ## Install Vim Configurations<br>

@@ -7,7 +7,7 @@ excerpt: "AI Chat Series"
 image: ""
 comments: true
 toc: true
-tags: Y-2025 rk4 AI_Assistant_Programming
+tags: Y-2025 algorithm
 ---
 
 

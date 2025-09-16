@@ -7,7 +7,7 @@ excerpt: "情绪价值很重要"
 image: ""
 comments: true
 toc: true
-tags: Y-2024 gossip
+tags: Y-2024 review
 ---
 
 近一段时间以来，我开始写公众号，并在B站发布视频。如何可以快速的破局，是近期一直在思考的问题。通过观察优秀的公众号和B站Up主，慢慢地有一些洞见。

@@ -7,7 +7,7 @@ excerpt: "王婆卖瓜系列"
 image: ""
 comments: true
 toc: true
-tags: Y-2023 杂货铺
+tags: Y-2023 tips
 ---
 
 最近逛到一篇博客，题目叫[Use GitHub Actions to Make Your GitHub Profile Dynamic](https://www.bengreenberg.dev/posts/2023-04-09-github-profile-dynamic-content/)，介绍如何基于Github的action hook快速更新自己的Github介绍页内容。看完蠢蠢欲动，然后我也来了一个照猫画虎，直接开干。

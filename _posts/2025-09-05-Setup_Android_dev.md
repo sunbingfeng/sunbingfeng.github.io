@@ -8,7 +8,7 @@ image: ""
 comments: true
 excerpt: "Android Setup"
 toc: true
-tags: Y-2025 AI_Assistant_Programming 应用开发
+tags: Y-2025 review
 ---
 
 > 本文是AI Chat系列文章的第9篇，介绍从一个小白的视角搭建Android开发环境。

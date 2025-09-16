@@ -6,7 +6,7 @@ date:   2022-01-27
 excerpt: "TMUX"
 image: ""
 comments: true
-tags: Y-2022 tmux tools summary
+tags: Y-2022 tools vim
 ---
 
 ## Why `Tmux` is needed?<br>

@@ -4320,6 +4320,16 @@
 
 		}
 
+/* Fix footer paragraph alignment - override global justify */
+.site-footer p,
+.footer-content p,
+.footer-section p,
+footer p,
+footer .footer-content p,
+footer .footer-section p {
+	text-align: center !important;
+}
+
 /* Nav Panel */
 
 	#navPanelToggle {

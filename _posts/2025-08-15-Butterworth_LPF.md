@@ -7,7 +7,7 @@ excerpt: "From Theory to Implementation: A Comprehensive Guide to Butterworth Fi
 image: ""
 comments: true
 toc: true
-tags: Y-2025 butterworth lpf AI_Assistant_Programming signal_processing
+tags: Y-2025 math algorithm
 ---
 
 > This is the 7th article in the AI Chat series, where we'll explore the principles and implementation of the Butterworth low-pass filter.
