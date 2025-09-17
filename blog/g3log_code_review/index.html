@@ -1,0 +1,1398 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>g3log代码分析 - Bill's Tech Blog</title>
+    <meta name="description" content="To Be Excellent">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="/assets/favicon.png">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <!-- KaTeX for LaTeX math rendering -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+    
+    <!-- Syntax Highlighting -->
+    <link rel="stylesheet" href="/assets/css/monokai.css">
+    
+    <!-- Styles -->
+    <style>
+        :root {
+            --primary-color: #2563eb;
+            --secondary-color: #1e40af;
+            --text-color: #1f2937;
+            --background-color: #ffffff;
+            --card-background: #f8fafc;
+            --gradient-start: #2563eb;
+            --gradient-end: #1e40af;
+            --header-height: 4rem;
+        }
+
+        [data-theme="dark"] {
+            --text-color: #f3f4f6;
+            --background-color: #111827;
+            --card-background: #1f2937;
+            --gradient-start: #1e40af;
+            --gradient-end: #1e3a8a;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background: var(--background-color);
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        /* Syntax Highlighting */
+        .highlight {
+            background: #272822;
+            color: #f8f8f2;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            overflow-x: auto;
+            margin: 1rem 0;
+        }
+        
+        .highlight pre {
+            margin: 0;
+            background: none;
+            border: none;
+            padding: 0;
+        }
+        
+        .highlight code {
+            background: none;
+            border: none;
+            padding: 0;
+            color: inherit;
+            font-family: 'Courier New', monospace;
+        }
+        
+        /* Typography and Heading Styles */
+        h1, h2, h3, h4, h5, h6 {
+            color: var(--text-color);
+            font-weight: 600;
+            line-height: 1.3;
+            margin-top: 0;
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            margin-top: 3rem;
+        }
+        
+        h2 {
+            font-size: 2rem;
+            margin-bottom: 1.25rem;
+            margin-top: 3rem;
+            padding-top: 1rem;
+            border-top: 2px solid var(--card-background);
+        }
+        
+        h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            margin-top: 2.5rem;
+            padding-top: 0.75rem;
+            /* border-top: 1px solid var(--card-background); */
+        }
+        
+        h4 {
+            font-size: 1.25rem;
+            margin-bottom: 0.75rem;
+            margin-top: 2rem;
+        }
+        
+        h5 {
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+            margin-top: 1.5rem;
+        }
+        
+        h6 {
+            font-size: 1rem;
+            margin-bottom: 0.5rem;
+            margin-top: 1.5rem;
+        }
+        
+        /* Paragraph and Text Spacing */
+        p {
+            margin-bottom: 1.5rem;
+            line-height: 1.8;
+            text-align: justify;
+        }
+        
+        /* List spacing */
+        ul, ol {
+            margin-bottom: 1.5rem;
+            padding-left: 1.5rem;
+            margin-left: 0;
+        }
+        
+        li {
+            margin-bottom: 0.75rem;
+            line-height: 1.7;
+            padding-left: 0.5rem;
+        }
+        
+        /* Nested list spacing */
+        ul ul, ol ol, ul ol, ol ul {
+            margin-top: 0.5rem;
+            margin-bottom: 0.5rem;
+            padding-left: 1.25rem;
+        }
+        
+        /* List item markers */
+        ul li::marker {
+            color: var(--gradient-start);
+        }
+        
+        ol li::marker {
+            color: var(--gradient-start);
+            font-weight: 600;
+        }
+        
+        /* Blockquote spacing */
+        blockquote {
+            margin: 2rem 0;
+            padding: 1rem 1.5rem;
+            border-left: 4px solid var(--gradient-start);
+            background: var(--card-background);
+            border-radius: 0.5rem;
+            font-style: italic;
+        }
+        
+        blockquote p {
+            margin-bottom: 1rem;
+        }
+        
+        blockquote p:last-child {
+            margin-bottom: 0;
+        }
+        
+        /* Code inline spacing */
+        code {
+            background: var(--card-background);
+            padding: 0.2rem 0.4rem;
+            border-radius: 0.25rem;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9em;
+        }
+        
+        /* Table Styles */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 2rem 0;
+            background: var(--background-color);
+            border-radius: 0.5rem;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+        
+        table th {
+            background: var(--gradient-start);
+            color: white;
+            font-weight: 600;
+            text-align: left;
+            padding: 1rem 1.5rem;
+            border-bottom: 2px solid var(--gradient-end);
+            font-size: 1rem;
+        }
+        
+        table td {
+            padding: 1rem 1.5rem;
+            border-bottom: 1px solid var(--card-background);
+            vertical-align: top;
+            line-height: 1.6;
+        }
+        
+        table tr:last-child td {
+            border-bottom: none;
+        }
+        
+        table tr:hover {
+            background: var(--card-background);
+            transition: background-color 0.2s ease;
+        }
+        
+        table tr:nth-child(even) {
+            background: rgba(0, 0, 0, 0.02);
+        }
+        
+        table tr:nth-child(even):hover {
+            background: var(--card-background);
+        }
+        
+        /* Responsive table */
+        @media (max-width: 768px) {
+            table {
+                font-size: 0.9rem;
+            }
+            
+            table th,
+            table td {
+                padding: 0.75rem 1rem;
+            }
+        }
+        
+        /* Figure and Image Styles */
+        figure {
+            margin: 2.5rem 0;
+            text-align: center;
+            background: var(--card-background);
+            border-radius: 0.75rem;
+            padding: 1.5rem;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            border: 1px solid rgba(0, 0, 0, 0.05);
+        }
+        
+        figure img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 0.5rem;
+            margin-bottom: 1rem;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+        
+        figcaption {
+            font-family: 'Georgia', 'Times New Roman', serif;
+            font-size: 0.95rem;
+          font-style: italic;
+            color: var(--text-color);
+            opacity: 0.8;
+            line-height: 1.5;
+            margin-top: 0.5rem;
+            padding: 0.75rem 1rem;
+            background: rgba(0, 0, 0, 0.03);
+            border-radius: 0.5rem;
+            border-left: 4px solid var(--gradient-start);
+        }
+        
+        /* Center image class for backward compatibility */
+        .center_img {
+            display: block;
+            margin: 0 auto;
+        }
+        
+        /* Responsive figure adjustments */
+        @media (max-width: 768px) {
+            figure {
+                margin: 2rem 0;
+                padding: 1rem;
+            }
+            
+            figcaption {
+                font-size: 0.9rem;
+                padding: 0.5rem 0.75rem;
+            }
+        }
+        
+        /* Header Styles */
+        .site-header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: var(--header-height);
+            background: var(--background-color);
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            padding: 0 2rem;
+            backdrop-filter: blur(10px);
+        }
+
+        .site-header .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .site-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text-color);
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-color);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-color);
+        }
+
+        .theme-toggle {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            cursor: pointer;
+            padding: 0.5rem;
+            font-size: 1.25rem;
+        }
+
+        /* Main Content */
+        .main-content {
+            margin-top: var(--header-height);
+            min-height: calc(100vh - var(--header-height));
+        }
+
+        /* Footer */
+        .site-footer {
+            background: var(--card-background);
+            padding: 2rem 0;
+            margin-top: 4rem;
+            text-align: center;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .footer-section {
+            margin-bottom: 1.5rem;
+        }
+
+        .footer-section p {
+            color: var(--text-color);
+            opacity: 0.8;
+            text-align: center;
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .site-header {
+                padding: 0 1rem;
+            }
+
+            .footer-content {
+                padding: 0 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="site-header">
+        <div class="container">
+            <a href="/" class="site-title">Bill's Tech Blog</a>
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="/blog">Blog</a></li>
+                    <li><a href="/about">About</a></li>
+                </ul>
+            </nav>
+            <button class="theme-toggle" aria-label="Toggle theme">
+                <i class="fas fa-moon"></i>
+            </button>
+        </div>
+    </header>
+
+    <main class="main-content">
+        <!-- Add Font Awesome for TOC icon -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer">
+<style>
+    .post-container {
+        display: flex;                    /* Use flexbox instead of grid */
+        gap: 2rem;
+        max-width: 1200px;
+        margin: 2rem auto 0;              /* Add top margin for spacing from header */
+        padding: 0 1rem;
+    }
+
+    /* Main content area (left column) */
+    .post-content-wrapper {
+        flex: 1;                          /* Take remaining space */
+        min-width: 0;                     /* Allow shrinking */
+    }
+
+    /* TOC area (right column) */
+    .toc-container {
+        flex: 0 0 300px;                  /* Fixed width, don't grow/shrink */
+        position: sticky;                  /* Make it stick when scrolling */
+        top: 2rem;                        /* Distance from top when sticky */
+        height: fit-content;               /* Only take needed height */
+    }
+
+    /* Ensure TOC doesn't show on mobile */
+    @media (max-width: 768px) {
+        .post-container {
+            flex-direction: column;        /* Stack vertically on mobile */
+        }
+        
+        .toc-container {
+            flex: none;                    /* Reset flex properties */
+            position: static;              /* Remove sticky positioning */
+            width: 100%;                   /* Full width on mobile */
+            order: -1;                     /* Show TOC before content on mobile */
+        }
+    }
+
+    .post-header {
+        background: linear-gradient(135deg, var(--gradient-start), var(--gradient-start), var(--gradient-end));
+        color: white;
+        padding: clamp(5rem, 12vw, 10rem) clamp(1rem, 3vw, 2rem) clamp(4rem, 10vw, 7rem);
+        text-align: center;
+        margin-top: 0;                          /* Remove negative margin */
+        position: relative;
+        width: 100vw;                           /* Full viewport width */
+        margin-left: calc(-50vw + 50%);         /* Break out of container */
+        margin-right: calc(-50vw + 50%);        /* Break out of container */
+        margin-bottom: 2rem;                    /* Add space below header */
+    }
+
+    .post-header::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: radial-gradient(circle at center, transparent 0%, rgba(0,0,0,0.2) 100%);
+        z-index: 1;
+    }
+
+    .post-content-wrapper {
+        position: relative;
+        z-index: 2;
+        max-width: 800px;
+        margin: 0 auto;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+        padding: 0 1rem;
+    }
+
+    .post-title {
+        font-size: clamp(2rem, 5vw, 3rem);
+        font-weight: 800;
+        margin: 0;
+        line-height: 1.2;
+        background: linear-gradient(to right, #fff, #e2e8f0);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        word-wrap: break-word;
+        animation: fadeInUp 1s ease;
+        animation-fill-mode: both;
+        padding: 0 0.5rem;
+    }
+
+    .post-meta {
+        font-size: clamp(0.875rem, 2vw, 1rem);
+        color: rgba(255, 255, 255, 0.9);
+        margin: 0;
+        animation: fadeInUp 1s ease 0.2s;
+        animation-fill-mode: both;
+    }
+
+    .post-tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+        justify-content: center;
+        margin: 0;
+        animation: fadeInUp 1s ease 0.4s;
+        animation-fill-mode: both;
+    }
+
+    .post-tags .tag {
+        background: rgba(255, 255, 255, 0.15);
+        color: white;
+        padding: 0.25rem 0.75rem;
+        border-radius: 1rem;
+        font-size: 0.875rem;
+        transition: all 0.3s ease;
+    }
+
+    .post-tags .tag:hover {
+        background: rgba(255, 255, 255, 0.25);
+        transform: translateY(-1px);
+    }
+
+    .post-content {
+        font-size: clamp(1rem, 2.5vw, 1.1rem);
+        line-height: 1.8;
+        max-width: 800px;
+        margin: 0 auto;
+        width: 100%;
+        padding: 2rem 1rem;
+        margin-top: 1rem;                       /* Add space above content */
+    }
+
+    /* TOC Styles */
+    .toc-container {
+        position: sticky;
+        top: calc(var(--header-height) + 1rem);
+        max-height: calc(100vh - var(--header-height) - 2rem);
+        overflow-y: auto;
+        padding: 1.5rem;
+        background: var(--card-background);
+        border-radius: 0.5rem;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        font-size: 0.9rem;
+        display: none; /* Hide by default on mobile */
+    }
+
+    .toc-container h2 {
+        font-size: 1.25rem;
+        margin: 0 0 1rem 0;
+        color: var(--text-color);
+        padding-bottom: 0.5rem;
+        border-bottom: 2px solid var(--primary-color);
+    }
+
+    .toc {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    .toc ul {
+        list-style: none;
+        padding-left: 1rem;
+        margin: 0.5rem 0;
+    }
+
+    .toc li {
+        margin: 0.5rem 0;
+    }
+
+    .toc a {
+        color: var(--text-color);
+        text-decoration: none;
+        transition: all 0.3s ease;
+        display: block;
+        padding: 0.25rem 0;
+        opacity: 0.8;
+    }
+
+    .toc a:hover {
+        color: var(--primary-color);
+        opacity: 1;
+        transform: translateX(5px);
+    }
+
+    .toc a.active {
+        color: var(--primary-color);
+        font-weight: 600;
+        opacity: 1;
+    }
+
+    /* Post content styles */
+    .post-content h1,
+    .post-content h2,
+    .post-content h3,
+    .post-content h4 {
+        scroll-margin-top: calc(var(--header-height) + 2rem);
+    }
+
+    .post-content img {
+        max-width: 100%;
+        height: auto;
+        border-radius: 0.5rem;
+        margin: 1.5rem 0;
+    }
+
+    .post-content pre {
+        overflow-x: auto;
+        padding: 1rem;
+        border-radius: 0.5rem;
+        margin: 1.5rem 0;
+        font-size: 0.9rem;
+    }
+
+    .post-content code {
+        font-size: 0.9em;
+        padding: 0.2em 0.4em;
+        border-radius: 0.25rem;
+    }
+
+    .post-content blockquote {
+        border-left: 4px solid var(--primary-color);
+        margin: 1.5rem 0;
+        padding: 1rem 1.5rem;
+        background: var(--card-background);
+        border-radius: 0 0.5rem 0.5rem 0;
+    }
+
+    /* Mobile TOC Toggle */
+    .toc-toggle {
+        display: none;
+        position: fixed;
+        bottom: 2rem;
+        right: 2rem;
+        background: var(--primary-color);
+        color: white;
+        padding: 0.75rem;
+        border-radius: 50%;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+        z-index: 1000;
+        cursor: pointer;
+        border: none;
+        width: 3rem;
+        height: 3rem;
+        font-size: 1.25rem;
+    }
+
+    @media (max-width: 1024px) {
+        .post-container {
+            grid-template-columns: 1fr;
+            padding: 0 1rem;
+        }
+
+        .toc-container {
+            display: none; /* Hide TOC by default on tablet */
+        }
+    }
+
+    @media (max-width: 768px) {
+        .post-header {
+            padding: clamp(5rem, 12vw, 8rem) 1rem clamp(3rem, 8vw, 5rem);
+        }
+
+        .post-content-wrapper {
+            gap: 1rem;
+            padding: 0 1rem;
+        }
+
+        .post-title {
+            font-size: clamp(1.75rem, 4vw, 2.5rem);
+            line-height: 1.3;
+            padding: 0 0.5rem;
+        }
+
+        .post-meta {
+            font-size: 0.9rem;
+            padding: 0 0.5rem;
+        }
+
+        .post-tags {
+            padding: 0 0.5rem;
+            gap: 0.375rem;
+        }
+
+        .post-tags .tag {
+            font-size: 0.8125rem;
+            padding: 0.2rem 0.625rem;
+        }
+
+        .post-content {
+            padding: 1.5rem 1rem;
+        }
+
+        /* Restore TOC mobile styles */
+        .toc-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            max-height: 100vh;
+            margin: 0;
+            border-radius: 0;
+            z-index: 1000;
+            transform: translateX(-100%);
+            transition: transform 0.3s ease;
+            padding: 2rem 1rem;
+        }
+
+        .toc-container.active {
+            transform: translateX(0);
+        }
+
+        .toc-toggle {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .toc-toggle.active {
+            background: var(--secondary-color);
+        }
+
+        /* Rest of mobile styles */
+        .post-content h1 {
+            font-size: clamp(1.5rem, 4vw, 2rem);
+            margin-top: 2rem;
+        }
+
+        .post-content h2 {
+            font-size: clamp(1.25rem, 3.5vw, 1.75rem);
+            margin-top: 1.75rem;
+        }
+
+        .post-content h3 {
+            font-size: clamp(1.1rem, 3vw, 1.5rem);
+            margin-top: 1.5rem;
+        }
+
+        .post-content h4 {
+            font-size: clamp(1rem, 2.5vw, 1.25rem);
+            margin-top: 1.25rem;
+        }
+
+        .post-content p {
+            margin: 1rem 0;
+        }
+
+        .post-content img {
+            margin: 1.25rem 0;
+        }
+
+        .post-content pre {
+            margin: 1.25rem 0;
+            padding: 0.75rem;
+            font-size: 0.85rem;
+        }
+
+        .post-content blockquote {
+            margin: 1.25rem 0;
+            padding: 0.75rem 1rem;
+        }
+
+        .comments-wrapper {
+            padding: 2rem 0;
+            margin-top: 2rem;
+        }
+
+        .comments-container {
+            padding: 0 1rem;
+        }
+
+        .comments-container h2 {
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+
+        .utterances-container {
+            padding: 0 0.5rem;
+        }
+    }
+
+    @media (max-width: 480px) {
+        .post-header {
+            padding: clamp(4rem, 10vw, 6rem) 0.75rem clamp(2.5rem, 6vw, 4rem);
+        }
+
+        /* Restore TOC toggle button styles for very small screens */
+        .toc-toggle {
+            bottom: 1rem;
+            right: 1rem;
+            width: 2.5rem;
+            height: 2.5rem;
+            font-size: 1rem;
+        }
+
+        /* Rest of very small screen styles */
+        .post-content-wrapper {
+            padding: 0 0.75rem;
+        }
+
+        .post-title {
+            font-size: clamp(1.5rem, 3.5vw, 2rem);
+            line-height: 1.4;
+            padding: 0 0.25rem;
+        }
+
+        .post-content {
+            padding: 1.25rem 0.75rem;
+            font-size: 0.95rem;
+        }
+
+        .post-content h1 {
+            font-size: clamp(1.4rem, 3.5vw, 1.8rem);
+        }
+
+        .post-content h2 {
+            font-size: clamp(1.2rem, 3vw, 1.6rem);
+        }
+
+        .post-content h3 {
+            font-size: clamp(1.1rem, 2.5vw, 1.4rem);
+        }
+
+        .post-content h4 {
+            font-size: clamp(1rem, 2vw, 1.2rem);
+        }
+
+        .comments-wrapper {
+            padding: 1.5rem 0;
+        }
+
+        .comments-container h2 {
+            font-size: 1.35rem;
+            margin-bottom: 1.25rem;
+        }
+
+        .utterances-container {
+            padding: 0 0.25rem;
+        }
+    }
+
+    /* Comments Section Styles */
+    .comments-wrapper {
+        width: 100vw;
+        background: var(--card-background);
+        padding: 3rem 0;
+        margin-top: 3rem;
+        margin-left: calc(-50vw + 50%);
+        margin-right: calc(-50vw + 50%);
+    }
+
+    .comments-container {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 0 1rem;
+    }
+
+    .comments-container h2 {
+        font-size: 1.75rem;
+        margin-bottom: 2rem;
+        color: var(--text-color);
+    }
+
+    .utterances-container {
+        width: 100%;
+        max-width: 800px;
+        margin: 0 auto;
+    }
+
+    /* Utterances specific styles */
+    .utterances-container iframe {
+        width: 100% !important;
+        border: none !important;
+    }
+
+    [data-theme="dark"] .utterances-container {
+        background: var(--card-background);
+    }
+
+    @keyframes fadeInUp {
+        from {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+</style>
+
+<!-- Post Header - Outside the flexbox container -->
+<div class="post-header">
+    <div class="post-content-wrapper">
+        <h1 class="post-title">g3log代码分析</h1>
+        <div class="post-meta">
+            <span>January 17, 2024</span>
+        </div>
+        
+        <div class="post-tags">
+            
+            <span class="tag">Y-2024</span>
+            
+            <span class="tag">c++</span>
+            
+            <span class="tag">framework</span>
+            
+        </div>
+        
+    </div>
+</div>
+
+<!-- Post Container - Only for content and TOC -->
+<div class="post-container">
+    <div class="post-content">
+        <h2 id="引子">引子</h2>
+
+<p>最近在优化一个项目性能的时候，经常发现glog会阻塞，最严重的情况会到秒级，让人很无奈。鉴于此，亟需切换使用一个异步的日志方案。</p>
+
+<p>很早之前就听看过关于g3log的介绍(详情可以参阅其作者给出的<a href="https://kjellkod.wordpress.com/2015/06/30/the-worlds-fastest-logger-vs-g3log/">性能分析报告</a>)，其设计较简洁，性能很不错。再加上其使用方式与glog很类似，因此其很适合作为glog的一种异步平替方案。</p>
+
+<p>经过简单的适配以后，发现之前因为同步日志带来的阻塞问题消失的无影无踪，心头一阵窃喜。</p>
+
+<p>闲暇之余，拜读了g3log的源代码，发现其中还真有点干货。因此，想写一点东西，分享一下。</p>
+
+<p>是为引。</p>
+
+<h2 id="关于g3log的基础使用">关于g3log的基础使用</h2>
+
+<ol>
+  <li>首先构造一个LogWorker，并初始化g3log：
+    <div class="language-cpp highlighter-rouge">
+<div class="highlight"><pre class="highlight"><code>  <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">directory</span> <span class="o">=</span> <span class="s">"./"</span><span class="p">;</span>
+  <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">name</span> <span class="o">=</span> <span class="s">"TestLogFile"</span><span class="p">;</span>
+  <span class="k">auto</span> <span class="n">worker</span> <span class="o">=</span> <span class="n">g3</span><span class="o">::</span><span class="n">LogWorker</span><span class="o">::</span><span class="n">createLogWorker</span><span class="p">();</span>
+  <span class="k">auto</span> <span class="n">handle</span> <span class="o">=</span> <span class="n">worker</span><span class="o">-&gt;</span><span class="n">addDefaultLogger</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">directory</span><span class="p">);</span>    
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>添加日志：</p>
+
+    <p>日志操作很简单，推荐使用基于Stream的方式，比如：</p>
+    <div class="language-cpp highlighter-rouge">
+<div class="highlight"><pre class="highlight"><code><span class="n">LOG</span><span class="p">(</span><span class="n">DEBUG</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="s">"Hello world!."</span><span class="p">;</span>
+</code></pre></div>    </div>
+  </li>
+  <li>如果需要更复杂的日志操作，可以添加自定义的Sink，具体可以参考作者给出的<a href="https://github.com/KjellKod/g3sinks">示例</a>
+</li>
+</ol>
+
+<h2 id="g3log的整体设计">g3log的整体设计</h2>
+
+<h3 id="log宏的定义">LOG宏的定义</h3>
+<p>上面提到的LOG(severity)宏的定义如下，其估计还是继承至glog：</p>
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#define INTERNAL_LOG_MESSAGE(level) LogCapture(__FILE__, __LINE__, static_cast&lt;const char*&gt;(G3LOG_PRETTY_FUNCTION), level)
+</span><span class="p">...</span>
+<span class="c1">// LOG(level) is the API for the stream log  </span>
+<span class="cp">#define LOG(level) if (!g3::logLevel(level)) {} else INTERNAL_LOG_MESSAGE(level).stream()
+</span></code></pre></div></div>
+
+<p>从上面代码可以看出，每一个LOG宏其实是定义了一个局部的LogCapture对象。该对象负责捕捉实际的日志内容，在其析构之前，会将所有的日志内容丢给LogWorker处理。</p>
+
+<p>这里要特殊指出一下，刚开始看g3log源码的时候，很困惑这个LogCapture对象怎么跟LogWorker联系起来的。其既没有提供相关的分发日志内容的接口，其他的模块也没有引用该对象的时候。
+直到看到其析构函数，一下全明白了。</p>
+
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cm">/** logCapture is a simple struct for capturing log/fatal entries. At destruction the
+* captured message is forwarded to background worker.
+* As a safety precaution: No memory allocated here will be moved into the background
+* worker in case of dynamic loaded library reasons instead the arguments are copied
+* inside of g3log.cpp::saveMessage*/</span>
+<span class="n">LogCapture</span><span class="o">::~</span><span class="n">LogCapture</span><span class="p">()</span> <span class="k">noexcept</span><span class="p">(</span><span class="nb">false</span><span class="p">)</span> <span class="p">{</span>
+   <span class="k">using</span> <span class="k">namespace</span> <span class="n">g3</span><span class="o">::</span><span class="n">internal</span><span class="p">;</span>
+   <span class="n">SIGNAL_HANDLER_VERIFY</span><span class="p">();</span>
+   <span class="n">saveMessage</span><span class="p">(</span><span class="n">_stream</span><span class="p">.</span><span class="n">str</span><span class="p">().</span><span class="n">c_str</span><span class="p">(),</span> <span class="n">_file</span><span class="p">,</span> <span class="n">_line</span><span class="p">,</span> <span class="n">_function</span><span class="p">,</span> <span class="n">_level</span><span class="p">,</span> <span class="n">_expression</span><span class="p">,</span> <span class="n">_fatal_signal</span><span class="p">,</span> <span class="n">_stack_trace</span><span class="p">.</span><span class="n">c_str</span><span class="p">());</span>
+<span class="p">}</span>
+</code></pre></div></div>
+<p>提一嘴，如果该LogCapture所在的局部域没有退出的话，其是不会进到析构的，因此该LOG条目就并不会立即打印，就算设置了g3log的flush策略为立即打印，也不会。
+有一个小Trick，如果你需要某一个LOG立即打印，你可以将该打印放到一个<code class="language-plaintext highlighter-rouge">{}</code>对中，比如：</p>
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span>
+   <span class="n">LOG</span><span class="p">(</span><span class="n">INFO</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="s">"this message will be flushed immediately."</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h3 id="active类的设计">Active类的设计</h3>
+
+<p>下面介绍g3log这个异步日志框架的一个核心组件，真正赖以实现所有异步操作的操盘手，那就是Active类。</p>
+
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code>   <span class="k">class</span> <span class="nc">Active</span> <span class="p">{</span>
+     <span class="nl">private:</span>
+      <span class="n">Active</span><span class="p">()</span> <span class="o">:</span>
+          <span class="n">done_</span><span class="p">(</span><span class="nb">false</span><span class="p">)</span> <span class="p">{}</span>  <span class="c1">// Construction ONLY through factory createActive();</span>
+      <span class="n">Active</span><span class="p">(</span><span class="k">const</span> <span class="n">Active</span><span class="o">&amp;</span><span class="p">)</span> <span class="o">=</span> <span class="k">delete</span><span class="p">;</span>
+      <span class="n">Active</span><span class="o">&amp;</span> <span class="k">operator</span><span class="o">=</span><span class="p">(</span><span class="k">const</span> <span class="n">Active</span><span class="o">&amp;</span><span class="p">)</span> <span class="o">=</span> <span class="k">delete</span><span class="p">;</span>
+   
+      <span class="kt">void</span> <span class="nf">run</span><span class="p">()</span> <span class="p">{</span>
+         <span class="k">while</span> <span class="p">(</span><span class="o">!</span><span class="n">done_</span><span class="p">)</span> <span class="p">{</span> 
+            <span class="n">Callback</span> <span class="n">func</span><span class="p">;</span>
+            <span class="n">mq_</span><span class="p">.</span><span class="n">wait_and_pop</span><span class="p">(</span><span class="n">func</span><span class="p">);</span>
+            <span class="n">func</span><span class="p">();</span> 
+         <span class="p">}</span>
+      <span class="p">}</span>
+
+      <span class="n">shared_queue</span><span class="o">&lt;</span><span class="n">Callback</span><span class="o">&gt;</span> <span class="n">mq_</span><span class="p">;</span>
+      <span class="n">std</span><span class="o">::</span><span class="kr">thread</span> <span class="n">thd_</span><span class="p">;</span>
+      <span class="kt">bool</span> <span class="n">done_</span><span class="p">;</span>
+      
+     <span class="k">public</span><span class="o">:</span>
+      <span class="k">virtual</span> <span class="o">~</span><span class="n">Active</span><span class="p">()</span> <span class="p">{</span>
+         <span class="n">send</span><span class="p">([</span><span class="k">this</span><span class="p">]()</span> <span class="k">noexcept</span> <span class="p">{</span> <span class="n">done_</span> <span class="o">=</span> <span class="nb">true</span><span class="p">;</span> <span class="p">});</span>
+         <span class="n">thd_</span><span class="p">.</span><span class="n">join</span><span class="p">();</span>
+      <span class="p">}</span>
+
+      <span class="kt">void</span> <span class="nf">send</span><span class="p">(</span><span class="n">Callback</span> <span class="n">msg_</span><span class="p">)</span> <span class="p">{</span>
+         <span class="n">mq_</span><span class="p">.</span><span class="n">push</span><span class="p">(</span><span class="n">msg_</span><span class="p">);</span>
+      <span class="p">}</span>
+
+      <span class="c1">/// Factory: safe construction of object before thread start</span>
+      <span class="k">static</span> <span class="n">std</span><span class="o">::</span><span class="n">unique_ptr</span><span class="o">&lt;</span><span class="n">Active</span><span class="o">&gt;</span> <span class="n">createActive</span><span class="p">()</span> <span class="p">{</span>
+         <span class="n">std</span><span class="o">::</span><span class="n">unique_ptr</span><span class="o">&lt;</span><span class="n">Active</span><span class="o">&gt;</span> <span class="n">aPtr</span><span class="p">(</span><span class="k">new</span> <span class="n">Active</span><span class="p">());</span>
+         <span class="n">aPtr</span><span class="o">-&gt;</span><span class="n">thd_</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="kr">thread</span><span class="p">(</span><span class="o">&amp;</span><span class="n">Active</span><span class="o">::</span><span class="n">run</span><span class="p">,</span> <span class="n">aPtr</span><span class="p">.</span><span class="n">get</span><span class="p">());</span>
+         <span class="k">return</span> <span class="n">aPtr</span><span class="p">;</span>
+      <span class="p">}</span>
+   <span class="p">};</span>
+</code></pre></div></div>
+
+<p>该类很巧妙的实现了一个先进先出的背景任务线程，而且保证线程安全。简单说明几点：</p>
+
+<ol>
+  <li>其通过一个shared_queue来实现多个任务的顺序处理；</li>
+  <li>run()是任务线程的执行主体，其顺序执行任务队列中的任务。当队列为空时，线程进入等待;</li>
+  <li>着重需要说明的是，该类的析构函数，通过载入一个给done_赋值的任务，来结束run线程。
+这个操作巧妙的点在于，无需对done_变量做锁操作即可以保证线程安全。而且可以保证所有的日志条目都能被正确的保存，不会被丢失。</li>
+</ol>
+
+<h3 id="logworker日志管理器">LogWorker：日志管理器</h3>
+
+<p>如前所述，每一个节点在初始化的时候，需要手动构造一个LogWorker。LogWorker担任一个管理员的角色，负责归集各个LogCapture中的日志内容，然后分发至不同的Sink。管理员不负责日志文件的写操作，真正的日志存储操作是在Sink中完成的。</p>
+
+<p>LogWorker包含一个private成员LogWorkerImpl，其承载了LogWorker的所有核心操作。</p>
+
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code>   <span class="c1">/// Background side of the LogWorker. Internal use only</span>
+   <span class="k">struct</span> <span class="nc">LogWorkerImpl</span> <span class="k">final</span> <span class="p">{</span>
+      <span class="k">typedef</span> <span class="n">std</span><span class="o">::</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="n">g3</span><span class="o">::</span><span class="n">internal</span><span class="o">::</span><span class="n">SinkWrapper</span><span class="o">&gt;</span> <span class="n">SinkWrapperPtr</span><span class="p">;</span>
+      <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">SinkWrapperPtr</span><span class="o">&gt;</span> <span class="n">_sinks</span><span class="p">;</span>
+      <span class="n">std</span><span class="o">::</span><span class="n">unique_ptr</span><span class="o">&lt;</span><span class="n">kjellkod</span><span class="o">::</span><span class="n">Active</span><span class="o">&gt;</span> <span class="n">_bg</span><span class="p">;</span>  <span class="c1">// do not change declaration order. _bg must be destroyed before sinks</span>
+      
+      <span class="n">LogWorkerImpl</span><span class="p">();</span> 
+      <span class="o">~</span><span class="n">LogWorkerImpl</span><span class="p">()</span> <span class="o">=</span> <span class="k">default</span><span class="p">;</span>
+      
+      <span class="kt">void</span> <span class="n">bgSave</span><span class="p">(</span><span class="n">g3</span><span class="o">::</span><span class="n">LogMessagePtr</span> <span class="n">msgPtr</span><span class="p">);</span>
+      <span class="kt">void</span> <span class="n">bgFatal</span><span class="p">(</span><span class="n">FatalMessagePtr</span> <span class="n">msgPtr</span><span class="p">);</span>
+      
+      <span class="n">LogWorkerImpl</span><span class="p">(</span><span class="k">const</span> <span class="n">LogWorkerImpl</span><span class="o">&amp;</span><span class="p">)</span> <span class="o">=</span> <span class="k">delete</span><span class="p">;</span>
+      <span class="n">LogWorkerImpl</span><span class="o">&amp;</span> <span class="k">operator</span><span class="o">=</span><span class="p">(</span><span class="k">const</span> <span class="n">LogWorkerImpl</span><span class="o">&amp;</span><span class="p">)</span> <span class="o">=</span> <span class="k">delete</span><span class="p">;</span>
+   <span class="p">};</span>
+
+</code></pre></div></div>
+
+<p>这里需要重点说明的是两个东西：</p>
+
+<ol>
+  <li>
+<code class="language-plaintext highlighter-rouge">_sinks</code>: 该容器存储所有的Sink</li>
+  <li>
+<code class="language-plaintext highlighter-rouge">_bg</code>: 其是一个任务线程封装类，就是前面所述的Active类，所有的日志条目的分发都是交给这一个背景线程完成的。</li>
+</ol>
+
+<h3 id="sink的设计">Sink的设计</h3>
+
+<p>Sink是日志内容的消费方，用来完成日志内容的最终处理，比如：关键词过滤、日志级别过滤、特殊颜色高亮显示以及文件存储等等。
+这种基于Sink的设计思想，被很多的日志框架所采用，比如：glog，boost log等等。最早源至哪里，谁才是真正的鼻祖，我没有深入去考证。</p>
+
+<p>其是一个模板类，通过传入不同的模板类型T，可以实现不同功能的Sink。也即是说，你只需要按照Sink的设计规范实现自定义的模板类即可。</p>
+
+<p>Sink的类定义如下所示，为了显示方便，摘掉了其构造函数实现：</p>
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code>      <span class="k">template</span> <span class="o">&lt;</span><span class="k">class</span> <span class="nc">T</span><span class="p">&gt;</span>
+      <span class="k">struct</span> <span class="nc">Sink</span> <span class="o">:</span> <span class="k">public</span> <span class="n">SinkWrapper</span> <span class="p">{</span>
+         <span class="n">std</span><span class="o">::</span><span class="n">unique_ptr</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="n">_real_sink</span><span class="p">;</span>
+         <span class="n">std</span><span class="o">::</span><span class="n">unique_ptr</span><span class="o">&lt;</span><span class="n">kjellkod</span><span class="o">::</span><span class="n">Active</span><span class="o">&gt;</span> <span class="n">_bg</span><span class="p">;</span>
+         <span class="n">AsyncMessageCall</span> <span class="n">_default_log_call</span><span class="p">;</span>
+
+         <span class="k">virtual</span> <span class="o">~</span><span class="n">Sink</span><span class="p">()</span> <span class="p">{</span>
+            <span class="n">_bg</span><span class="p">.</span><span class="n">reset</span><span class="p">();</span>  <span class="c1">// TODO: to remove</span>
+         <span class="p">}</span>
+
+         <span class="kt">void</span> <span class="nf">send</span><span class="p">(</span><span class="n">LogMessageMover</span> <span class="n">msg</span><span class="p">)</span> <span class="k">override</span> <span class="p">{</span>
+            <span class="n">_bg</span><span class="o">-&gt;</span><span class="n">send</span><span class="p">([</span><span class="k">this</span><span class="p">,</span> <span class="n">msg</span><span class="p">]</span> <span class="p">{</span>
+               <span class="n">_default_log_call</span><span class="p">(</span><span class="n">msg</span><span class="p">);</span>
+            <span class="p">});</span>
+         <span class="p">}</span>
+
+         <span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="nc">Call</span><span class="p">,</span> <span class="k">typename</span><span class="o">...</span> <span class="nc">Args</span><span class="p">&gt;</span>
+         <span class="k">auto</span> <span class="nf">async</span><span class="p">(</span><span class="n">Call</span> <span class="n">call</span><span class="p">,</span> <span class="n">Args</span><span class="o">&amp;&amp;</span><span class="p">...</span> <span class="n">args</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">std</span><span class="o">::</span><span class="n">future</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">invoke_result_t</span><span class="o">&lt;</span><span class="k">decltype</span><span class="p">(</span><span class="n">call</span><span class="p">),</span> <span class="n">T</span><span class="p">,</span> <span class="n">Args</span><span class="p">...</span><span class="o">&gt;&gt;</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="n">g3</span><span class="o">::</span><span class="n">spawn_task</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">bind</span><span class="p">(</span><span class="n">call</span><span class="p">,</span> <span class="n">_real_sink</span><span class="p">.</span><span class="n">get</span><span class="p">(),</span> <span class="n">std</span><span class="o">::</span><span class="n">forward</span><span class="o">&lt;</span><span class="n">Args</span><span class="o">&gt;</span><span class="p">(</span><span class="n">args</span><span class="p">)...),</span> <span class="n">_bg</span><span class="p">.</span><span class="n">get</span><span class="p">());</span>
+         <span class="p">}</span>
+      <span class="p">};</span>
+</code></pre></div></div>
+<p>可以看出, Sink其实也是封装了一个Active线程，所有的日志操作均是在该背景线程上完成的。</p>
+
+<p>g3log提供了一个最基础的FileSink，如果调用addDefaultLogger初始化g3log的话，内部就是使用FileSink来保存日志。</p>
+
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code>      <span class="cm">/**      
+      A convenience function to add the default g3::FileSink to the log worker
+       @param log_prefix that you want
+       @param log_directory where the log is to be stored.
+       @return a handle for API access to the sink. See the README for example usage
+
+       @verbatim
+       Example:
+       using namespace g3;
+       std::unique_ptr&lt;LogWorker&gt; logworker {LogWorker::createLogWorker()};
+       auto handle = addDefaultLogger("my_test_log", "/tmp");
+       initializeLogging(logworker.get()); // ref. g3log.hpp
+
+       std::future&lt;std::string&gt; log_file_name = sinkHandle-&gt;call(&amp;FileSink::fileName);
+       std::cout &lt;&lt; "The filename is: " &lt;&lt; log_file_name.get() &lt;&lt; std::endl;
+       //   something like: /tmp/my_test_log.g3log.20150819-100300.log
+       */</span>
+      <span class="n">std</span><span class="o">::</span><span class="n">unique_ptr</span><span class="o">&lt;</span><span class="n">FileSinkHandle</span><span class="o">&gt;</span> <span class="n">addDefaultLogger</span><span class="p">(</span><span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span> <span class="n">log_prefix</span><span class="p">,</span> <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span> <span class="n">log_directory</span><span class="p">,</span> <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span> <span class="n">default_id</span> <span class="o">=</span> <span class="s">"g3log"</span><span class="p">);</span>
+
+</code></pre></div></div>
+
+<p>FileSink有一个很显著的缺点，那就是不能做文件大小限制。如果节点一直运行，日志打印的越多，文件会越来越大，难以维护。这个时候，就需要加入自定义的Sink了。</p>
+
+<h3 id="sinkhandle">SinkHandle</h3>
+<p>LogWorker调用addSink返回的是一个SinkHandle对象，也即是说，g3log不允许直接操作一个已添加过的Sink，所有的Sink操作都被委托给SinkHandle。</p>
+
+<p>SinHandle触发的所有操作，都是同步异步调用的方式加入到对应Sink对象的任务线程中。这样做的好处是，可以保证线程安全。</p>
+
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code>   <span class="k">template</span> <span class="o">&lt;</span><span class="k">class</span> <span class="nc">T</span><span class="p">&gt;</span>
+   <span class="k">class</span> <span class="nc">SinkHandle</span> <span class="p">{</span>
+      <span class="n">std</span><span class="o">::</span><span class="n">weak_ptr</span><span class="o">&lt;</span><span class="n">internal</span><span class="o">::</span><span class="n">Sink</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;&gt;</span> <span class="n">_sink</span><span class="p">;</span>
+         
+     <span class="nl">public:</span>
+      <span class="n">SinkHandle</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="n">internal</span><span class="o">::</span><span class="n">Sink</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;&gt;</span> <span class="n">sink</span><span class="p">)</span> <span class="o">:</span>
+          <span class="n">_sink</span><span class="p">(</span><span class="n">sink</span><span class="p">)</span> <span class="p">{}</span>
+            
+      <span class="o">~</span><span class="n">SinkHandle</span><span class="p">()</span> <span class="o">=</span> <span class="k">default</span><span class="p">;</span>
+         
+      <span class="c1">// Asynchronous call to the real sink. If the real sink is already deleted</span>
+      <span class="c1">// the returned future will contain a bad_weak_ptr exception instead of the</span>
+      <span class="c1">// call result.</span>
+      <span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="nc">AsyncCall</span><span class="p">,</span> <span class="k">typename</span><span class="o">...</span> <span class="nc">Args</span><span class="p">&gt;</span>
+      <span class="k">auto</span> <span class="nf">call</span><span class="p">(</span><span class="n">AsyncCall</span> <span class="n">func</span><span class="p">,</span> <span class="n">Args</span><span class="o">&amp;&amp;</span><span class="p">...</span> <span class="n">args</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">std</span><span class="o">::</span><span class="n">future</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">invoke_result_t</span><span class="o">&lt;</span><span class="k">decltype</span><span class="p">(</span><span class="n">func</span><span class="p">),</span> <span class="n">T</span><span class="p">,</span> <span class="n">Args</span><span class="p">...</span><span class="o">&gt;&gt;</span> <span class="p">{</span>
+         <span class="k">try</span> <span class="p">{</span>
+            <span class="n">std</span><span class="o">::</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="n">internal</span><span class="o">::</span><span class="n">Sink</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;&gt;</span> <span class="n">sink</span><span class="p">(</span><span class="n">_sink</span><span class="p">);</span>
+            <span class="k">return</span> <span class="n">sink</span><span class="o">-&gt;</span><span class="n">async</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="n">std</span><span class="o">::</span><span class="n">forward</span><span class="o">&lt;</span><span class="n">Args</span><span class="o">&gt;</span><span class="p">(</span><span class="n">args</span><span class="p">)...);</span>
+         <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">bad_weak_ptr</span><span class="o">&amp;</span> <span class="n">e</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">typedef</span> <span class="n">std</span><span class="o">::</span><span class="n">invoke_result_t</span><span class="o">&lt;</span><span class="k">decltype</span><span class="p">(</span><span class="n">func</span><span class="p">),</span> <span class="n">T</span><span class="p">,</span> <span class="n">Args</span><span class="p">...</span><span class="o">&gt;</span> <span class="n">PromiseType</span><span class="p">;</span>
+            <span class="n">std</span><span class="o">::</span><span class="n">promise</span><span class="o">&lt;</span><span class="n">PromiseType</span><span class="o">&gt;</span> <span class="n">promise</span><span class="p">;</span>
+            <span class="n">promise</span><span class="p">.</span><span class="n">set_exception</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">make_exception_ptr</span><span class="p">(</span><span class="n">e</span><span class="p">));</span>
+            <span class="k">return</span> <span class="n">std</span><span class="o">::</span><span class="n">move</span><span class="p">(</span><span class="n">promise</span><span class="p">.</span><span class="n">get_future</span><span class="p">());</span>
+         <span class="p">}</span>
+      <span class="p">}</span>
+
+      <span class="c1">/// Get weak_ptr access to the sink(). Make sure to check that the returned pointer is valid,</span>
+      <span class="c1">/// auto p = sink(); auto ptr = p.lock(); if (ptr) { .... }</span>
+      <span class="c1">/// ref: https://en.cppreference.com/w/cpp/memory/weak_ptr/lock</span>
+      <span class="n">std</span><span class="o">::</span><span class="n">weak_ptr</span><span class="o">&lt;</span><span class="n">internal</span><span class="o">::</span><span class="n">Sink</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;&gt;</span> <span class="n">sink</span><span class="p">()</span> <span class="p">{</span>
+         <span class="k">return</span> <span class="n">_sink</span><span class="p">.</span><span class="n">lock</span><span class="p">();</span>
+      <span class="p">}</span>  
+   <span class="p">};</span>    
+</code></pre></div></div>
+
+<p>如上面代码所示，SinkHandle维护的是一个弱智能指针，这样可以保证Sink对象的正常析构释放。同时，其在call接口中，捕捉了bad_weak_ptr异常。就算Sink对象被析构了也能正常运作。
+整体来说，SinkHandle的设计还是很鲁棒的。</p>
+
+<h2 id="尾声">尾声</h2>
+
+<p>好了，以上就差不多是g3log的所有东西了。东西不多，但是很精妙。整体看下来，觉得其设计很轻巧。对于学习C++的人，值得一看。</p>
+
+<h2 id="references">References</h2>
+
+<ul>
+  <li><a href="https://kjellkod.wordpress.com/2015/06/30/the-worlds-fastest-logger-vs-g3log/">g3log作者的性能分析报告</a></li>
+</ul>
+
+
+    </div>
+
+    
+    <button class="toc-toggle" aria-label="Toggle Table of Contents" aria-expanded="false">
+        <i class="fas fa-list"></i>
+    </button>
+    <div class="toc-container">
+        <h2>Table of Contents</h2>
+        <nav class="toc">
+            <ul id="my_toc" class="inline_toc">
+  <li><a href="#%E5%BC%95%E5%AD%90">引子</a></li>
+  <li><a href="#%E5%85%B3%E4%BA%8Eg3log%E7%9A%84%E5%9F%BA%E7%A1%80%E4%BD%BF%E7%94%A8">关于g3log的基础使用</a></li>
+  <li><a href="#g3log%E7%9A%84%E6%95%B4%E4%BD%93%E8%AE%BE%E8%AE%A1">g3log的整体设计</a></li>
+  <li><a href="#%E5%B0%BE%E5%A3%B0">尾声</a></li>
+  <li><a href="#references">References</a></li>
+</ul> 
+        </nav>
+    </div>
+    
+</div>
+
+<!-- Comments Section - Outside the post-container for full width -->
+<div class="comments-wrapper">
+    <div class="comments-container">
+        <h2>Comments</h2>
+        <div class="utterances-container">
+                <script src="https://utteranc.es/client.js" repo="sunbingfeng/sunbingfeng.github.io" issue-term="pathname" label="comment" theme="github-light" crossorigin="anonymous" async>
+                </script>
+            </div>
+    </div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const tocContainer = document.querySelector('.toc-container');
+        const tocToggle = document.querySelector('.toc-toggle');
+        const tocLinks = document.querySelectorAll('.toc a');
+        const headers = document.querySelectorAll('.post-content h1, .post-content h2, .post-content h3, .post-content h4');
+        
+        // Show TOC by default on desktop
+        if (window.innerWidth > 1024 && tocContainer) {
+            tocContainer.style.display = 'block';
+        }
+
+        // TOC Toggle for mobile
+        if (tocToggle) {
+            tocToggle.addEventListener('click', function() {
+                const isExpanded = tocToggle.getAttribute('aria-expanded') === 'true';
+                tocContainer.classList.toggle('active');
+                tocToggle.classList.toggle('active');
+                tocToggle.setAttribute('aria-expanded', !isExpanded);
+                
+                // Toggle display for mobile
+                if (window.innerWidth <= 1024) {
+                    tocContainer.style.display = isExpanded ? 'none' : 'block';
+                }
+            });
+
+            // Close TOC when clicking outside
+            document.addEventListener('click', function(e) {
+                if (tocContainer && 
+                    tocContainer.classList.contains('active') && 
+                    !tocContainer.contains(e.target) && 
+                    !tocToggle.contains(e.target)) {
+                    tocContainer.classList.remove('active');
+                    tocToggle.classList.remove('active');
+                    tocToggle.setAttribute('aria-expanded', 'false');
+                    if (window.innerWidth <= 1024) {
+                        tocContainer.style.display = 'none';
+                    }
+                }
+            });
+        }
+
+        // Update active TOC item on scroll
+        function updateTOC() {
+            if (!tocLinks.length) return;
+            
+            const scrollPosition = window.scrollY;
+            let currentSection = null;
+            
+            headers.forEach((header) => {
+                const headerTop = header.offsetTop - 100;
+                const headerBottom = headerTop + header.offsetHeight;
+                
+                if (scrollPosition >= headerTop && scrollPosition < headerBottom) {
+                    currentSection = header.id;
+                }
+            });
+
+            if (currentSection) {
+                tocLinks.forEach(link => {
+                    link.classList.remove('active');
+                    if (link.getAttribute('href') === `#${currentSection}`) {
+                        link.classList.add('active');
+                        // Scroll TOC to active item on mobile
+                        if (window.innerWidth <= 1024 && tocContainer) {
+                            link.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                        }
+                    }
+                });
+            }
+        }
+
+        // Smooth scroll for TOC links
+        tocLinks.forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href').substring(1);
+                const targetElement = document.getElementById(targetId);
+                
+                if (targetElement) {
+                    const headerOffset = 80;
+                    const elementPosition = targetElement.getBoundingClientRect().top;
+                    const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+
+                    window.scrollTo({
+                        top: offsetPosition,
+                        behavior: 'smooth'
+                    });
+
+                    // Close TOC on mobile after clicking
+                    if (window.innerWidth <= 1024) {
+                        tocContainer.classList.remove('active');
+                        tocToggle.classList.remove('active');
+                        tocToggle.setAttribute('aria-expanded', 'false');
+                        tocContainer.style.display = 'none';
+                    }
+                }
+            });
+        });
+
+        // Update TOC on scroll
+        window.addEventListener('scroll', updateTOC);
+        // Initial TOC update
+        updateTOC();
+
+        // Handle window resize
+        window.addEventListener('resize', function() {
+            if (window.innerWidth > 1024) {
+                tocContainer.style.display = 'block';
+            } else if (!tocContainer.classList.contains('active')) {
+                tocContainer.style.display = 'none';
+            }
+        });
+    });
+</script> 
+    </main>
+
+    <footer class="site-footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <p>© 2025 Bill's Tech Blog. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Theme toggle functionality
+        const themeToggle = document.querySelector('.theme-toggle');
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        const currentTheme = localStorage.getItem('theme') || (prefersDark ? 'dark' : 'light');
+
+        function setTheme(theme) {
+            document.documentElement.setAttribute('data-theme', theme);
+            localStorage.setItem('theme', theme);
+            themeToggle.innerHTML = theme === 'dark' ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
+        }
+
+        setTheme(currentTheme);
+
+        themeToggle.addEventListener('click', () => {
+            const newTheme = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+            setTheme(newTheme);
+        });
+
+        // KaTeX auto-render
+        document.addEventListener("DOMContentLoaded", function() {
+            renderMathInElement(document.body, {
+                delimiters: [
+                    {left: "$$", right: "$$", display: true},
+                    {left: "$", right: "$", display: false},
+                    {left: "\\[", right: "\\]", display: true},
+                    {left: "\\(", right: "\\)", display: false}
+                ],
+                throwOnError: false
+            });
+        });
+    </script>
+</body>
+</html> 

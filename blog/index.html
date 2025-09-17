@@ -1,0 +1,1847 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Blog - Bill's Tech Blog</title>
+    <meta name="description" content="Latest articles and updates">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="/assets/favicon.png">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <!-- KaTeX for LaTeX math rendering -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+    
+    <!-- Syntax Highlighting -->
+    <link rel="stylesheet" href="/assets/css/monokai.css">
+    
+    <!-- Styles -->
+    <style>
+        :root {
+            --primary-color: #2563eb;
+            --secondary-color: #1e40af;
+            --text-color: #1f2937;
+            --background-color: #ffffff;
+            --card-background: #f8fafc;
+            --gradient-start: #2563eb;
+            --gradient-end: #1e40af;
+            --header-height: 4rem;
+        }
+
+        [data-theme="dark"] {
+            --text-color: #f3f4f6;
+            --background-color: #111827;
+            --card-background: #1f2937;
+            --gradient-start: #1e40af;
+            --gradient-end: #1e3a8a;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background: var(--background-color);
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        /* Syntax Highlighting */
+        .highlight {
+            background: #272822;
+            color: #f8f8f2;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            overflow-x: auto;
+            margin: 1rem 0;
+        }
+        
+        .highlight pre {
+            margin: 0;
+            background: none;
+            border: none;
+            padding: 0;
+        }
+        
+        .highlight code {
+            background: none;
+            border: none;
+            padding: 0;
+            color: inherit;
+            font-family: 'Courier New', monospace;
+        }
+        
+        /* Typography and Heading Styles */
+        h1, h2, h3, h4, h5, h6 {
+            color: var(--text-color);
+            font-weight: 600;
+            line-height: 1.3;
+            margin-top: 0;
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            margin-top: 3rem;
+        }
+        
+        h2 {
+            font-size: 2rem;
+            margin-bottom: 1.25rem;
+            margin-top: 3rem;
+            padding-top: 1rem;
+            border-top: 2px solid var(--card-background);
+        }
+        
+        h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            margin-top: 2.5rem;
+            padding-top: 0.75rem;
+            /* border-top: 1px solid var(--card-background); */
+        }
+        
+        h4 {
+            font-size: 1.25rem;
+            margin-bottom: 0.75rem;
+            margin-top: 2rem;
+        }
+        
+        h5 {
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+            margin-top: 1.5rem;
+        }
+        
+        h6 {
+            font-size: 1rem;
+            margin-bottom: 0.5rem;
+            margin-top: 1.5rem;
+        }
+        
+        /* Paragraph and Text Spacing */
+        p {
+            margin-bottom: 1.5rem;
+            line-height: 1.8;
+            text-align: justify;
+        }
+        
+        /* List spacing */
+        ul, ol {
+            margin-bottom: 1.5rem;
+            padding-left: 1.5rem;
+            margin-left: 0;
+        }
+        
+        li {
+            margin-bottom: 0.75rem;
+            line-height: 1.7;
+            padding-left: 0.5rem;
+        }
+        
+        /* Nested list spacing */
+        ul ul, ol ol, ul ol, ol ul {
+            margin-top: 0.5rem;
+            margin-bottom: 0.5rem;
+            padding-left: 1.25rem;
+        }
+        
+        /* List item markers */
+        ul li::marker {
+            color: var(--gradient-start);
+        }
+        
+        ol li::marker {
+            color: var(--gradient-start);
+            font-weight: 600;
+        }
+        
+        /* Blockquote spacing */
+        blockquote {
+            margin: 2rem 0;
+            padding: 1rem 1.5rem;
+            border-left: 4px solid var(--gradient-start);
+            background: var(--card-background);
+            border-radius: 0.5rem;
+            font-style: italic;
+        }
+        
+        blockquote p {
+            margin-bottom: 1rem;
+        }
+        
+        blockquote p:last-child {
+            margin-bottom: 0;
+        }
+        
+        /* Code inline spacing */
+        code {
+            background: var(--card-background);
+            padding: 0.2rem 0.4rem;
+            border-radius: 0.25rem;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9em;
+        }
+        
+        /* Table Styles */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 2rem 0;
+            background: var(--background-color);
+            border-radius: 0.5rem;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+        
+        table th {
+            background: var(--gradient-start);
+            color: white;
+            font-weight: 600;
+            text-align: left;
+            padding: 1rem 1.5rem;
+            border-bottom: 2px solid var(--gradient-end);
+            font-size: 1rem;
+        }
+        
+        table td {
+            padding: 1rem 1.5rem;
+            border-bottom: 1px solid var(--card-background);
+            vertical-align: top;
+            line-height: 1.6;
+        }
+        
+        table tr:last-child td {
+            border-bottom: none;
+        }
+        
+        table tr:hover {
+            background: var(--card-background);
+            transition: background-color 0.2s ease;
+        }
+        
+        table tr:nth-child(even) {
+            background: rgba(0, 0, 0, 0.02);
+        }
+        
+        table tr:nth-child(even):hover {
+            background: var(--card-background);
+        }
+        
+        /* Responsive table */
+        @media (max-width: 768px) {
+            table {
+                font-size: 0.9rem;
+            }
+            
+            table th,
+            table td {
+                padding: 0.75rem 1rem;
+            }
+        }
+        
+        /* Figure and Image Styles */
+        figure {
+            margin: 2.5rem 0;
+            text-align: center;
+            background: var(--card-background);
+            border-radius: 0.75rem;
+            padding: 1.5rem;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            border: 1px solid rgba(0, 0, 0, 0.05);
+        }
+        
+        figure img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 0.5rem;
+            margin-bottom: 1rem;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+        
+        figcaption {
+            font-family: 'Georgia', 'Times New Roman', serif;
+            font-size: 0.95rem;
+          font-style: italic;
+            color: var(--text-color);
+            opacity: 0.8;
+            line-height: 1.5;
+            margin-top: 0.5rem;
+            padding: 0.75rem 1rem;
+            background: rgba(0, 0, 0, 0.03);
+            border-radius: 0.5rem;
+            border-left: 4px solid var(--gradient-start);
+        }
+        
+        /* Center image class for backward compatibility */
+        .center_img {
+            display: block;
+            margin: 0 auto;
+        }
+        
+        /* Responsive figure adjustments */
+        @media (max-width: 768px) {
+            figure {
+                margin: 2rem 0;
+                padding: 1rem;
+            }
+            
+            figcaption {
+                font-size: 0.9rem;
+                padding: 0.5rem 0.75rem;
+            }
+        }
+        
+        /* Header Styles */
+        .site-header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: var(--header-height);
+            background: var(--background-color);
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            padding: 0 2rem;
+            backdrop-filter: blur(10px);
+        }
+
+        .site-header .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .site-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text-color);
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-color);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-color);
+        }
+
+        .theme-toggle {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            cursor: pointer;
+            padding: 0.5rem;
+            font-size: 1.25rem;
+        }
+
+        /* Main Content */
+        .main-content {
+            margin-top: var(--header-height);
+            min-height: calc(100vh - var(--header-height));
+        }
+
+        /* Footer */
+        .site-footer {
+            background: var(--card-background);
+            padding: 2rem 0;
+            margin-top: 4rem;
+            text-align: center;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .footer-section {
+            margin-bottom: 1.5rem;
+        }
+
+        .footer-section p {
+            color: var(--text-color);
+            opacity: 0.8;
+            text-align: center;
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .site-header {
+                padding: 0 1rem;
+            }
+
+            .footer-content {
+                padding: 0 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="site-header">
+        <div class="container">
+            <a href="/" class="site-title">Bill's Tech Blog</a>
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="/blog">Blog</a></li>
+                    <li><a href="/about">About</a></li>
+                </ul>
+            </nav>
+            <button class="theme-toggle" aria-label="Toggle theme">
+                <i class="fas fa-moon"></i>
+            </button>
+        </div>
+    </header>
+
+    <main class="main-content">
+        <style>
+    :root {
+        --primary-color: #2563eb;
+        --secondary-color: #1e40af;
+        --text-color: #1f2937;
+        --background-color: #ffffff;
+        --card-background: #f8fafc;
+        --gradient-start: #2563eb;
+        --gradient-end: #1e40af;
+        --tag-hover: #1e40af;
+    }
+    [data-theme="dark"] {
+        --text-color: #f3f4f6;
+        --background-color: #111827;
+        --card-background: #1f2937;
+        --gradient-start: #1e40af;
+        --gradient-end: #1e3a8a;
+        --tag-hover: #3b82f6;
+    }
+
+    .blog-header {
+        background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+        color: white;
+        padding: 6rem 2rem 4rem;
+        text-align: center;
+        margin-top: calc(-1 * var(--header-height));
+        position: relative;
+        overflow: hidden;
+    }
+
+    .blog-header::before {
+        content: '';
+        position: absolute;
+        top: 0; left: 0; right: 0; bottom: 0;
+        background: radial-gradient(circle at center, transparent 0%, rgba(0,0,0,0.2) 100%);
+        z-index: 1;
+    }
+
+    .blog-header-content {
+        position: relative;
+        z-index: 2;
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+
+    .blog-header h1 {
+        font-size: 3rem;
+        font-weight: 800;
+        margin: 0;
+        background: linear-gradient(to right, #fff, #e2e8f0);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+
+    .blog-header p {
+        font-size: 1.25rem;
+        margin: 1rem 0 0;
+        opacity: 0.9;
+    }
+
+    .selected-tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+        margin: 1rem 0;
+        justify-content: center;
+    }
+
+    .selected-tag {
+        background: rgba(255, 255, 255, 0.2);
+        color: white;
+        padding: 0.3rem 0.8rem;
+        border-radius: 1rem;
+        font-size: 0.9rem;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+
+    .selected-tag:hover {
+        background: rgba(255, 255, 255, 0.3);
+    }
+
+    .selected-tag i {
+        font-size: 0.8rem;
+    }
+
+    .tags-cloud-container {
+        position: relative;
+        max-width: 1000px;
+        margin: 2rem auto;
+        padding: 0 1rem;
+    }
+
+    .tags-cloud {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1rem;
+        justify-content: space-between;
+        position: relative;
+    }
+
+    .tags-cloud:not(.expanded) {
+        max-height: 120px;
+        overflow: hidden;
+        mask-image: linear-gradient(to bottom, black 80%, transparent 100%);
+        -webkit-mask-image: linear-gradient(to bottom, black 80%, transparent 100%);
+    }
+
+    .tags-cloud.expanded {
+        display: none;
+    }
+
+    .expand-tags {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.5rem;
+        background: rgba(255, 255, 255, 0.2);
+        color: white;
+        padding: 0.5rem 1rem;
+        border-radius: 2rem;
+        font-size: 0.9rem;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        margin: 1rem auto 0;
+        border: none;
+        backdrop-filter: blur(10px);
+        width: fit-content;
+        min-width: 150px;
+    }
+
+    .expand-tags:hover {
+        background: rgba(255, 255, 255, 0.3);
+        transform: translateY(-2px);
+    }
+
+    .expand-tags i {
+        transition: transform 0.3s ease;
+    }
+
+    .expand-tags.expanded i {
+        transform: rotate(180deg);
+    }
+
+    .tag-stat {
+        background: rgba(255, 255, 255, 0.1);
+        color: white;
+        padding: 0.5rem 1rem;
+        border-radius: 2rem;
+        font-size: 0.9rem;
+        text-decoration: none;
+        transition: all 0.3s ease;
+        backdrop-filter: blur(10px);
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+    }
+
+    .tag-stat:hover {
+        background: rgba(255, 255, 255, 0.2);
+        transform: translateY(-2px);
+    }
+
+    .tag-stat i {
+        font-size: 1rem;
+    }
+
+    .tag-count {
+        background: rgba(255, 255, 255, 0.2);
+        padding: 0.2rem 0.6rem;
+        border-radius: 1rem;
+        font-size: 0.8rem;
+        font-weight: 600;
+    }
+
+    .blog-content {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 4rem 2rem;
+        min-height: 50vh;
+    }
+
+    .blog-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+        gap: 2.5rem;
+        align-items: start;
+    }
+
+    .post-card {
+        transition: all 0.3s ease;
+        opacity: 1;
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+        margin: 0;
+    }
+
+    .post-card.hidden {
+        opacity: 0;
+        pointer-events: none;
+        position: absolute;
+        visibility: hidden;
+    }
+
+    .post-card.visible {
+        opacity: 1;
+        pointer-events: auto;
+        position: relative;
+        visibility: visible;
+    }
+
+    .blog-grid:empty {
+        min-height: 200px;
+    }
+
+    .blog-grid:has(.post-card.visible:only-child) {
+        grid-template-columns: minmax(340px, 800px);
+        justify-content: center;
+    }
+
+    .blog-grid:has(.post-card.visible:nth-child(2)) {
+        grid-template-columns: repeat(2, minmax(340px, 1fr));
+    }
+
+    .blog-grid:has(.post-card.visible:nth-child(3)) {
+        grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+    }
+
+    .post-meta {
+        display: flex;
+        gap: 1.2rem;
+        font-size: 0.95rem;
+        color: var(--text-color);
+        opacity: 0.7;
+        margin-bottom: 0.7rem;
+    }
+
+    .post-card h2 {
+        font-size: 1.6rem;
+        margin: 0.5rem 0 0.7rem 0;
+        font-weight: 700;
+        line-height: 1.3;
+    }
+
+    .post-card h2 a {
+        color: var(--text-color);
+        text-decoration: none;
+        transition: color 0.2s;
+    }
+
+    .post-card h2 a:hover {
+        color: var(--primary-color);
+    }
+
+    .post-tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+        margin: 0.5rem 0 1rem 0;
+    }
+
+    .tag {
+        background: var(--primary-color);
+        color: white;
+        padding: 0.25rem 0.75rem;
+        border-radius: 1rem;
+        font-size: 0.75rem;
+        font-weight: 500;
+        text-decoration: none;
+        transition: background 0.2s;
+    }
+
+    .tag:hover {
+        background: var(--secondary-color);
+    }
+
+    .post-excerpt {
+        margin: 0.7rem 0 1.2rem 0;
+        color: var(--text-color);
+        opacity: 0.92;
+        flex-grow: 1;
+    }
+
+    .post-card .cta-button {
+        align-self: flex-start;
+        margin-top: auto;
+        padding: 0.7rem 1.5rem;
+        border-radius: 0.5rem;
+        background: var(--primary-color);
+        color: white;
+        text-decoration: none;
+        font-weight: 600;
+        transition: all 0.3s ease;
+        box-shadow: 0 2px 8px rgba(37,99,235,0.08);
+    }
+
+    .post-card .cta-button:hover {
+        background: var(--secondary-color);
+        transform: translateY(-2px);
+    }
+
+    .pagination-info {
+        width: 100%;
+        text-align: center;
+        margin: 4rem 0 2rem 0;
+        color: var(--text-color);
+        opacity: 0.8;
+        font-size: 1.1rem;
+    }
+
+    .pagination {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 0.5rem;
+        margin-top: 1rem;
+        flex-wrap: wrap;
+    }
+
+    .pagination-item {
+        background: var(--card-background);
+        color: var(--text-color);
+        padding: 0.5rem 1rem;
+        border-radius: 0.5rem;
+        text-decoration: none;
+        font-weight: 500;
+        transition: all 0.3s ease;
+        cursor: pointer;
+        border: 1px solid rgba(37,99,235,0.1);
+        user-select: none;
+    }
+
+    .pagination-item:hover {
+        background: var(--primary-color);
+        color: white;
+        transform: translateY(-2px);
+        border-color: var(--primary-color);
+    }
+
+    .pagination-item.active {
+        background: var(--primary-color);
+        color: white;
+        border-color: var(--primary-color);
+        pointer-events: none;
+        transform: translateY(-2px);
+    }
+
+    .pagination-item.disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+        pointer-events: none;
+        transform: none;
+    }
+
+    .pagination-item.disabled:hover {
+        background: var(--card-background);
+        color: var(--text-color);
+        transform: none;
+    }
+
+    .tag-stat {
+        cursor: pointer;
+    }
+
+    .tag-stat.active {
+        background: rgba(255, 255, 255, 0.3);
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    .tag {
+        cursor: pointer;
+    }
+
+    @media (max-width: 768px) {
+        .blog-header {
+            padding: 7rem 1rem 4rem;
+            margin-top: calc(-1 * var(--header-height));
+        }
+        .blog-header h1 {
+            font-size: 2.2rem;
+            line-height: 1.3;
+            padding: 0 0.5rem;
+            word-wrap: break-word;
+        }
+        .blog-content {
+            padding: 2rem 1rem;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        .blog-grid {
+            grid-template-columns: 1fr;
+            gap: 2rem;
+            padding: 0 0.5rem;
+        }
+        .post-card {
+            padding: 1.5rem;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        .post-card h2 {
+            font-size: 1.4rem;
+            line-height: 1.4;
+            word-wrap: break-word;
+            padding: 0 0.5rem;
+        }
+        .post-excerpt {
+            font-size: 0.95rem;
+            line-height: 1.5;
+            padding: 0 0.5rem;
+        }
+        .tags-cloud-container {
+            padding: 0 0.5rem;
+        }
+        .tags-cloud {
+            justify-content: center;
+            gap: 0.75rem;
+        }
+        .expand-tags {
+            font-size: 0.85rem;
+            padding: 0.4rem 0.8rem;
+            margin-top: 0.75rem;
+            width: auto;
+            min-width: 140px;
+        }
+        .tag-stat {
+            font-size: 0.85rem;
+            padding: 0.4rem 0.8rem;
+            white-space: nowrap;
+        }
+        .pagination {
+            justify-content: center;
+            padding: 0 0.5rem;
+        }
+        .selected-tags {
+            justify-content: center;
+            padding: 0 0.5rem;
+        }
+        .post-meta {
+            padding: 0 0.5rem;
+            flex-wrap: wrap;
+        }
+        .post-tags {
+            padding: 0 0.5rem;
+        }
+        .cta-button {
+            margin: 0.5rem;
+            width: calc(100% - 1rem);
+            text-align: center;
+        }
+    }
+
+    @media (max-width: 480px) {
+        .blog-header {
+            padding: 6rem 0.5rem 3rem;
+        }
+        .blog-header h1 {
+            font-size: 2rem;
+        }
+        .post-card {
+            padding: 1.2rem;
+        }
+        .post-card h2 {
+            font-size: 1.3rem;
+        }
+        .tags-cloud {
+            gap: 0.5rem;
+        }
+        .expand-tags {
+            font-size: 0.8rem;
+            padding: 0.35rem 0.7rem;
+            margin-top: 0.5rem;
+            min-width: 130px;
+        }
+        .tag-stat {
+            font-size: 0.8rem;
+            padding: 0.35rem 0.7rem;
+        }
+    }
+</style>
+
+<div class="blog-header">
+    <div class="blog-header-content">
+        <h1>Latest Posts</h1>
+        <div class="selected-tags"></div>
+        <div class="tags-cloud-container">
+            <div class="tags-cloud">
+                <a href="#" class="tag-stat active" data-tag="all">
+                    <i class="fas fa-th-large"></i>
+                    All Posts
+                    <span class="tag-count">21</span>
+                </a>
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                    
+                    
+                    
+                    
+                    
+                    <a href="#" class="tag-stat" data-tag="Y-2025">
+                        <i class="fas fa-tag"></i>
+                        Y-2025
+                        <span class="tag-count">10</span>
+                    </a>
+                
+                    
+                    
+                    
+                    
+                    
+                    <a href="#" class="tag-stat" data-tag="Y-2024">
+                        <i class="fas fa-tag"></i>
+                        Y-2024
+                        <span class="tag-count">5</span>
+                    </a>
+                
+                    
+                    
+                    
+                    
+                    
+                    <a href="#" class="tag-stat" data-tag="Y-2023">
+                        <i class="fas fa-tag"></i>
+                        Y-2023
+                        <span class="tag-count">2</span>
+                    </a>
+                
+                    
+                    
+                    
+                    
+                    
+                    <a href="#" class="tag-stat" data-tag="Y-2022">
+                        <i class="fas fa-tag"></i>
+                        Y-2022
+                        <span class="tag-count">4</span>
+                    </a>
+                
+                    
+                    
+                    
+                    
+                    
+                    <a href="#" class="tag-stat" data-tag="vim">
+                        <i class="fas fa-tag"></i>
+                        vim
+                        <span class="tag-count">2</span>
+                    </a>
+                
+                    
+                    
+                    
+                    
+                    
+                    <a href="#" class="tag-stat" data-tag="tools">
+                        <i class="fas fa-tag"></i>
+                        tools
+                        <span class="tag-count">3</span>
+                    </a>
+                
+                    
+                    
+                    
+                    
+                    
+                    <a href="#" class="tag-stat" data-tag="tips">
+                        <i class="fas fa-lightbulb"></i>
+                        tips
+                        <span class="tag-count">5</span>
+                    </a>
+                
+                    
+                    
+                    
+                    
+                    
+                    <a href="#" class="tag-stat" data-tag="review">
+                        <i class="fas fa-tag"></i>
+                        review
+                        <span class="tag-count">3</span>
+                    </a>
+                
+            </div>
+            
+            <button class="expand-tags" aria-label="Show more tags">
+                <span>Show More Tags</span>
+                <i class="fas fa-chevron-down"></i>
+            </button>
+            
+            
+            <div class="tags-cloud expanded">
+                
+                    
+                    
+                    
+                    
+                    
+                    <a href="#" class="tag-stat" data-tag="math">
+                        <i class="fas fa-tag"></i>
+                        math
+                        <span class="tag-count">6</span>
+                    </a>
+                
+                    
+                    
+                    
+                    
+                    
+                    <a href="#" class="tag-stat" data-tag="framework">
+                        <i class="fas fa-tag"></i>
+                        framework
+                        <span class="tag-count">1</span>
+                    </a>
+                
+                    
+                    
+                    
+                    
+                    
+                    <a href="#" class="tag-stat" data-tag="c++">
+                        <i class="fas fa-code"></i>
+                        c++
+                        <span class="tag-count">3</span>
+                    </a>
+                
+                    
+                    
+                    
+                    
+                    
+                    <a href="#" class="tag-stat" data-tag="algorithm">
+                        <i class="fas fa-tag"></i>
+                        algorithm
+                        <span class="tag-count">3</span>
+                    </a>
+                
+            </div>
+            
+        </div>
+    </div>
+</div>
+
+<div class="blog-content">
+    <div class="blog-grid">
+        
+        
+        <article class="post-card" data-tag-page="1" data-tags="Y-2025 math ">
+            <div class="post-meta">
+                <span>Sep 13, 2025</span>
+                <span>
+
+3 min read </span>
+            </div>
+            <h2><a href="/blog/KLT_SVD/">什么是KLT变换？</a></h2>
+            <div class="post-tags">
+                
+                <a href="#" class="tag" data-tag="Y-2025">Y-2025</a>
+                
+                <a href="#" class="tag" data-tag="math">math</a>
+                
+            </div>
+            <div class="post-excerpt">
+                详解KLT跟SVD的关系
+        </div>
+            <a href="/blog/KLT_SVD/" class="cta-button">Read More</a>
+        </article>
+        
+        <article class="post-card" data-tag-page="1" data-tags="Y-2025 review ">
+            <div class="post-meta">
+                <span>Sep 05, 2025</span>
+                <span>
+
+1 min read </span>
+            </div>
+            <h2><a href="/blog/Setup_Android_dev/">Setup Android Dev Environment</a></h2>
+            <div class="post-tags">
+                
+                <a href="#" class="tag" data-tag="Y-2025">Y-2025</a>
+                
+                <a href="#" class="tag" data-tag="review">review</a>
+                
+            </div>
+            <div class="post-excerpt">
+                Android Setup
+        </div>
+            <a href="/blog/Setup_Android_dev/" class="cta-button">Read More</a>
+        </article>
+        
+        <article class="post-card" data-tag-page="1" data-tags="Y-2025 c++ ">
+            <div class="post-meta">
+                <span>Aug 22, 2025</span>
+                <span>
+
+4 min read </span>
+            </div>
+            <h2><a href="/blog/SFINAE/">SFINAE到底是不是Error？</a></h2>
+            <div class="post-tags">
+                
+                <a href="#" class="tag" data-tag="Y-2025">Y-2025</a>
+                
+                <a href="#" class="tag" data-tag="c++">c++</a>
+                
+            </div>
+            <div class="post-excerpt">
+                C++ 模板元编程
+        </div>
+            <a href="/blog/SFINAE/" class="cta-button">Read More</a>
+        </article>
+        
+        <article class="post-card" data-tag-page="1" data-tags="Y-2025 math algorithm ">
+            <div class="post-meta">
+                <span>Aug 15, 2025</span>
+                <span>
+
+5 min read </span>
+            </div>
+            <h2><a href="/blog/Butterworth_LPF/">Deep Dive into Butterworth Low Pass Filter</a></h2>
+            <div class="post-tags">
+                
+                <a href="#" class="tag" data-tag="Y-2025">Y-2025</a>
+                
+                <a href="#" class="tag" data-tag="math">math</a>
+                
+                <a href="#" class="tag" data-tag="algorithm">algorithm</a>
+                
+            </div>
+            <div class="post-excerpt">
+                From Theory to Implementation: A Comprehensive Guide to Butterworth Filters
+        </div>
+            <a href="/blog/Butterworth_LPF/" class="cta-button">Read More</a>
+        </article>
+        
+        <article class="post-card" data-tag-page="1" data-tags="Y-2025 algorithm ">
+            <div class="post-meta">
+                <span>Apr 25, 2025</span>
+                <span>
+
+3 min read </span>
+            </div>
+            <h2><a href="/blog/RungeKutta/">4th-order Rugge-Kutta</a></h2>
+            <div class="post-tags">
+                
+                <a href="#" class="tag" data-tag="Y-2025">Y-2025</a>
+                
+                <a href="#" class="tag" data-tag="algorithm">algorithm</a>
+                
+            </div>
+            <div class="post-excerpt">
+                AI Chat Series
+        </div>
+            <a href="/blog/RungeKutta/" class="cta-button">Read More</a>
+        </article>
+        
+        <article class="post-card" data-tag-page="1" data-tags="Y-2025 math tips ">
+            <div class="post-meta">
+                <span>Apr 14, 2025</span>
+                <span>
+
+6 min read </span>
+            </div>
+            <h2><a href="/blog/fast_inv_sqrt/">Fast Inverse sqrt</a></h2>
+            <div class="post-tags">
+                
+                <a href="#" class="tag" data-tag="Y-2025">Y-2025</a>
+                
+                <a href="#" class="tag" data-tag="math">math</a>
+                
+                <a href="#" class="tag" data-tag="tips">tips</a>
+                
+            </div>
+            <div class="post-excerpt">
+                AI Chat Series
+        </div>
+            <a href="/blog/fast_inv_sqrt/" class="cta-button">Read More</a>
+        </article>
+        
+        <article class="post-card" data-tag-page="1" data-tags="Y-2025 math ">
+            <div class="post-meta">
+                <span>Apr 11, 2025</span>
+                <span>
+
+9 min read </span>
+            </div>
+            <h2><a href="/blog/Congugate_Gradient/">Conjugate Gradient Method</a></h2>
+            <div class="post-tags">
+                
+                <a href="#" class="tag" data-tag="Y-2025">Y-2025</a>
+                
+                <a href="#" class="tag" data-tag="math">math</a>
+                
+            </div>
+            <div class="post-excerpt">
+                AI Chat Series
+        </div>
+            <a href="/blog/Congugate_Gradient/" class="cta-button">Read More</a>
+        </article>
+        
+        <article class="post-card" data-tag-page="1" data-tags="Y-2025 math ">
+            <div class="post-meta">
+                <span>Mar 05, 2025</span>
+                <span>
+
+8 min read </span>
+            </div>
+            <h2><a href="/blog/R_orthogonalize/">SO(3) Orthogonalization</a></h2>
+            <div class="post-tags">
+                
+                <a href="#" class="tag" data-tag="Y-2025">Y-2025</a>
+                
+                <a href="#" class="tag" data-tag="math">math</a>
+                
+            </div>
+            <div class="post-excerpt">
+                AI Chat Series
+        </div>
+            <a href="/blog/R_orthogonalize/" class="cta-button">Read More</a>
+        </article>
+        
+        <article class="post-card" data-tag-page="1" data-tags="Y-2025 math ">
+            <div class="post-meta">
+                <span>Mar 01, 2025</span>
+                <span>
+
+8 min read </span>
+            </div>
+            <h2><a href="/blog/SO(3)_Log/">SO(3) Logarithm</a></h2>
+            <div class="post-tags">
+                
+                <a href="#" class="tag" data-tag="Y-2025">Y-2025</a>
+                
+                <a href="#" class="tag" data-tag="math">math</a>
+                
+            </div>
+            <div class="post-excerpt">
+                AI Chat Series
+        </div>
+            <a href="/blog/SO(3)_Log/" class="cta-button">Read More</a>
+        </article>
+        
+        <article class="post-card" data-tag-page="1" data-tags="Y-2025 algorithm ">
+            <div class="post-meta">
+                <span>Feb 28, 2025</span>
+                <span>
+
+3 min read </span>
+            </div>
+            <h2><a href="/blog/exp_fast_implementations/">Fast exp implementations</a></h2>
+            <div class="post-tags">
+                
+                <a href="#" class="tag" data-tag="Y-2025">Y-2025</a>
+                
+                <a href="#" class="tag" data-tag="algorithm">algorithm</a>
+                
+            </div>
+            <div class="post-excerpt">
+                AI Chat Series
+        </div>
+            <a href="/blog/exp_fast_implementations/" class="cta-button">Read More</a>
+        </article>
+        
+        <article class="post-card" data-tag-page="1" data-tags="Y-2024 tips ">
+            <div class="post-meta">
+                <span>Apr 11, 2024</span>
+                <span>
+
+1 min read </span>
+            </div>
+            <h2><a href="/blog/5tools_to_boost_efficiency/">5个提升Linux开发效率的工具</a></h2>
+            <div class="post-tags">
+                
+                <a href="#" class="tag" data-tag="Y-2024">Y-2024</a>
+                
+                <a href="#" class="tag" data-tag="tips">tips</a>
+                
+            </div>
+            <div class="post-excerpt">
+                吐血推荐
+        </div>
+            <a href="/blog/5tools_to_boost_efficiency/" class="cta-button">Read More</a>
+        </article>
+        
+        <article class="post-card" data-tag-page="1" data-tags="Y-2024 review ">
+            <div class="post-meta">
+                <span>Mar 01, 2024</span>
+                <span>
+
+1 min read </span>
+            </div>
+            <h2><a href="/blog/How_to_capture_audience/">和观众保持情绪共鸣</a></h2>
+            <div class="post-tags">
+                
+                <a href="#" class="tag" data-tag="Y-2024">Y-2024</a>
+                
+                <a href="#" class="tag" data-tag="review">review</a>
+                
+            </div>
+            <div class="post-excerpt">
+                情绪价值很重要
+        </div>
+            <a href="/blog/How_to_capture_audience/" class="cta-button">Read More</a>
+        </article>
+        
+        <article class="post-card" data-tag-page="1" data-tags="Y-2024 tips ">
+            <div class="post-meta">
+                <span>Feb 18, 2024</span>
+                <span>
+
+1 min read </span>
+            </div>
+            <h2><a href="/blog/IDE_setup/">你真的会用IDE吗？</a></h2>
+            <div class="post-tags">
+                
+                <a href="#" class="tag" data-tag="Y-2024">Y-2024</a>
+                
+                <a href="#" class="tag" data-tag="tips">tips</a>
+                
+            </div>
+            <div class="post-excerpt">
+                跟鼠标说再见
+        </div>
+            <a href="/blog/IDE_setup/" class="cta-button">Read More</a>
+        </article>
+        
+        <article class="post-card" data-tag-page="1" data-tags="Y-2024 tools ">
+            <div class="post-meta">
+                <span>Feb 01, 2024</span>
+                <span>
+
+1 min read </span>
+            </div>
+            <h2><a href="/blog/Obsidian/">Obsidian，私人PKM助理</a></h2>
+            <div class="post-tags">
+                
+                <a href="#" class="tag" data-tag="Y-2024">Y-2024</a>
+                
+                <a href="#" class="tag" data-tag="tools">tools</a>
+                
+            </div>
+            <div class="post-excerpt">
+                好用的一批
+        </div>
+            <a href="/blog/Obsidian/" class="cta-button">Read More</a>
+        </article>
+        
+        <article class="post-card" data-tag-page="1" data-tags="Y-2024 c++ framework ">
+            <div class="post-meta">
+                <span>Jan 17, 2024</span>
+                <span>
+
+3 min read </span>
+            </div>
+            <h2><a href="/blog/g3log_code_review/">g3log代码分析</a></h2>
+            <div class="post-tags">
+                
+                <a href="#" class="tag" data-tag="Y-2024">Y-2024</a>
+                
+                <a href="#" class="tag" data-tag="c++">c++</a>
+                
+                <a href="#" class="tag" data-tag="framework">framework</a>
+                
+            </div>
+            <div class="post-excerpt">
+                glog的异步平替
+        </div>
+            <a href="/blog/g3log_code_review/" class="cta-button">Read More</a>
+        </article>
+        
+        <article class="post-card" data-tag-page="1" data-tags="Y-2023 c++ ">
+            <div class="post-meta">
+                <span>Jun 27, 2023</span>
+                <span>
+
+1 min read </span>
+            </div>
+            <h2><a href="/blog/shared_ptr_doule_free_issue/">你真的会用shared_ptr吗？</a></h2>
+            <div class="post-tags">
+                
+                <a href="#" class="tag" data-tag="Y-2023">Y-2023</a>
+                
+                <a href="#" class="tag" data-tag="c++">c++</a>
+                
+            </div>
+            <div class="post-excerpt">
+                小心有坑
+        </div>
+            <a href="/blog/shared_ptr_doule_free_issue/" class="cta-button">Read More</a>
+        </article>
+        
+        <article class="post-card" data-tag-page="1" data-tags="Y-2023 tips ">
+            <div class="post-meta">
+                <span>Jun 05, 2023</span>
+                <span>
+
+1 min read </span>
+            </div>
+            <h2><a href="/blog/Update_Github_Intro_Pages/">自动更新Github个人介绍页</a></h2>
+            <div class="post-tags">
+                
+                <a href="#" class="tag" data-tag="Y-2023">Y-2023</a>
+                
+                <a href="#" class="tag" data-tag="tips">tips</a>
+                
+            </div>
+            <div class="post-excerpt">
+                王婆卖瓜系列
+        </div>
+            <a href="/blog/Update_Github_Intro_Pages/" class="cta-button">Read More</a>
+        </article>
+        
+        <article class="post-card" data-tag-page="1" data-tags="Y-2022 tips ">
+            <div class="post-meta">
+                <span>Mar 31, 2022</span>
+                <span>
+
+2 min read </span>
+            </div>
+            <h2><a href="/blog/how_to_setup_a_vpn/">Docker+frp+OpenVPN搭建VPN</a></h2>
+            <div class="post-tags">
+                
+                <a href="#" class="tag" data-tag="Y-2022">Y-2022</a>
+                
+                <a href="#" class="tag" data-tag="tips">tips</a>
+                
+            </div>
+            <div class="post-excerpt">
+                15分钟无脑搭建
+        </div>
+            <a href="/blog/how_to_setup_a_vpn/" class="cta-button">Read More</a>
+        </article>
+        
+        <article class="post-card" data-tag-page="1" data-tags="Y-2022 review ">
+            <div class="post-meta">
+                <span>Feb 06, 2022</span>
+                <span>
+
+1 min read </span>
+            </div>
+            <h2><a href="/blog/how_to_write_thesis_efficiently/">如何高效的写毕业论文</a></h2>
+            <div class="post-tags">
+                
+                <a href="#" class="tag" data-tag="Y-2022">Y-2022</a>
+                
+                <a href="#" class="tag" data-tag="review">review</a>
+                
+            </div>
+            <div class="post-excerpt">
+                经验总结
+        </div>
+            <a href="/blog/how_to_write_thesis_efficiently/" class="cta-button">Read More</a>
+        </article>
+        
+        <article class="post-card" data-tag-page="1" data-tags="Y-2022 tools vim ">
+            <div class="post-meta">
+                <span>Jan 28, 2022</span>
+                <span>
+
+4 min read </span>
+            </div>
+            <h2><a href="/blog/Setup_Your_VIM_Env_Part_II/">Setup Your Pure VIM Dev Environment--Part II</a></h2>
+            <div class="post-tags">
+                
+                <a href="#" class="tag" data-tag="Y-2022">Y-2022</a>
+                
+                <a href="#" class="tag" data-tag="tools">tools</a>
+                
+                <a href="#" class="tag" data-tag="vim">vim</a>
+                
+            </div>
+            <div class="post-excerpt">
+                VIM SETUP
+        </div>
+            <a href="/blog/Setup_Your_VIM_Env_Part_II/" class="cta-button">Read More</a>
+        </article>
+        
+        <article class="post-card" data-tag-page="1" data-tags="Y-2022 tools vim ">
+            <div class="post-meta">
+                <span>Jan 27, 2022</span>
+                <span>
+
+3 min read </span>
+            </div>
+            <h2><a href="/blog/Setup_Your_VIM_Env/">Setup Your Pure VIM Dev Environment--Part I</a></h2>
+            <div class="post-tags">
+                
+                <a href="#" class="tag" data-tag="Y-2022">Y-2022</a>
+                
+                <a href="#" class="tag" data-tag="tools">tools</a>
+                
+                <a href="#" class="tag" data-tag="vim">vim</a>
+                
+            </div>
+            <div class="post-excerpt">
+                TMUX
+        </div>
+            <a href="/blog/Setup_Your_VIM_Env/" class="cta-button">Read More</a>
+        </article>
+        
+    </div>
+    <div class="pagination-info"></div>
+    <div class="pagination"></div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const tagStats = document.querySelectorAll('.tag-stat');
+    const postCards = document.querySelectorAll('.post-card');
+    const urlParams = new URLSearchParams(window.location.search);
+    const selectedTags = new Set(urlParams.get('tags')?.split(',') || ['all']);
+    let currentPage = parseInt(urlParams.get('page')) || 1;
+    const POSTS_PER_PAGE = 3;
+    let filteredPosts = [];
+
+    function updateSelectedTagsDisplay() {
+        const selectedTagsContainer = document.querySelector('.selected-tags');
+        selectedTagsContainer.innerHTML = '';
+
+        if (selectedTags.has('all')) {
+            selectedTagsContainer.style.display = 'none';
+            return;
+        }
+
+        selectedTagsContainer.style.display = 'flex';
+        selectedTags.forEach(tag => {
+            if (tag === 'all') return;
+            
+            const tagElement = document.createElement('div');
+            tagElement.className = 'selected-tag';
+            tagElement.innerHTML = `
+                ${tag}
+                <i class="fas fa-times"></i>
+            `;
+            tagElement.addEventListener('click', () => {
+                selectedTags.delete(tag);
+                if (selectedTags.size === 0) {
+                    selectedTags.add('all');
+                }
+                filterPosts();
+            });
+            selectedTagsContainer.appendChild(tagElement);
+        });
+    }
+
+    function updateTagStats() {
+        tagStats.forEach(stat => {
+            const tag = stat.dataset.tag;
+            if (selectedTags.has(tag)) {
+                stat.classList.add('active');
+            } else {
+                stat.classList.remove('active');
+            }
+        });
+    }
+
+    function updatePagination() {
+        const paginationContainer = document.querySelector('.pagination');
+        const paginationInfo = document.querySelector('.pagination-info');
+        const totalPages = Math.ceil(filteredPosts.length / POSTS_PER_PAGE);
+        
+        // Update pagination info
+        if (filteredPosts.length > 0) {
+            const start = (currentPage - 1) * POSTS_PER_PAGE + 1;
+            const end = Math.min(currentPage * POSTS_PER_PAGE, filteredPosts.length);
+            paginationInfo.textContent = `Showing ${start}-${end} of ${filteredPosts.length} posts`;
+        } else {
+            paginationInfo.textContent = 'No posts found';
+        }
+
+        // Clear existing pagination
+        paginationContainer.innerHTML = '';
+
+        if (totalPages <= 1) {
+            return;
+        }
+
+        // Previous button
+        const prevButton = document.createElement('button');
+        prevButton.className = `pagination-item ${currentPage === 1 ? 'disabled' : ''}`;
+        prevButton.innerHTML = '<i class="fas fa-chevron-left"></i>';
+        if (currentPage > 1) {
+            prevButton.addEventListener('click', () => {
+                currentPage--;
+                updatePage(currentPage);
+            });
+        }
+        paginationContainer.appendChild(prevButton);
+
+        // Page numbers
+        for (let i = 1; i <= totalPages; i++) {
+            const pageButton = document.createElement('button');
+            pageButton.className = `pagination-item ${i === currentPage ? 'active' : ''}`;
+            pageButton.textContent = i;
+            if (i !== currentPage) {
+                pageButton.addEventListener('click', () => {
+                    currentPage = i;
+                    updatePage(currentPage);
+                });
+            }
+            paginationContainer.appendChild(pageButton);
+        }
+
+        // Next button
+        const nextButton = document.createElement('button');
+        nextButton.className = `pagination-item ${currentPage === totalPages ? 'disabled' : ''}`;
+        nextButton.innerHTML = '<i class="fas fa-chevron-right"></i>';
+        if (currentPage < totalPages) {
+            nextButton.addEventListener('click', () => {
+                currentPage++;
+                updatePage(currentPage);
+            });
+        }
+        paginationContainer.appendChild(nextButton);
+    }
+
+    function updatePage(page) {
+        const newUrl = new URL(window.location.href);
+        newUrl.searchParams.set('page', page);
+        window.history.pushState({ tags: Array.from(selectedTags), page: page }, '', newUrl);
+        showPage(page);
+    }
+
+    function showPage(page) {
+        const start = (page - 1) * POSTS_PER_PAGE;
+        const end = start + POSTS_PER_PAGE;
+        const visiblePosts = filteredPosts.slice(start, end);
+        
+        // First mark all posts as hidden
+        postCards.forEach(card => {
+            card.classList.add('hidden');
+            card.classList.remove('visible');
+        });
+
+        // Then mark filtered posts for current page as visible
+        visiblePosts.forEach(card => {
+            card.classList.remove('hidden');
+            card.classList.add('visible');
+        });
+        
+        updatePagination();
+    }
+
+    function filterPosts() {
+        // Update URL without page reload
+        const newUrl = new URL(window.location.href);
+        if (selectedTags.has('all')) {
+            newUrl.searchParams.delete('tags');
+        } else {
+            newUrl.searchParams.set('tags', Array.from(selectedTags).join(','));
+        }
+        newUrl.searchParams.set('page', '1');
+        window.history.pushState({ tags: Array.from(selectedTags), page: 1 }, '', newUrl);
+
+        // Reset to first page when changing tags
+        currentPage = 1;
+
+        // Update tag highlighting
+        updateTagStats();
+        updateSelectedTagsDisplay();
+
+        // Filter posts
+        filteredPosts = Array.from(postCards).filter(card => {
+            if (selectedTags.has('all')) return true;
+            
+            const cardTags = card.dataset.tags.split(' ').filter(t => t.length > 0);
+            // Show post if it has ANY of the selected tags
+            return Array.from(selectedTags).some(selectedTag => 
+                cardTags.includes(selectedTag)
+            );
+        });
+
+        // Update post visibility
+        postCards.forEach(card => {
+            if (filteredPosts.includes(card)) {
+                card.classList.remove('hidden');
+                card.classList.add('visible');
+            } else {
+                card.classList.add('hidden');
+                card.classList.remove('visible');
+            }
+        });
+
+        // Show first page of filtered posts
+        showPage(1);
+    }
+
+    // Add click handlers to tags
+    tagStats.forEach(stat => {
+        stat.addEventListener('click', (e) => {
+            e.preventDefault();
+            const tag = stat.dataset.tag;
+            
+            if (tag === 'all') {
+                selectedTags.clear();
+                selectedTags.add('all');
+            } else {
+                selectedTags.delete('all');
+                if (selectedTags.has(tag)) {
+                    selectedTags.delete(tag);
+                    if (selectedTags.size === 0) {
+                        selectedTags.add('all');
+                    }
+                } else {
+                    selectedTags.add(tag);
+                }
+            }
+            
+            filterPosts();
+        });
+    });
+
+    // Add click handlers to post tags
+    document.querySelectorAll('.post-tags .tag').forEach(tag => {
+        tag.addEventListener('click', (e) => {
+            e.preventDefault();
+            const tagName = tag.dataset.tag;
+            selectedTags.clear();
+            selectedTags.add(tagName);
+            filterPosts();
+        });
+    });
+
+    // Initialize with current tags and page
+    filterPosts();
+    if (currentPage > 1) {
+        showPage(currentPage);
+    }
+
+    // Handle browser back/forward buttons
+    window.addEventListener('popstate', (event) => {
+        const tags = event.state?.tags || ['all'];
+        const page = event.state?.page || 1;
+        selectedTags.clear();
+        tags.forEach(tag => selectedTags.add(tag));
+        currentPage = page;
+        filterPosts();
+        if (page > 1) {
+            showPage(page);
+        }
+    });
+
+    // Add expand tags functionality
+    const expandButton = document.querySelector('.expand-tags');
+    const expandedTags = document.querySelector('.tags-cloud.expanded');
+    const tagsCloud = document.querySelector('.tags-cloud:not(.expanded)');
+
+    if (expandButton && expandedTags) {
+        expandButton.addEventListener('click', function() {
+            const isExpanded = expandButton.classList.contains('expanded');
+            expandButton.classList.toggle('expanded');
+            expandButton.querySelector('span').textContent = isExpanded ? 'Show More Tags' : 'Show Less Tags';
+            
+            if (isExpanded) {
+                expandedTags.style.display = 'none';
+                tagsCloud.style.display = 'flex';
+            } else {
+                expandedTags.style.display = 'flex';
+                tagsCloud.style.display = 'none';
+            }
+        });
+    }
+});
+</script> 
+    </main>
+
+    <footer class="site-footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <p>© 2025 Bill's Tech Blog. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Theme toggle functionality
+        const themeToggle = document.querySelector('.theme-toggle');
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        const currentTheme = localStorage.getItem('theme') || (prefersDark ? 'dark' : 'light');
+
+        function setTheme(theme) {
+            document.documentElement.setAttribute('data-theme', theme);
+            localStorage.setItem('theme', theme);
+            themeToggle.innerHTML = theme === 'dark' ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
+        }
+
+        setTheme(currentTheme);
+
+        themeToggle.addEventListener('click', () => {
+            const newTheme = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+            setTheme(newTheme);
+        });
+
+        // KaTeX auto-render
+        document.addEventListener("DOMContentLoaded", function() {
+            renderMathInElement(document.body, {
+                delimiters: [
+                    {left: "$$", right: "$$", display: true},
+                    {left: "$", right: "$", display: false},
+                    {left: "\\[", right: "\\]", display: true},
+                    {left: "\\(", right: "\\)", display: false}
+                ],
+                throwOnError: false
+            });
+        });
+    </script>
+</body>
+</html> 

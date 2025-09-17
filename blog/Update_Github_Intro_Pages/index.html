@@ -1,0 +1,1174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>自动更新Github个人介绍页 - Bill's Tech Blog</title>
+    <meta name="description" content="To Be Excellent">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="/assets/favicon.png">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <!-- KaTeX for LaTeX math rendering -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+    
+    <!-- Syntax Highlighting -->
+    <link rel="stylesheet" href="/assets/css/monokai.css">
+    
+    <!-- Styles -->
+    <style>
+        :root {
+            --primary-color: #2563eb;
+            --secondary-color: #1e40af;
+            --text-color: #1f2937;
+            --background-color: #ffffff;
+            --card-background: #f8fafc;
+            --gradient-start: #2563eb;
+            --gradient-end: #1e40af;
+            --header-height: 4rem;
+        }
+
+        [data-theme="dark"] {
+            --text-color: #f3f4f6;
+            --background-color: #111827;
+            --card-background: #1f2937;
+            --gradient-start: #1e40af;
+            --gradient-end: #1e3a8a;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background: var(--background-color);
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        /* Syntax Highlighting */
+        .highlight {
+            background: #272822;
+            color: #f8f8f2;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            overflow-x: auto;
+            margin: 1rem 0;
+        }
+        
+        .highlight pre {
+            margin: 0;
+            background: none;
+            border: none;
+            padding: 0;
+        }
+        
+        .highlight code {
+            background: none;
+            border: none;
+            padding: 0;
+            color: inherit;
+            font-family: 'Courier New', monospace;
+        }
+        
+        /* Typography and Heading Styles */
+        h1, h2, h3, h4, h5, h6 {
+            color: var(--text-color);
+            font-weight: 600;
+            line-height: 1.3;
+            margin-top: 0;
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            margin-top: 3rem;
+        }
+        
+        h2 {
+            font-size: 2rem;
+            margin-bottom: 1.25rem;
+            margin-top: 3rem;
+            padding-top: 1rem;
+            border-top: 2px solid var(--card-background);
+        }
+        
+        h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            margin-top: 2.5rem;
+            padding-top: 0.75rem;
+            /* border-top: 1px solid var(--card-background); */
+        }
+        
+        h4 {
+            font-size: 1.25rem;
+            margin-bottom: 0.75rem;
+            margin-top: 2rem;
+        }
+        
+        h5 {
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+            margin-top: 1.5rem;
+        }
+        
+        h6 {
+            font-size: 1rem;
+            margin-bottom: 0.5rem;
+            margin-top: 1.5rem;
+        }
+        
+        /* Paragraph and Text Spacing */
+        p {
+            margin-bottom: 1.5rem;
+            line-height: 1.8;
+            text-align: justify;
+        }
+        
+        /* List spacing */
+        ul, ol {
+            margin-bottom: 1.5rem;
+            padding-left: 1.5rem;
+            margin-left: 0;
+        }
+        
+        li {
+            margin-bottom: 0.75rem;
+            line-height: 1.7;
+            padding-left: 0.5rem;
+        }
+        
+        /* Nested list spacing */
+        ul ul, ol ol, ul ol, ol ul {
+            margin-top: 0.5rem;
+            margin-bottom: 0.5rem;
+            padding-left: 1.25rem;
+        }
+        
+        /* List item markers */
+        ul li::marker {
+            color: var(--gradient-start);
+        }
+        
+        ol li::marker {
+            color: var(--gradient-start);
+            font-weight: 600;
+        }
+        
+        /* Blockquote spacing */
+        blockquote {
+            margin: 2rem 0;
+            padding: 1rem 1.5rem;
+            border-left: 4px solid var(--gradient-start);
+            background: var(--card-background);
+            border-radius: 0.5rem;
+            font-style: italic;
+        }
+        
+        blockquote p {
+            margin-bottom: 1rem;
+        }
+        
+        blockquote p:last-child {
+            margin-bottom: 0;
+        }
+        
+        /* Code inline spacing */
+        code {
+            background: var(--card-background);
+            padding: 0.2rem 0.4rem;
+            border-radius: 0.25rem;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9em;
+        }
+        
+        /* Table Styles */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 2rem 0;
+            background: var(--background-color);
+            border-radius: 0.5rem;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+        
+        table th {
+            background: var(--gradient-start);
+            color: white;
+            font-weight: 600;
+            text-align: left;
+            padding: 1rem 1.5rem;
+            border-bottom: 2px solid var(--gradient-end);
+            font-size: 1rem;
+        }
+        
+        table td {
+            padding: 1rem 1.5rem;
+            border-bottom: 1px solid var(--card-background);
+            vertical-align: top;
+            line-height: 1.6;
+        }
+        
+        table tr:last-child td {
+            border-bottom: none;
+        }
+        
+        table tr:hover {
+            background: var(--card-background);
+            transition: background-color 0.2s ease;
+        }
+        
+        table tr:nth-child(even) {
+            background: rgba(0, 0, 0, 0.02);
+        }
+        
+        table tr:nth-child(even):hover {
+            background: var(--card-background);
+        }
+        
+        /* Responsive table */
+        @media (max-width: 768px) {
+            table {
+                font-size: 0.9rem;
+            }
+            
+            table th,
+            table td {
+                padding: 0.75rem 1rem;
+            }
+        }
+        
+        /* Figure and Image Styles */
+        figure {
+            margin: 2.5rem 0;
+            text-align: center;
+            background: var(--card-background);
+            border-radius: 0.75rem;
+            padding: 1.5rem;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            border: 1px solid rgba(0, 0, 0, 0.05);
+        }
+        
+        figure img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 0.5rem;
+            margin-bottom: 1rem;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+        
+        figcaption {
+            font-family: 'Georgia', 'Times New Roman', serif;
+            font-size: 0.95rem;
+          font-style: italic;
+            color: var(--text-color);
+            opacity: 0.8;
+            line-height: 1.5;
+            margin-top: 0.5rem;
+            padding: 0.75rem 1rem;
+            background: rgba(0, 0, 0, 0.03);
+            border-radius: 0.5rem;
+            border-left: 4px solid var(--gradient-start);
+        }
+        
+        /* Center image class for backward compatibility */
+        .center_img {
+            display: block;
+            margin: 0 auto;
+        }
+        
+        /* Responsive figure adjustments */
+        @media (max-width: 768px) {
+            figure {
+                margin: 2rem 0;
+                padding: 1rem;
+            }
+            
+            figcaption {
+                font-size: 0.9rem;
+                padding: 0.5rem 0.75rem;
+            }
+        }
+        
+        /* Header Styles */
+        .site-header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: var(--header-height);
+            background: var(--background-color);
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            padding: 0 2rem;
+            backdrop-filter: blur(10px);
+        }
+
+        .site-header .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .site-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text-color);
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-color);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-color);
+        }
+
+        .theme-toggle {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            cursor: pointer;
+            padding: 0.5rem;
+            font-size: 1.25rem;
+        }
+
+        /* Main Content */
+        .main-content {
+            margin-top: var(--header-height);
+            min-height: calc(100vh - var(--header-height));
+        }
+
+        /* Footer */
+        .site-footer {
+            background: var(--card-background);
+            padding: 2rem 0;
+            margin-top: 4rem;
+            text-align: center;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .footer-section {
+            margin-bottom: 1.5rem;
+        }
+
+        .footer-section p {
+            color: var(--text-color);
+            opacity: 0.8;
+            text-align: center;
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .site-header {
+                padding: 0 1rem;
+            }
+
+            .footer-content {
+                padding: 0 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="site-header">
+        <div class="container">
+            <a href="/" class="site-title">Bill's Tech Blog</a>
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="/blog">Blog</a></li>
+                    <li><a href="/about">About</a></li>
+                </ul>
+            </nav>
+            <button class="theme-toggle" aria-label="Toggle theme">
+                <i class="fas fa-moon"></i>
+            </button>
+        </div>
+    </header>
+
+    <main class="main-content">
+        <!-- Add Font Awesome for TOC icon -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer">
+<style>
+    .post-container {
+        display: flex;                    /* Use flexbox instead of grid */
+        gap: 2rem;
+        max-width: 1200px;
+        margin: 2rem auto 0;              /* Add top margin for spacing from header */
+        padding: 0 1rem;
+    }
+
+    /* Main content area (left column) */
+    .post-content-wrapper {
+        flex: 1;                          /* Take remaining space */
+        min-width: 0;                     /* Allow shrinking */
+    }
+
+    /* TOC area (right column) */
+    .toc-container {
+        flex: 0 0 300px;                  /* Fixed width, don't grow/shrink */
+        position: sticky;                  /* Make it stick when scrolling */
+        top: 2rem;                        /* Distance from top when sticky */
+        height: fit-content;               /* Only take needed height */
+    }
+
+    /* Ensure TOC doesn't show on mobile */
+    @media (max-width: 768px) {
+        .post-container {
+            flex-direction: column;        /* Stack vertically on mobile */
+        }
+        
+        .toc-container {
+            flex: none;                    /* Reset flex properties */
+            position: static;              /* Remove sticky positioning */
+            width: 100%;                   /* Full width on mobile */
+            order: -1;                     /* Show TOC before content on mobile */
+        }
+    }
+
+    .post-header {
+        background: linear-gradient(135deg, var(--gradient-start), var(--gradient-start), var(--gradient-end));
+        color: white;
+        padding: clamp(5rem, 12vw, 10rem) clamp(1rem, 3vw, 2rem) clamp(4rem, 10vw, 7rem);
+        text-align: center;
+        margin-top: 0;                          /* Remove negative margin */
+        position: relative;
+        width: 100vw;                           /* Full viewport width */
+        margin-left: calc(-50vw + 50%);         /* Break out of container */
+        margin-right: calc(-50vw + 50%);        /* Break out of container */
+        margin-bottom: 2rem;                    /* Add space below header */
+    }
+
+    .post-header::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: radial-gradient(circle at center, transparent 0%, rgba(0,0,0,0.2) 100%);
+        z-index: 1;
+    }
+
+    .post-content-wrapper {
+        position: relative;
+        z-index: 2;
+        max-width: 800px;
+        margin: 0 auto;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+        padding: 0 1rem;
+    }
+
+    .post-title {
+        font-size: clamp(2rem, 5vw, 3rem);
+        font-weight: 800;
+        margin: 0;
+        line-height: 1.2;
+        background: linear-gradient(to right, #fff, #e2e8f0);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        word-wrap: break-word;
+        animation: fadeInUp 1s ease;
+        animation-fill-mode: both;
+        padding: 0 0.5rem;
+    }
+
+    .post-meta {
+        font-size: clamp(0.875rem, 2vw, 1rem);
+        color: rgba(255, 255, 255, 0.9);
+        margin: 0;
+        animation: fadeInUp 1s ease 0.2s;
+        animation-fill-mode: both;
+    }
+
+    .post-tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+        justify-content: center;
+        margin: 0;
+        animation: fadeInUp 1s ease 0.4s;
+        animation-fill-mode: both;
+    }
+
+    .post-tags .tag {
+        background: rgba(255, 255, 255, 0.15);
+        color: white;
+        padding: 0.25rem 0.75rem;
+        border-radius: 1rem;
+        font-size: 0.875rem;
+        transition: all 0.3s ease;
+    }
+
+    .post-tags .tag:hover {
+        background: rgba(255, 255, 255, 0.25);
+        transform: translateY(-1px);
+    }
+
+    .post-content {
+        font-size: clamp(1rem, 2.5vw, 1.1rem);
+        line-height: 1.8;
+        max-width: 800px;
+        margin: 0 auto;
+        width: 100%;
+        padding: 2rem 1rem;
+        margin-top: 1rem;                       /* Add space above content */
+    }
+
+    /* TOC Styles */
+    .toc-container {
+        position: sticky;
+        top: calc(var(--header-height) + 1rem);
+        max-height: calc(100vh - var(--header-height) - 2rem);
+        overflow-y: auto;
+        padding: 1.5rem;
+        background: var(--card-background);
+        border-radius: 0.5rem;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        font-size: 0.9rem;
+        display: none; /* Hide by default on mobile */
+    }
+
+    .toc-container h2 {
+        font-size: 1.25rem;
+        margin: 0 0 1rem 0;
+        color: var(--text-color);
+        padding-bottom: 0.5rem;
+        border-bottom: 2px solid var(--primary-color);
+    }
+
+    .toc {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    .toc ul {
+        list-style: none;
+        padding-left: 1rem;
+        margin: 0.5rem 0;
+    }
+
+    .toc li {
+        margin: 0.5rem 0;
+    }
+
+    .toc a {
+        color: var(--text-color);
+        text-decoration: none;
+        transition: all 0.3s ease;
+        display: block;
+        padding: 0.25rem 0;
+        opacity: 0.8;
+    }
+
+    .toc a:hover {
+        color: var(--primary-color);
+        opacity: 1;
+        transform: translateX(5px);
+    }
+
+    .toc a.active {
+        color: var(--primary-color);
+        font-weight: 600;
+        opacity: 1;
+    }
+
+    /* Post content styles */
+    .post-content h1,
+    .post-content h2,
+    .post-content h3,
+    .post-content h4 {
+        scroll-margin-top: calc(var(--header-height) + 2rem);
+    }
+
+    .post-content img {
+        max-width: 100%;
+        height: auto;
+        border-radius: 0.5rem;
+        margin: 1.5rem 0;
+    }
+
+    .post-content pre {
+        overflow-x: auto;
+        padding: 1rem;
+        border-radius: 0.5rem;
+        margin: 1.5rem 0;
+        font-size: 0.9rem;
+    }
+
+    .post-content code {
+        font-size: 0.9em;
+        padding: 0.2em 0.4em;
+        border-radius: 0.25rem;
+    }
+
+    .post-content blockquote {
+        border-left: 4px solid var(--primary-color);
+        margin: 1.5rem 0;
+        padding: 1rem 1.5rem;
+        background: var(--card-background);
+        border-radius: 0 0.5rem 0.5rem 0;
+    }
+
+    /* Mobile TOC Toggle */
+    .toc-toggle {
+        display: none;
+        position: fixed;
+        bottom: 2rem;
+        right: 2rem;
+        background: var(--primary-color);
+        color: white;
+        padding: 0.75rem;
+        border-radius: 50%;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+        z-index: 1000;
+        cursor: pointer;
+        border: none;
+        width: 3rem;
+        height: 3rem;
+        font-size: 1.25rem;
+    }
+
+    @media (max-width: 1024px) {
+        .post-container {
+            grid-template-columns: 1fr;
+            padding: 0 1rem;
+        }
+
+        .toc-container {
+            display: none; /* Hide TOC by default on tablet */
+        }
+    }
+
+    @media (max-width: 768px) {
+        .post-header {
+            padding: clamp(5rem, 12vw, 8rem) 1rem clamp(3rem, 8vw, 5rem);
+        }
+
+        .post-content-wrapper {
+            gap: 1rem;
+            padding: 0 1rem;
+        }
+
+        .post-title {
+            font-size: clamp(1.75rem, 4vw, 2.5rem);
+            line-height: 1.3;
+            padding: 0 0.5rem;
+        }
+
+        .post-meta {
+            font-size: 0.9rem;
+            padding: 0 0.5rem;
+        }
+
+        .post-tags {
+            padding: 0 0.5rem;
+            gap: 0.375rem;
+        }
+
+        .post-tags .tag {
+            font-size: 0.8125rem;
+            padding: 0.2rem 0.625rem;
+        }
+
+        .post-content {
+            padding: 1.5rem 1rem;
+        }
+
+        /* Restore TOC mobile styles */
+        .toc-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            max-height: 100vh;
+            margin: 0;
+            border-radius: 0;
+            z-index: 1000;
+            transform: translateX(-100%);
+            transition: transform 0.3s ease;
+            padding: 2rem 1rem;
+        }
+
+        .toc-container.active {
+            transform: translateX(0);
+        }
+
+        .toc-toggle {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .toc-toggle.active {
+            background: var(--secondary-color);
+        }
+
+        /* Rest of mobile styles */
+        .post-content h1 {
+            font-size: clamp(1.5rem, 4vw, 2rem);
+            margin-top: 2rem;
+        }
+
+        .post-content h2 {
+            font-size: clamp(1.25rem, 3.5vw, 1.75rem);
+            margin-top: 1.75rem;
+        }
+
+        .post-content h3 {
+            font-size: clamp(1.1rem, 3vw, 1.5rem);
+            margin-top: 1.5rem;
+        }
+
+        .post-content h4 {
+            font-size: clamp(1rem, 2.5vw, 1.25rem);
+            margin-top: 1.25rem;
+        }
+
+        .post-content p {
+            margin: 1rem 0;
+        }
+
+        .post-content img {
+            margin: 1.25rem 0;
+        }
+
+        .post-content pre {
+            margin: 1.25rem 0;
+            padding: 0.75rem;
+            font-size: 0.85rem;
+        }
+
+        .post-content blockquote {
+            margin: 1.25rem 0;
+            padding: 0.75rem 1rem;
+        }
+
+        .comments-wrapper {
+            padding: 2rem 0;
+            margin-top: 2rem;
+        }
+
+        .comments-container {
+            padding: 0 1rem;
+        }
+
+        .comments-container h2 {
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+
+        .utterances-container {
+            padding: 0 0.5rem;
+        }
+    }
+
+    @media (max-width: 480px) {
+        .post-header {
+            padding: clamp(4rem, 10vw, 6rem) 0.75rem clamp(2.5rem, 6vw, 4rem);
+        }
+
+        /* Restore TOC toggle button styles for very small screens */
+        .toc-toggle {
+            bottom: 1rem;
+            right: 1rem;
+            width: 2.5rem;
+            height: 2.5rem;
+            font-size: 1rem;
+        }
+
+        /* Rest of very small screen styles */
+        .post-content-wrapper {
+            padding: 0 0.75rem;
+        }
+
+        .post-title {
+            font-size: clamp(1.5rem, 3.5vw, 2rem);
+            line-height: 1.4;
+            padding: 0 0.25rem;
+        }
+
+        .post-content {
+            padding: 1.25rem 0.75rem;
+            font-size: 0.95rem;
+        }
+
+        .post-content h1 {
+            font-size: clamp(1.4rem, 3.5vw, 1.8rem);
+        }
+
+        .post-content h2 {
+            font-size: clamp(1.2rem, 3vw, 1.6rem);
+        }
+
+        .post-content h3 {
+            font-size: clamp(1.1rem, 2.5vw, 1.4rem);
+        }
+
+        .post-content h4 {
+            font-size: clamp(1rem, 2vw, 1.2rem);
+        }
+
+        .comments-wrapper {
+            padding: 1.5rem 0;
+        }
+
+        .comments-container h2 {
+            font-size: 1.35rem;
+            margin-bottom: 1.25rem;
+        }
+
+        .utterances-container {
+            padding: 0 0.25rem;
+        }
+    }
+
+    /* Comments Section Styles */
+    .comments-wrapper {
+        width: 100vw;
+        background: var(--card-background);
+        padding: 3rem 0;
+        margin-top: 3rem;
+        margin-left: calc(-50vw + 50%);
+        margin-right: calc(-50vw + 50%);
+    }
+
+    .comments-container {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 0 1rem;
+    }
+
+    .comments-container h2 {
+        font-size: 1.75rem;
+        margin-bottom: 2rem;
+        color: var(--text-color);
+    }
+
+    .utterances-container {
+        width: 100%;
+        max-width: 800px;
+        margin: 0 auto;
+    }
+
+    /* Utterances specific styles */
+    .utterances-container iframe {
+        width: 100% !important;
+        border: none !important;
+    }
+
+    [data-theme="dark"] .utterances-container {
+        background: var(--card-background);
+    }
+
+    @keyframes fadeInUp {
+        from {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+</style>
+
+<!-- Post Header - Outside the flexbox container -->
+<div class="post-header">
+    <div class="post-content-wrapper">
+        <h1 class="post-title">自动更新Github个人介绍页</h1>
+        <div class="post-meta">
+            <span>June 05, 2023</span>
+        </div>
+        
+        <div class="post-tags">
+            
+            <span class="tag">Y-2023</span>
+            
+            <span class="tag">tips</span>
+            
+        </div>
+        
+    </div>
+</div>
+
+<!-- Post Container - Only for content and TOC -->
+<div class="post-container">
+    <div class="post-content">
+        <p>最近逛到一篇博客，题目叫<a href="https://www.bengreenberg.dev/posts/2023-04-09-github-profile-dynamic-content/">Use GitHub Actions to Make Your GitHub Profile Dynamic</a>，介绍如何基于Github的action hook快速更新自己的Github介绍页内容。看完蠢蠢欲动，然后我也来了一个照猫画虎，直接开干。</p>
+
+<p>原理很简单：</p>
+
+<ol>
+  <li>在自己的个人介绍页对应repo的README中开辟一个#级标题，比如：<code class="language-plaintext highlighter-rouge">### Recent Blog Posts</code>，后续的更新操作即是直接替换该部分的内容</li>
+  <li>然后添加同步脚本以及对应的Github action，先直接拿来主义，把逻辑功能架起来再说</li>
+  <li>同步脚本是基于ruby的，步骤也很清晰：
+    <ul>
+      <li>利用<code class="language-plaintext highlighter-rouge">nokogiri</code>抓取个人Blog中最新的5篇Posts，包括：标题以及对应post的URL，生成Post列表</li>
+      <li>基于正则表达式直接替换原先README中的对应内容</li>
+      <li>最后，调用Github的<code class="language-plaintext highlighter-rouge">Octokit</code>，提交相应的改动</li>
+    </ul>
+  </li>
+</ol>
+
+<p>操作的确很简单，但是也有需要注意的地方：</p>
+
+<ol>
+  <li>
+<code class="language-plaintext highlighter-rouge">nokogiri</code>抓取是通过css样式来筛选的，你需要根据blog中post的样式做相应的修改。</li>
+</ol>
+
+<p>具体一点，原先作者的<a href="https://www.bengreenberg.dev/blog/">blog</a>给post卡片设置的样式如下所示：</p>
+
+<p><img src="https://sunbingfeng.github.io/images/2023-06/bengreenberg_css.png" alt="img" align="center" class="center_img"></p>
+
+<p>因此其通过<code class="language-plaintext highlighter-rouge">posts = parsed_page.css('.flex.flex-col.rounded-lg.shadow-lg.overflow-hidden')</code>就可以提取到所有的posts。</p>
+
+<ol>
+  <li>正则表达式查找原README中的待匹配项，你需要根据你的README的内容稍微调整。</li>
+</ol>
+
+<p>具体一点，原作者采用的regex如下：</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>posts_regex = /### Recent Blog Posts\n\n[\s\S]*?(?=&lt;\/td&gt;)/m
+</code></pre></div></div>
+
+<p>原因即是其<code class="language-plaintext highlighter-rouge">### Recent Blog Posts</code>标题是放在<code class="language-plaintext highlighter-rouge">table</code>中的，其需要利用table的结束标记<code class="language-plaintext highlighter-rouge">&lt;\td&gt;</code>来确定替换的边界。</p>
+
+<p>好了，说了这么多，感觉都像是废话，尤其是对于搞ruby-rails的人来说。最后放一个效果图吧</p>
+
+<p><img src="https://sunbingfeng.github.io/images/2023-06/my_github_profile.png" alt="img" align="center" class="center_img"></p>
+
+<p>🎉🎉🎉🎉🎉🎉🎉🎉</p>
+
+
+    </div>
+
+    
+    <button class="toc-toggle" aria-label="Toggle Table of Contents" aria-expanded="false">
+        <i class="fas fa-list"></i>
+    </button>
+    <div class="toc-container">
+        <h2>Table of Contents</h2>
+        <nav class="toc">
+             
+        </nav>
+    </div>
+    
+</div>
+
+<!-- Comments Section - Outside the post-container for full width -->
+<div class="comments-wrapper">
+    <div class="comments-container">
+        <h2>Comments</h2>
+        <div class="utterances-container">
+                <script src="https://utteranc.es/client.js" repo="sunbingfeng/sunbingfeng.github.io" issue-term="pathname" label="comment" theme="github-light" crossorigin="anonymous" async>
+                </script>
+            </div>
+    </div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const tocContainer = document.querySelector('.toc-container');
+        const tocToggle = document.querySelector('.toc-toggle');
+        const tocLinks = document.querySelectorAll('.toc a');
+        const headers = document.querySelectorAll('.post-content h1, .post-content h2, .post-content h3, .post-content h4');
+        
+        // Show TOC by default on desktop
+        if (window.innerWidth > 1024 && tocContainer) {
+            tocContainer.style.display = 'block';
+        }
+
+        // TOC Toggle for mobile
+        if (tocToggle) {
+            tocToggle.addEventListener('click', function() {
+                const isExpanded = tocToggle.getAttribute('aria-expanded') === 'true';
+                tocContainer.classList.toggle('active');
+                tocToggle.classList.toggle('active');
+                tocToggle.setAttribute('aria-expanded', !isExpanded);
+                
+                // Toggle display for mobile
+                if (window.innerWidth <= 1024) {
+                    tocContainer.style.display = isExpanded ? 'none' : 'block';
+                }
+            });
+
+            // Close TOC when clicking outside
+            document.addEventListener('click', function(e) {
+                if (tocContainer && 
+                    tocContainer.classList.contains('active') && 
+                    !tocContainer.contains(e.target) && 
+                    !tocToggle.contains(e.target)) {
+                    tocContainer.classList.remove('active');
+                    tocToggle.classList.remove('active');
+                    tocToggle.setAttribute('aria-expanded', 'false');
+                    if (window.innerWidth <= 1024) {
+                        tocContainer.style.display = 'none';
+                    }
+                }
+            });
+        }
+
+        // Update active TOC item on scroll
+        function updateTOC() {
+            if (!tocLinks.length) return;
+            
+            const scrollPosition = window.scrollY;
+            let currentSection = null;
+            
+            headers.forEach((header) => {
+                const headerTop = header.offsetTop - 100;
+                const headerBottom = headerTop + header.offsetHeight;
+                
+                if (scrollPosition >= headerTop && scrollPosition < headerBottom) {
+                    currentSection = header.id;
+                }
+            });
+
+            if (currentSection) {
+                tocLinks.forEach(link => {
+                    link.classList.remove('active');
+                    if (link.getAttribute('href') === `#${currentSection}`) {
+                        link.classList.add('active');
+                        // Scroll TOC to active item on mobile
+                        if (window.innerWidth <= 1024 && tocContainer) {
+                            link.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                        }
+                    }
+                });
+            }
+        }
+
+        // Smooth scroll for TOC links
+        tocLinks.forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href').substring(1);
+                const targetElement = document.getElementById(targetId);
+                
+                if (targetElement) {
+                    const headerOffset = 80;
+                    const elementPosition = targetElement.getBoundingClientRect().top;
+                    const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+
+                    window.scrollTo({
+                        top: offsetPosition,
+                        behavior: 'smooth'
+                    });
+
+                    // Close TOC on mobile after clicking
+                    if (window.innerWidth <= 1024) {
+                        tocContainer.classList.remove('active');
+                        tocToggle.classList.remove('active');
+                        tocToggle.setAttribute('aria-expanded', 'false');
+                        tocContainer.style.display = 'none';
+                    }
+                }
+            });
+        });
+
+        // Update TOC on scroll
+        window.addEventListener('scroll', updateTOC);
+        // Initial TOC update
+        updateTOC();
+
+        // Handle window resize
+        window.addEventListener('resize', function() {
+            if (window.innerWidth > 1024) {
+                tocContainer.style.display = 'block';
+            } else if (!tocContainer.classList.contains('active')) {
+                tocContainer.style.display = 'none';
+            }
+        });
+    });
+</script> 
+    </main>
+
+    <footer class="site-footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <p>© 2025 Bill's Tech Blog. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Theme toggle functionality
+        const themeToggle = document.querySelector('.theme-toggle');
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        const currentTheme = localStorage.getItem('theme') || (prefersDark ? 'dark' : 'light');
+
+        function setTheme(theme) {
+            document.documentElement.setAttribute('data-theme', theme);
+            localStorage.setItem('theme', theme);
+            themeToggle.innerHTML = theme === 'dark' ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
+        }
+
+        setTheme(currentTheme);
+
+        themeToggle.addEventListener('click', () => {
+            const newTheme = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+            setTheme(newTheme);
+        });
+
+        // KaTeX auto-render
+        document.addEventListener("DOMContentLoaded", function() {
+            renderMathInElement(document.body, {
+                delimiters: [
+                    {left: "$$", right: "$$", display: true},
+                    {left: "$", right: "$", display: false},
+                    {left: "\\[", right: "\\]", display: true},
+                    {left: "\\(", right: "\\)", display: false}
+                ],
+                throwOnError: false
+            });
+        });
+    </script>
+</body>
+</html> 

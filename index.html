@@ -1,0 +1,981 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Bill's Tech Blog - Bill's Tech Blog</title>
+    <meta name="description" content="To Be Excellent">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="/assets/favicon.png">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <!-- KaTeX for LaTeX math rendering -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+    
+    <!-- Syntax Highlighting -->
+    <link rel="stylesheet" href="/assets/css/monokai.css">
+    
+    <!-- Styles -->
+    <style>
+        :root {
+            --primary-color: #2563eb;
+            --secondary-color: #1e40af;
+            --text-color: #1f2937;
+            --background-color: #ffffff;
+            --card-background: #f8fafc;
+            --gradient-start: #2563eb;
+            --gradient-end: #1e40af;
+            --header-height: 4rem;
+        }
+
+        [data-theme="dark"] {
+            --text-color: #f3f4f6;
+            --background-color: #111827;
+            --card-background: #1f2937;
+            --gradient-start: #1e40af;
+            --gradient-end: #1e3a8a;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background: var(--background-color);
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        /* Syntax Highlighting */
+        .highlight {
+            background: #272822;
+            color: #f8f8f2;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            overflow-x: auto;
+            margin: 1rem 0;
+        }
+        
+        .highlight pre {
+            margin: 0;
+            background: none;
+            border: none;
+            padding: 0;
+        }
+        
+        .highlight code {
+            background: none;
+            border: none;
+            padding: 0;
+            color: inherit;
+            font-family: 'Courier New', monospace;
+        }
+        
+        /* Typography and Heading Styles */
+        h1, h2, h3, h4, h5, h6 {
+            color: var(--text-color);
+            font-weight: 600;
+            line-height: 1.3;
+            margin-top: 0;
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            margin-top: 3rem;
+        }
+        
+        h2 {
+            font-size: 2rem;
+            margin-bottom: 1.25rem;
+            margin-top: 3rem;
+            padding-top: 1rem;
+            border-top: 2px solid var(--card-background);
+        }
+        
+        h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            margin-top: 2.5rem;
+            padding-top: 0.75rem;
+            /* border-top: 1px solid var(--card-background); */
+        }
+        
+        h4 {
+            font-size: 1.25rem;
+            margin-bottom: 0.75rem;
+            margin-top: 2rem;
+        }
+        
+        h5 {
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+            margin-top: 1.5rem;
+        }
+        
+        h6 {
+            font-size: 1rem;
+            margin-bottom: 0.5rem;
+            margin-top: 1.5rem;
+        }
+        
+        /* Paragraph and Text Spacing */
+        p {
+            margin-bottom: 1.5rem;
+            line-height: 1.8;
+            text-align: justify;
+        }
+        
+        /* List spacing */
+        ul, ol {
+            margin-bottom: 1.5rem;
+            padding-left: 1.5rem;
+            margin-left: 0;
+        }
+        
+        li {
+            margin-bottom: 0.75rem;
+            line-height: 1.7;
+            padding-left: 0.5rem;
+        }
+        
+        /* Nested list spacing */
+        ul ul, ol ol, ul ol, ol ul {
+            margin-top: 0.5rem;
+            margin-bottom: 0.5rem;
+            padding-left: 1.25rem;
+        }
+        
+        /* List item markers */
+        ul li::marker {
+            color: var(--gradient-start);
+        }
+        
+        ol li::marker {
+            color: var(--gradient-start);
+            font-weight: 600;
+        }
+        
+        /* Blockquote spacing */
+        blockquote {
+            margin: 2rem 0;
+            padding: 1rem 1.5rem;
+            border-left: 4px solid var(--gradient-start);
+            background: var(--card-background);
+            border-radius: 0.5rem;
+            font-style: italic;
+        }
+        
+        blockquote p {
+            margin-bottom: 1rem;
+        }
+        
+        blockquote p:last-child {
+            margin-bottom: 0;
+        }
+        
+        /* Code inline spacing */
+        code {
+            background: var(--card-background);
+            padding: 0.2rem 0.4rem;
+            border-radius: 0.25rem;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9em;
+        }
+        
+        /* Table Styles */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 2rem 0;
+            background: var(--background-color);
+            border-radius: 0.5rem;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+        
+        table th {
+            background: var(--gradient-start);
+            color: white;
+            font-weight: 600;
+            text-align: left;
+            padding: 1rem 1.5rem;
+            border-bottom: 2px solid var(--gradient-end);
+            font-size: 1rem;
+        }
+        
+        table td {
+            padding: 1rem 1.5rem;
+            border-bottom: 1px solid var(--card-background);
+            vertical-align: top;
+            line-height: 1.6;
+        }
+        
+        table tr:last-child td {
+            border-bottom: none;
+        }
+        
+        table tr:hover {
+            background: var(--card-background);
+            transition: background-color 0.2s ease;
+        }
+        
+        table tr:nth-child(even) {
+            background: rgba(0, 0, 0, 0.02);
+        }
+        
+        table tr:nth-child(even):hover {
+            background: var(--card-background);
+        }
+        
+        /* Responsive table */
+        @media (max-width: 768px) {
+            table {
+                font-size: 0.9rem;
+            }
+            
+            table th,
+            table td {
+                padding: 0.75rem 1rem;
+            }
+        }
+        
+        /* Figure and Image Styles */
+        figure {
+            margin: 2.5rem 0;
+            text-align: center;
+            background: var(--card-background);
+            border-radius: 0.75rem;
+            padding: 1.5rem;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            border: 1px solid rgba(0, 0, 0, 0.05);
+        }
+        
+        figure img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 0.5rem;
+            margin-bottom: 1rem;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+        
+        figcaption {
+            font-family: 'Georgia', 'Times New Roman', serif;
+            font-size: 0.95rem;
+          font-style: italic;
+            color: var(--text-color);
+            opacity: 0.8;
+            line-height: 1.5;
+            margin-top: 0.5rem;
+            padding: 0.75rem 1rem;
+            background: rgba(0, 0, 0, 0.03);
+            border-radius: 0.5rem;
+            border-left: 4px solid var(--gradient-start);
+        }
+        
+        /* Center image class for backward compatibility */
+        .center_img {
+            display: block;
+            margin: 0 auto;
+        }
+        
+        /* Responsive figure adjustments */
+        @media (max-width: 768px) {
+            figure {
+                margin: 2rem 0;
+                padding: 1rem;
+            }
+            
+            figcaption {
+                font-size: 0.9rem;
+                padding: 0.5rem 0.75rem;
+            }
+        }
+        
+        /* Header Styles */
+        .site-header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: var(--header-height);
+            background: var(--background-color);
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            padding: 0 2rem;
+            backdrop-filter: blur(10px);
+        }
+
+        .site-header .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .site-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text-color);
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-color);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-color);
+        }
+
+        .theme-toggle {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            cursor: pointer;
+            padding: 0.5rem;
+            font-size: 1.25rem;
+        }
+
+        /* Main Content */
+        .main-content {
+            margin-top: var(--header-height);
+            min-height: calc(100vh - var(--header-height));
+        }
+
+        /* Footer */
+        .site-footer {
+            background: var(--card-background);
+            padding: 2rem 0;
+            margin-top: 4rem;
+            text-align: center;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .footer-section {
+            margin-bottom: 1.5rem;
+        }
+
+        .footer-section p {
+            color: var(--text-color);
+            opacity: 0.8;
+            text-align: center;
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .site-header {
+                padding: 0 1rem;
+            }
+
+            .footer-content {
+                padding: 0 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <body>
+<header class="site-header">
+        <div class="container">
+            <a href="/" class="site-title">Bill's Tech Blog</a>
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="/blog">Blog</a></li>
+                    <li><a href="/about">About</a></li>
+                </ul>
+            </nav>
+            <button class="theme-toggle" aria-label="Toggle theme">
+                <i class="fas fa-moon"></i>
+            </button>
+        </div>
+    </header>
+
+    <main class="main-content">
+        
+
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Bill's Tech Blog</title>
+    <style>
+        :root {
+            --primary-color: #2563eb;
+            --secondary-color: #1e40af;
+            --text-color: #1f2937;
+            --background-color: #ffffff;
+            --card-background: #f8fafc;
+            --gradient-start: #2563eb;
+            --gradient-end: #1e40af;
+        }
+
+        [data-theme="dark"] {
+            --text-color: #f3f4f6;
+            --background-color: #111827;
+            --card-background: #1f2937;
+            --gradient-start: #1e40af;
+            --gradient-end: #1e3a8a;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background: var(--background-color);
+            margin: 0;
+            padding: 0;
+            transition: background-color 0.3s ease;
+        }
+
+        .hero {
+            background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+            color: white;
+            padding: clamp(6rem, 15vw, 12rem) 2rem clamp(4rem, 10vw, 8rem);
+            text-align: center;
+            margin-top: calc(-1 * var(--header-height));
+            position: relative;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at center, transparent 0%, rgba(0,0,0,0.2) 100%);
+            z-index: 1;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .hero h1 {
+            font-size: clamp(2.5rem, 6vw, 4rem);
+            font-weight: 800;
+            margin: 0;
+            line-height: 0.8;
+            background: linear-gradient(to right, #fff, #e2e8f0);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: fadeInUp 1s ease;
+            animation-fill-mode: both;
+        }
+
+        .hero p {
+            font-size: clamp(1rem, 3vw, 1.5rem);
+            margin: 1rem 0 2rem;
+            opacity: 0.9;
+            animation: fadeInUp 1s ease 0.2s;
+            animation-fill-mode: both;
+            padding: 0 1rem;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            margin-top: 0.5rem;
+            animation: fadeInUp 1s ease 0.4s;
+            animation-fill-mode: both;
+        }
+
+        .cta-button {
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.5rem;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+            font-size: clamp(0.875rem, 2vw, 1rem);
+            white-space: nowrap;
+        }
+
+        .cta-button:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+        }
+
+        .posts-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            padding: 2rem 1rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .post-card {
+            background: var(--card-background);
+            border-radius: 1rem;
+            padding: 1.25rem;
+            transition: transform 0.3s ease;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+
+        .post-card:hover {
+            transform: translateY(-4px);
+        }
+
+        .post-meta {
+            display: flex;
+            gap: 0.75rem;
+            font-size: 0.875rem;
+            color: var(--text-color);
+            opacity: 0.8;
+            margin-bottom: 0.75rem;
+            flex-wrap: wrap;
+        }
+
+        .post-card h2 {
+            font-size: clamp(1.25rem, 3vw, 1.5rem);
+            margin: 0.5rem 0;
+            line-height: 1.3;
+        }
+
+        .post-card h2 a {
+            color: var(--text-color);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .post-card h2 a:hover {
+            color: var(--primary-color);
+        }
+
+        .post-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin: 0.75rem 0;
+        }
+
+        .tag {
+            background: var(--primary-color);
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 1rem;
+            font-size: 0.75rem;
+            font-weight: 500;
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+            white-space: nowrap;
+        }
+
+        .tag:hover {
+            background: var(--secondary-color);
+        }
+
+        .post-excerpt {
+            margin: 1rem 0;
+            flex-grow: 1;
+        }
+
+        .post-card .cta-button {
+            align-self: flex-start;
+            margin-top: auto;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero {
+                padding: clamp(8rem, 15vw, 12rem) 1rem clamp(3rem, 8vw, 6rem);
+            }
+
+            .hero-content {
+                gap: 1.75rem;
+            }
+
+            .hero h1 {
+                font-size: clamp(2rem, 5vw, 3rem);
+                padding: 0 0.5rem;
+            }
+
+            .cta-buttons {
+                gap: 1rem;
+                margin-top: 0.25rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero {
+                padding: clamp(7rem, 12vw, 10rem) 0.75rem clamp(2.5rem, 6vw, 4rem);
+            }
+
+            .hero-content {
+                gap: 1.5rem;
+            }
+
+            .hero h1 {
+                font-size: clamp(1.75rem, 4vw, 2.5rem);
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+                gap: 0.75rem;
+                margin-top: 0.25rem;
+            }
+
+            .posts-grid {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+                padding: 1.5rem 1rem;
+            }
+
+            .post-card {
+                padding: 1rem;
+            }
+
+            .subscribe-section {
+                padding: 2rem 1rem;
+            }
+
+            .subscribe-button {
+                width: 100%;
+                text-align: center;
+            }
+        }
+
+        .subscribe-section {
+            background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+            padding: 3rem 1rem;
+            text-align: center;
+            color: white;
+            margin-top: 3rem;
+        }
+
+        .subscribe-container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+
+        .subscribe-section h2 {
+            font-size: clamp(1.5rem, 4vw, 2rem);
+            margin-bottom: 1rem;
+            color: white;
+            line-height: 1.3;
+        }
+
+        .subscribe-section p {
+            font-size: clamp(0.875rem, 2.5vw, 1.1rem);
+            margin-bottom: 1.5rem;
+            opacity: 0.9;
+            padding: 0 0.5rem;
+            text-align: center;
+        }
+
+        .subscribe-button {
+            display: inline-block;
+            background: white;
+            color: var(--primary-color);
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: clamp(0.875rem, 2.5vw, 1.1rem);
+            transition: all 0.3s ease;
+            margin-top: 1rem;
+            white-space: nowrap;
+        }
+
+        .subscribe-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            background: #f8fafc;
+        }
+
+        /* Add viewport meta tag to ensure proper scaling */
+        @viewport {
+            width: device-width;
+            zoom: 1.0;
+        }
+    </style>
+
+
+    <div class="hero">
+        <div class="hero-content">
+            <h1>To Be Excellent</h1>
+            <div class="cta-buttons">
+                <a href="/blog" class="cta-button">Explore</a>
+                <a href="/about" class="cta-button">About Me</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="posts-grid">
+        
+        <article class="post-card">
+            <div class="post-meta">
+                <span>Sep 13, 2025</span>
+                <span>
+
+3 min read </span>
+            </div>
+            <h2><a href="/blog/KLT_SVD/">什么是KLT变换？</a></h2>
+            <div class="post-tags">
+                
+                <a href="#" class="tag" data-tag="Y-2025">Y-2025</a>
+                
+                <a href="#" class="tag" data-tag="math">math</a>
+                
+            </div>
+            <div class="post-excerpt">
+                详解KLT跟SVD的关系
+            </div>
+            <a href="/blog/KLT_SVD/" class="cta-button">Read More</a>
+        </article>
+        
+        <article class="post-card">
+            <div class="post-meta">
+                <span>Sep 05, 2025</span>
+                <span>
+
+1 min read </span>
+            </div>
+            <h2><a href="/blog/Setup_Android_dev/">Setup Android Dev Environment</a></h2>
+            <div class="post-tags">
+                
+                <a href="#" class="tag" data-tag="Y-2025">Y-2025</a>
+                
+                <a href="#" class="tag" data-tag="review">review</a>
+                
+            </div>
+            <div class="post-excerpt">
+                Android Setup
+            </div>
+            <a href="/blog/Setup_Android_dev/" class="cta-button">Read More</a>
+        </article>
+        
+        <article class="post-card">
+            <div class="post-meta">
+                <span>Aug 22, 2025</span>
+                <span>
+
+4 min read </span>
+            </div>
+            <h2><a href="/blog/SFINAE/">SFINAE到底是不是Error？</a></h2>
+            <div class="post-tags">
+                
+                <a href="#" class="tag" data-tag="Y-2025">Y-2025</a>
+                
+                <a href="#" class="tag" data-tag="c++">c++</a>
+                
+            </div>
+            <div class="post-excerpt">
+                C++ 模板元编程
+            </div>
+            <a href="/blog/SFINAE/" class="cta-button">Read More</a>
+        </article>
+        
+        <article class="post-card">
+            <div class="post-meta">
+                <span>Aug 15, 2025</span>
+                <span>
+
+5 min read </span>
+            </div>
+            <h2><a href="/blog/Butterworth_LPF/">Deep Dive into Butterworth Low Pass Filter</a></h2>
+            <div class="post-tags">
+                
+                <a href="#" class="tag" data-tag="Y-2025">Y-2025</a>
+                
+                <a href="#" class="tag" data-tag="math">math</a>
+                
+                <a href="#" class="tag" data-tag="algorithm">algorithm</a>
+                
+            </div>
+            <div class="post-excerpt">
+                From Theory to Implementation: A Comprehensive Guide to Butterworth Filters
+            </div>
+            <a href="/blog/Butterworth_LPF/" class="cta-button">Read More</a>
+        </article>
+        
+        <article class="post-card">
+            <div class="post-meta">
+                <span>Apr 25, 2025</span>
+                <span>
+
+3 min read </span>
+            </div>
+            <h2><a href="/blog/RungeKutta/">4th-order Rugge-Kutta</a></h2>
+            <div class="post-tags">
+                
+                <a href="#" class="tag" data-tag="Y-2025">Y-2025</a>
+                
+                <a href="#" class="tag" data-tag="algorithm">algorithm</a>
+                
+            </div>
+            <div class="post-excerpt">
+                AI Chat Series
+            </div>
+            <a href="/blog/RungeKutta/" class="cta-button">Read More</a>
+        </article>
+        
+        <article class="post-card">
+            <div class="post-meta">
+                <span>Apr 14, 2025</span>
+                <span>
+
+6 min read </span>
+            </div>
+            <h2><a href="/blog/fast_inv_sqrt/">Fast Inverse sqrt</a></h2>
+            <div class="post-tags">
+                
+                <a href="#" class="tag" data-tag="Y-2025">Y-2025</a>
+                
+                <a href="#" class="tag" data-tag="math">math</a>
+                
+                <a href="#" class="tag" data-tag="tips">tips</a>
+                
+            </div>
+            <div class="post-excerpt">
+                AI Chat Series
+            </div>
+            <a href="/blog/fast_inv_sqrt/" class="cta-button">Read More</a>
+        </article>
+        
+    </div>
+
+    <div class="subscribe-section">
+        <div class="subscribe-container">
+            <h2>Subscribe to My Newsletter</h2>
+            <p>Get the latest posts delivered right to your inbox</p>
+            <a href="https://medium.com/@bingfeng.sun/subscribe" class="subscribe-button" target="_blank" rel="noopener">
+                Subscribe to my Medium
+            </a>
+        </div>
+    </div>
+
+    <script>
+        // Theme toggle functionality
+        const themeToggle = document.querySelector('.theme-toggle');
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        const currentTheme = localStorage.getItem('theme') || (prefersDark ? 'dark' : 'light');
+
+        function setTheme(theme) {
+            document.documentElement.setAttribute('data-theme', theme);
+            localStorage.setItem('theme', theme);
+            themeToggle.innerHTML = theme === 'dark' ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
+        }
+
+        setTheme(currentTheme);
+
+        themeToggle.addEventListener('click', () => {
+            const newTheme = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+            setTheme(newTheme);
+        });
+
+        // Tag click handling
+        document.querySelectorAll('.tag').forEach(tag => {
+            tag.addEventListener('click', (e) => {
+                e.preventDefault();
+                const tagName = tag.dataset.tag;
+                window.location.href = '/blog?tag=' + encodeURIComponent(tagName);
+            });
+        });
+    </script>
+</main>
+</body></body>
+</html> 
+    </main>
+
+    <footer class="site-footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <p>&copy; 2025 Bill's Tech Blog. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Theme toggle functionality
+        const themeToggle = document.querySelector('.theme-toggle');
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        const currentTheme = localStorage.getItem('theme') || (prefersDark ? 'dark' : 'light');
+
+        function setTheme(theme) {
+            document.documentElement.setAttribute('data-theme', theme);
+            localStorage.setItem('theme', theme);
+            themeToggle.innerHTML = theme === 'dark' ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
+        }
+
+        setTheme(currentTheme);
+
+        themeToggle.addEventListener('click', () => {
+            const newTheme = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+            setTheme(newTheme);
+        });
+
+        // KaTeX auto-render
+        document.addEventListener("DOMContentLoaded", function() {
+            renderMathInElement(document.body, {
+                delimiters: [
+                    {left: "$$", right: "$$", display: true},
+                    {left: "$", right: "$", display: false},
+                    {left: "\\[", right: "\\]", display: true},
+                    {left: "\\(", right: "\\)", display: false}
+                ],
+                throwOnError: false
+            });
+        });
+    </script>
+</body>
+</html> 

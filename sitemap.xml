@@ -1,0 +1,424 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  
+    <url>
+      <loc>https://sunbingfeng.github.io/blog/KLT_SVD/</loc>
+      
+        <lastmod>2025-09-13T00:00:00+00:00</lastmod>
+      
+      <changefreq>weekly</changefreq>
+      <priority>0.7</priority>
+    </url>
+  
+    <url>
+      <loc>https://sunbingfeng.github.io/blog/Setup_Android_dev/</loc>
+      
+        <lastmod>2025-09-05T00:00:00+00:00</lastmod>
+      
+      <changefreq>weekly</changefreq>
+      <priority>0.7</priority>
+    </url>
+  
+    <url>
+      <loc>https://sunbingfeng.github.io/blog/SFINAE/</loc>
+      
+        <lastmod>2025-08-22T00:00:00+00:00</lastmod>
+      
+      <changefreq>weekly</changefreq>
+      <priority>0.7</priority>
+    </url>
+  
+    <url>
+      <loc>https://sunbingfeng.github.io/blog/Butterworth_LPF/</loc>
+      
+        <lastmod>2025-08-15T00:00:00+00:00</lastmod>
+      
+      <changefreq>weekly</changefreq>
+      <priority>0.7</priority>
+    </url>
+  
+    <url>
+      <loc>https://sunbingfeng.github.io/blog/RungeKutta/</loc>
+      
+        <lastmod>2025-04-25T00:00:00+00:00</lastmod>
+      
+      <changefreq>weekly</changefreq>
+      <priority>0.7</priority>
+    </url>
+  
+    <url>
+      <loc>https://sunbingfeng.github.io/blog/fast_inv_sqrt/</loc>
+      
+        <lastmod>2025-04-14T00:00:00+00:00</lastmod>
+      
+      <changefreq>weekly</changefreq>
+      <priority>0.7</priority>
+    </url>
+  
+    <url>
+      <loc>https://sunbingfeng.github.io/blog/Congugate_Gradient/</loc>
+      
+        <lastmod>2025-04-11T00:00:00+00:00</lastmod>
+      
+      <changefreq>weekly</changefreq>
+      <priority>0.7</priority>
+    </url>
+  
+    <url>
+      <loc>https://sunbingfeng.github.io/blog/R_orthogonalize/</loc>
+      
+        <lastmod>2025-03-05T00:00:00+00:00</lastmod>
+      
+      <changefreq>weekly</changefreq>
+      <priority>0.7</priority>
+    </url>
+  
+    <url>
+      <loc>https://sunbingfeng.github.io/blog/SO(3)_Log/</loc>
+      
+        <lastmod>2025-03-01T00:00:00+00:00</lastmod>
+      
+      <changefreq>weekly</changefreq>
+      <priority>0.7</priority>
+    </url>
+  
+    <url>
+      <loc>https://sunbingfeng.github.io/blog/exp_fast_implementations/</loc>
+      
+        <lastmod>2025-02-28T00:00:00+00:00</lastmod>
+      
+      <changefreq>weekly</changefreq>
+      <priority>0.7</priority>
+    </url>
+  
+    <url>
+      <loc>https://sunbingfeng.github.io/blog/5tools_to_boost_efficiency/</loc>
+      
+        <lastmod>2024-04-11T00:00:00+00:00</lastmod>
+      
+      <changefreq>weekly</changefreq>
+      <priority>0.7</priority>
+    </url>
+  
+    <url>
+      <loc>https://sunbingfeng.github.io/blog/How_to_capture_audience/</loc>
+      
+        <lastmod>2024-03-01T00:00:00+00:00</lastmod>
+      
+      <changefreq>weekly</changefreq>
+      <priority>0.7</priority>
+    </url>
+  
+    <url>
+      <loc>https://sunbingfeng.github.io/blog/IDE_setup/</loc>
+      
+        <lastmod>2024-02-18T00:00:00+00:00</lastmod>
+      
+      <changefreq>weekly</changefreq>
+      <priority>0.7</priority>
+    </url>
+  
+    <url>
+      <loc>https://sunbingfeng.github.io/blog/Obsidian/</loc>
+      
+        <lastmod>2024-02-01T00:00:00+00:00</lastmod>
+      
+      <changefreq>weekly</changefreq>
+      <priority>0.7</priority>
+    </url>
+  
+    <url>
+      <loc>https://sunbingfeng.github.io/blog/g3log_code_review/</loc>
+      
+        <lastmod>2024-01-17T00:00:00+00:00</lastmod>
+      
+      <changefreq>weekly</changefreq>
+      <priority>0.7</priority>
+    </url>
+  
+    <url>
+      <loc>https://sunbingfeng.github.io/blog/shared_ptr_doule_free_issue/</loc>
+      
+        <lastmod>2023-06-27T00:00:00+00:00</lastmod>
+      
+      <changefreq>weekly</changefreq>
+      <priority>0.7</priority>
+    </url>
+  
+    <url>
+      <loc>https://sunbingfeng.github.io/blog/Update_Github_Intro_Pages/</loc>
+      
+        <lastmod>2023-06-05T00:00:00+00:00</lastmod>
+      
+      <changefreq>weekly</changefreq>
+      <priority>0.7</priority>
+    </url>
+  
+    <url>
+      <loc>https://sunbingfeng.github.io/blog/how_to_setup_a_vpn/</loc>
+      
+        <lastmod>2022-03-31T00:00:00+00:00</lastmod>
+      
+      <changefreq>weekly</changefreq>
+      <priority>0.7</priority>
+    </url>
+  
+    <url>
+      <loc>https://sunbingfeng.github.io/blog/how_to_write_thesis_efficiently/</loc>
+      
+        <lastmod>2022-02-06T00:00:00+00:00</lastmod>
+      
+      <changefreq>weekly</changefreq>
+      <priority>0.7</priority>
+    </url>
+  
+    <url>
+      <loc>https://sunbingfeng.github.io/blog/Setup_Your_VIM_Env_Part_II/</loc>
+      
+        <lastmod>2022-01-28T00:00:00+00:00</lastmod>
+      
+      <changefreq>weekly</changefreq>
+      <priority>0.7</priority>
+    </url>
+  
+    <url>
+      <loc>https://sunbingfeng.github.io/blog/Setup_Your_VIM_Env/</loc>
+      
+        <lastmod>2022-01-27T00:00:00+00:00</lastmod>
+      
+      <changefreq>weekly</changefreq>
+      <priority>0.7</priority>
+    </url>
+  
+  
+    <url>
+      <loc>https://sunbingfeng.github.io/about/</loc>
+       <lastmod>2017-11-10T00:20:35+00:00</lastmod>
+      
+       <changefreq>weekly</changefreq>
+      
+       <priority>0.5</priority>
+      
+     </url>
+  
+    <url>
+      <loc>https://sunbingfeng.github.io/elements/</loc>
+       <lastmod>2017-11-02T00:00:00+00:00</lastmod>
+      
+       <changefreq>weekly</changefreq>
+      
+       <priority>0.7</priority>
+      
+     </url>
+  
+    <url>
+      <loc>https://sunbingfeng.github.io/assets/css/footer.css</loc>
+       <lastmod>2017-11-10T00:20:35+00:00</lastmod>
+      
+       <changefreq>weekly</changefreq>
+      
+       <priority>0.5</priority>
+      
+     </url>
+  
+    <url>
+      <loc>https://sunbingfeng.github.io/blog/</loc>
+       <lastmod>2017-11-10T00:20:35+00:00</lastmod>
+      
+       <changefreq>weekly</changefreq>
+      
+       <priority>0.5</priority>
+      
+     </url>
+  
+    <url>
+      <loc>https://sunbingfeng.github.io/</loc>
+       <lastmod>2024-01-15T00:00:00+00:00</lastmod>
+      
+       <changefreq>weekly</changefreq>
+      
+       <priority>1.0</priority>
+      
+     </url>
+  
+    <url>
+      <loc>https://sunbingfeng.github.io/sitemap.xml</loc>
+       <lastmod>2017-11-10T00:20:35+00:00</lastmod>
+      
+       <changefreq>weekly</changefreq>
+      
+       <priority>0.5</priority>
+      
+     </url>
+  
+    <url>
+      <loc>https://sunbingfeng.github.io/blog/tag/y-2022/</loc>
+       <lastmod>2017-11-10T00:20:35+00:00</lastmod>
+      
+       <changefreq>weekly</changefreq>
+      
+       <priority>0.5</priority>
+      
+     </url>
+  
+    <url>
+      <loc>https://sunbingfeng.github.io/blog/tag/tools/</loc>
+       <lastmod>2017-11-10T00:20:35+00:00</lastmod>
+      
+       <changefreq>weekly</changefreq>
+      
+       <priority>0.5</priority>
+      
+     </url>
+  
+    <url>
+      <loc>https://sunbingfeng.github.io/blog/tag/vim/</loc>
+       <lastmod>2017-11-10T00:20:35+00:00</lastmod>
+      
+       <changefreq>weekly</changefreq>
+      
+       <priority>0.5</priority>
+      
+     </url>
+  
+    <url>
+      <loc>https://sunbingfeng.github.io/blog/tag/review/</loc>
+       <lastmod>2017-11-10T00:20:35+00:00</lastmod>
+      
+       <changefreq>weekly</changefreq>
+      
+       <priority>0.5</priority>
+      
+     </url>
+  
+    <url>
+      <loc>https://sunbingfeng.github.io/blog/tag/tips/</loc>
+       <lastmod>2017-11-10T00:20:35+00:00</lastmod>
+      
+       <changefreq>weekly</changefreq>
+      
+       <priority>0.5</priority>
+      
+     </url>
+  
+    <url>
+      <loc>https://sunbingfeng.github.io/blog/tag/y-2023/</loc>
+       <lastmod>2017-11-10T00:20:35+00:00</lastmod>
+      
+       <changefreq>weekly</changefreq>
+      
+       <priority>0.5</priority>
+      
+     </url>
+  
+    <url>
+      <loc>https://sunbingfeng.github.io/blog/tag/c/</loc>
+       <lastmod>2017-11-10T00:20:35+00:00</lastmod>
+      
+       <changefreq>weekly</changefreq>
+      
+       <priority>0.5</priority>
+      
+     </url>
+  
+    <url>
+      <loc>https://sunbingfeng.github.io/blog/tag/y-2024/</loc>
+       <lastmod>2017-11-10T00:20:35+00:00</lastmod>
+      
+       <changefreq>weekly</changefreq>
+      
+       <priority>0.5</priority>
+      
+     </url>
+  
+    <url>
+      <loc>https://sunbingfeng.github.io/blog/tag/framework/</loc>
+       <lastmod>2017-11-10T00:20:35+00:00</lastmod>
+      
+       <changefreq>weekly</changefreq>
+      
+       <priority>0.5</priority>
+      
+     </url>
+  
+    <url>
+      <loc>https://sunbingfeng.github.io/blog/tag/y-2025/</loc>
+       <lastmod>2017-11-10T00:20:35+00:00</lastmod>
+      
+       <changefreq>weekly</changefreq>
+      
+       <priority>0.5</priority>
+      
+     </url>
+  
+    <url>
+      <loc>https://sunbingfeng.github.io/blog/tag/algorithm/</loc>
+       <lastmod>2017-11-10T00:20:35+00:00</lastmod>
+      
+       <changefreq>weekly</changefreq>
+      
+       <priority>0.5</priority>
+      
+     </url>
+  
+    <url>
+      <loc>https://sunbingfeng.github.io/blog/tag/math/</loc>
+       <lastmod>2017-11-10T00:20:35+00:00</lastmod>
+      
+       <changefreq>weekly</changefreq>
+      
+       <priority>0.5</priority>
+      
+     </url>
+  
+    <url>
+      <loc>https://sunbingfeng.github.io/robots.txt</loc>
+       <lastmod>2017-11-10T00:20:35+00:00</lastmod>
+      
+       <changefreq>weekly</changefreq>
+      
+       <priority>0.5</priority>
+      
+     </url>
+  
+    <url>
+      <loc>https://sunbingfeng.github.io/feed.xml</loc>
+       <lastmod>2017-11-10T00:20:35+00:00</lastmod>
+      
+       <changefreq>weekly</changefreq>
+      
+       <priority>0.5</priority>
+      
+     </url>
+  
+    <url>
+      <loc>https://sunbingfeng.github.io/blog/page2/</loc>
+       <lastmod>2017-11-10T00:20:35+00:00</lastmod>
+      
+       <changefreq>weekly</changefreq>
+      
+       <priority>0.5</priority>
+      
+     </url>
+  
+    <url>
+      <loc>https://sunbingfeng.github.io/blog/page3/</loc>
+       <lastmod>2017-11-10T00:20:35+00:00</lastmod>
+      
+       <changefreq>weekly</changefreq>
+      
+       <priority>0.5</priority>
+      
+     </url>
+  
+    <url>
+      <loc>https://sunbingfeng.github.io/assets/css/footer.css.map</loc>
+       <lastmod>2017-11-10T00:20:35+00:00</lastmod>
+      
+       <changefreq>weekly</changefreq>
+      
+       <priority>0.5</priority>
+      
+     </url>
+  
+</urlset>

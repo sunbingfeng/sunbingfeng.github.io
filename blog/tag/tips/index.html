@@ -1,0 +1,915 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>tips - Bill's Tech Blog</title>
+    <meta name="description" content="5 posts tagged with 'tips'">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="/assets/favicon.png">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <!-- KaTeX for LaTeX math rendering -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+    
+    <!-- Syntax Highlighting -->
+    <link rel="stylesheet" href="/assets/css/monokai.css">
+    
+    <!-- Styles -->
+    <style>
+        :root {
+            --primary-color: #2563eb;
+            --secondary-color: #1e40af;
+            --text-color: #1f2937;
+            --background-color: #ffffff;
+            --card-background: #f8fafc;
+            --gradient-start: #2563eb;
+            --gradient-end: #1e40af;
+            --header-height: 4rem;
+        }
+
+        [data-theme="dark"] {
+            --text-color: #f3f4f6;
+            --background-color: #111827;
+            --card-background: #1f2937;
+            --gradient-start: #1e40af;
+            --gradient-end: #1e3a8a;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background: var(--background-color);
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        /* Syntax Highlighting */
+        .highlight {
+            background: #272822;
+            color: #f8f8f2;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            overflow-x: auto;
+            margin: 1rem 0;
+        }
+        
+        .highlight pre {
+            margin: 0;
+            background: none;
+            border: none;
+            padding: 0;
+        }
+        
+        .highlight code {
+            background: none;
+            border: none;
+            padding: 0;
+            color: inherit;
+            font-family: 'Courier New', monospace;
+        }
+        
+        /* Typography and Heading Styles */
+        h1, h2, h3, h4, h5, h6 {
+            color: var(--text-color);
+            font-weight: 600;
+            line-height: 1.3;
+            margin-top: 0;
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            margin-top: 3rem;
+        }
+        
+        h2 {
+            font-size: 2rem;
+            margin-bottom: 1.25rem;
+            margin-top: 3rem;
+            padding-top: 1rem;
+            border-top: 2px solid var(--card-background);
+        }
+        
+        h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            margin-top: 2.5rem;
+            padding-top: 0.75rem;
+            /* border-top: 1px solid var(--card-background); */
+        }
+        
+        h4 {
+            font-size: 1.25rem;
+            margin-bottom: 0.75rem;
+            margin-top: 2rem;
+        }
+        
+        h5 {
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+            margin-top: 1.5rem;
+        }
+        
+        h6 {
+            font-size: 1rem;
+            margin-bottom: 0.5rem;
+            margin-top: 1.5rem;
+        }
+        
+        /* Paragraph and Text Spacing */
+        p {
+            margin-bottom: 1.5rem;
+            line-height: 1.8;
+            text-align: justify;
+        }
+        
+        /* List spacing */
+        ul, ol {
+            margin-bottom: 1.5rem;
+            padding-left: 1.5rem;
+            margin-left: 0;
+        }
+        
+        li {
+            margin-bottom: 0.75rem;
+            line-height: 1.7;
+            padding-left: 0.5rem;
+        }
+        
+        /* Nested list spacing */
+        ul ul, ol ol, ul ol, ol ul {
+            margin-top: 0.5rem;
+            margin-bottom: 0.5rem;
+            padding-left: 1.25rem;
+        }
+        
+        /* List item markers */
+        ul li::marker {
+            color: var(--gradient-start);
+        }
+        
+        ol li::marker {
+            color: var(--gradient-start);
+            font-weight: 600;
+        }
+        
+        /* Blockquote spacing */
+        blockquote {
+            margin: 2rem 0;
+            padding: 1rem 1.5rem;
+            border-left: 4px solid var(--gradient-start);
+            background: var(--card-background);
+            border-radius: 0.5rem;
+            font-style: italic;
+        }
+        
+        blockquote p {
+            margin-bottom: 1rem;
+        }
+        
+        blockquote p:last-child {
+            margin-bottom: 0;
+        }
+        
+        /* Code inline spacing */
+        code {
+            background: var(--card-background);
+            padding: 0.2rem 0.4rem;
+            border-radius: 0.25rem;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9em;
+        }
+        
+        /* Table Styles */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 2rem 0;
+            background: var(--background-color);
+            border-radius: 0.5rem;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+        
+        table th {
+            background: var(--gradient-start);
+            color: white;
+            font-weight: 600;
+            text-align: left;
+            padding: 1rem 1.5rem;
+            border-bottom: 2px solid var(--gradient-end);
+            font-size: 1rem;
+        }
+        
+        table td {
+            padding: 1rem 1.5rem;
+            border-bottom: 1px solid var(--card-background);
+            vertical-align: top;
+            line-height: 1.6;
+        }
+        
+        table tr:last-child td {
+            border-bottom: none;
+        }
+        
+        table tr:hover {
+            background: var(--card-background);
+            transition: background-color 0.2s ease;
+        }
+        
+        table tr:nth-child(even) {
+            background: rgba(0, 0, 0, 0.02);
+        }
+        
+        table tr:nth-child(even):hover {
+            background: var(--card-background);
+        }
+        
+        /* Responsive table */
+        @media (max-width: 768px) {
+            table {
+                font-size: 0.9rem;
+            }
+            
+            table th,
+            table td {
+                padding: 0.75rem 1rem;
+            }
+        }
+        
+        /* Figure and Image Styles */
+        figure {
+            margin: 2.5rem 0;
+            text-align: center;
+            background: var(--card-background);
+            border-radius: 0.75rem;
+            padding: 1.5rem;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            border: 1px solid rgba(0, 0, 0, 0.05);
+        }
+        
+        figure img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 0.5rem;
+            margin-bottom: 1rem;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+        
+        figcaption {
+            font-family: 'Georgia', 'Times New Roman', serif;
+            font-size: 0.95rem;
+          font-style: italic;
+            color: var(--text-color);
+            opacity: 0.8;
+            line-height: 1.5;
+            margin-top: 0.5rem;
+            padding: 0.75rem 1rem;
+            background: rgba(0, 0, 0, 0.03);
+            border-radius: 0.5rem;
+            border-left: 4px solid var(--gradient-start);
+        }
+        
+        /* Center image class for backward compatibility */
+        .center_img {
+            display: block;
+            margin: 0 auto;
+        }
+        
+        /* Responsive figure adjustments */
+        @media (max-width: 768px) {
+            figure {
+                margin: 2rem 0;
+                padding: 1rem;
+            }
+            
+            figcaption {
+                font-size: 0.9rem;
+                padding: 0.5rem 0.75rem;
+            }
+        }
+        
+        /* Header Styles */
+        .site-header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: var(--header-height);
+            background: var(--background-color);
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            padding: 0 2rem;
+            backdrop-filter: blur(10px);
+        }
+
+        .site-header .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .site-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text-color);
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-color);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-color);
+        }
+
+        .theme-toggle {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            cursor: pointer;
+            padding: 0.5rem;
+            font-size: 1.25rem;
+        }
+
+        /* Main Content */
+        .main-content {
+            margin-top: var(--header-height);
+            min-height: calc(100vh - var(--header-height));
+        }
+
+        /* Footer */
+        .site-footer {
+            background: var(--card-background);
+            padding: 2rem 0;
+            margin-top: 4rem;
+            text-align: center;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .footer-section {
+            margin-bottom: 1.5rem;
+        }
+
+        .footer-section p {
+            color: var(--text-color);
+            opacity: 0.8;
+            text-align: center;
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .site-header {
+                padding: 0 1rem;
+            }
+
+            .footer-content {
+                padding: 0 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="site-header">
+        <div class="container">
+            <a href="/" class="site-title">Bill's Tech Blog</a>
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="/blog">Blog</a></li>
+                    <li><a href="/about">About</a></li>
+                </ul>
+            </nav>
+            <button class="theme-toggle" aria-label="Toggle theme">
+                <i class="fas fa-moon"></i>
+            </button>
+        </div>
+    </header>
+
+    <main class="main-content">
+        <style>
+    .tag-header {
+        background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+        color: white;
+        padding: 6rem 2rem 4rem;
+        text-align: center;
+        margin-top: calc(-1 * var(--header-height));
+        position: relative;
+    }
+
+    .tag-header::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: radial-gradient(circle at center, transparent 0%, rgba(0,0,0,0.2) 100%);
+        z-index: 1;
+    }
+
+    .tag-header-content {
+        position: relative;
+        z-index: 2;
+        max-width: 800px;
+        margin: 0 auto;
+    }
+
+    .tag-header h1 {
+        font-size: 3rem;
+        font-weight: 800;
+        margin: 0;
+        background: linear-gradient(to right, #fff, #e2e8f0);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 1rem;
+    }
+
+    .tag-header .tag-icon {
+        font-size: 2.5rem;
+        color: var(--primary-color);
+    }
+
+    .tag-header p {
+        font-size: 1.25rem;
+        margin: 1rem 0 0;
+        opacity: 0.9;
+    }
+
+    .tag-content {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 4rem 2rem;
+    }
+
+    .post-list {
+        display: flex;
+        flex-direction: column;
+        gap: 2rem;
+    }
+
+    .post-item {
+        background: var(--card-background);
+        border-radius: 1rem;
+        padding: 2rem;
+        transition: all 0.3s ease;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .post-item::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+        opacity: 0;
+        transition: opacity 0.3s ease;
+        z-index: 1;
+    }
+
+    .post-item:hover::before {
+        opacity: 0.05;
+    }
+
+    .post-item:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    .post-item a {
+        text-decoration: none;
+        color: inherit;
+    }
+
+    .post-item h2 {
+        font-size: 1.5rem;
+        font-weight: 700;
+        margin: 0 0 1rem;
+        color: var(--text-color);
+        position: relative;
+        z-index: 2;
+    }
+
+    .post-meta {
+        display: flex;
+        align-items: center;
+        gap: 1.5rem;
+        margin-bottom: 1rem;
+        font-size: 0.875rem;
+        color: var(--text-color);
+        opacity: 0.8;
+        position: relative;
+        z-index: 2;
+    }
+
+    .post-meta-item {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+    }
+
+    .post-meta-item i {
+        color: var(--primary-color);
+    }
+
+    .post-excerpt {
+        color: var(--text-color);
+        opacity: 0.9;
+        line-height: 1.6;
+        position: relative;
+        z-index: 2;
+    }
+
+    .post-tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+        margin-top: 1rem;
+        position: relative;
+        z-index: 2;
+    }
+
+    .post-tag {
+        background: var(--tag-background);
+        color: var(--tag-color);
+        padding: 0.25rem 0.75rem;
+        border-radius: 1rem;
+        font-size: 0.75rem;
+        font-weight: 500;
+        transition: all 0.2s ease;
+    }
+
+    .post-tag:hover {
+        background: var(--primary-color);
+        color: white;
+    }
+
+    .back-to-tags {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        color: var(--text-color);
+        text-decoration: none;
+        margin-bottom: 2rem;
+        font-weight: 500;
+        transition: all 0.2s ease;
+    }
+
+    .back-to-tags:hover {
+        color: var(--primary-color);
+    }
+
+    @media (max-width: 768px) {
+        .tag-header {
+            padding: 5rem 1rem 3rem;
+        }
+
+        .tag-header h1 {
+            font-size: 2rem;
+        }
+
+        .tag-content {
+            padding: 2rem 1rem;
+        }
+
+        .post-item {
+            padding: 1.5rem;
+        }
+
+        .post-meta {
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+    }
+</style>
+
+<div class="tag-header">
+    <div class="tag-header-content">
+        <h1>
+            
+            
+            <i class="fas fa-lightbulb tag-icon"></i>
+            tips
+        </h1>
+        <p>5 posts tagged with "tips"</p>
+    </div>
+</div>
+
+<div class="tag-content">
+    <a href="/tags" class="back-to-tags">
+        <i class="fas fa-arrow-left"></i>
+        Back to all tags
+    </a>
+
+    <div class="post-list">
+        
+        <article class="post-item">
+            <a href="/blog/fast_inv_sqrt/">
+                <h2>Fast Inverse sqrt</h2>
+            </a>
+            <div class="post-meta">
+                <div class="post-meta-item">
+                    <i class="far fa-calendar"></i>
+                    April 14, 2025
+                </div>
+                <div class="post-meta-item">
+                    <i class="far fa-clock"></i>
+                    
+
+6 min read 
+                </div>
+            </div>
+            <div class="post-excerpt">
+                AI Chat Series
+            </div>
+            <div class="post-tags">
+                
+                <a href="/blog-tag-y-2025" class="post-tag">
+                    Y-2025
+                </a>
+                
+                <a href="/blog-tag-math" class="post-tag">
+                    math
+                </a>
+                
+                <a href="/blog-tag-tips" class="post-tag">
+                    tips
+                </a>
+                
+            </div>
+        </article>
+
+        <article class="post-item">
+            <a href="/blog/5tools_to_boost_efficiency/">
+                <h2>5个提升Linux开发效率的工具</h2>
+            </a>
+            <div class="post-meta">
+                <div class="post-meta-item">
+                    <i class="far fa-calendar"></i>
+                    April 11, 2024
+                </div>
+                <div class="post-meta-item">
+                    <i class="far fa-clock"></i>
+                    
+
+1 min read 
+                </div>
+            </div>
+            <div class="post-excerpt">
+                吐血推荐
+            </div>
+            <div class="post-tags">
+                
+                <a href="/blog-tag-y-2024" class="post-tag">
+                    Y-2024
+                </a>
+                
+                <a href="/blog-tag-tips" class="post-tag">
+                    tips
+                </a>
+                
+            </div>
+        </article>
+
+        <article class="post-item">
+            <a href="/blog/IDE_setup/">
+                <h2>你真的会用IDE吗？</h2>
+            </a>
+            <div class="post-meta">
+                <div class="post-meta-item">
+                    <i class="far fa-calendar"></i>
+                    February 18, 2024
+                </div>
+                <div class="post-meta-item">
+                    <i class="far fa-clock"></i>
+                    
+
+1 min read 
+                </div>
+            </div>
+            <div class="post-excerpt">
+                跟鼠标说再见
+            </div>
+            <div class="post-tags">
+                
+                <a href="/blog-tag-y-2024" class="post-tag">
+                    Y-2024
+                </a>
+                
+                <a href="/blog-tag-tips" class="post-tag">
+                    tips
+                </a>
+                
+            </div>
+        </article>
+
+        <article class="post-item">
+            <a href="/blog/Update_Github_Intro_Pages/">
+                <h2>自动更新Github个人介绍页</h2>
+            </a>
+            <div class="post-meta">
+                <div class="post-meta-item">
+                    <i class="far fa-calendar"></i>
+                    June 05, 2023
+                </div>
+                <div class="post-meta-item">
+                    <i class="far fa-clock"></i>
+                    
+
+1 min read 
+                </div>
+            </div>
+            <div class="post-excerpt">
+                王婆卖瓜系列
+            </div>
+            <div class="post-tags">
+                
+                <a href="/blog-tag-y-2023" class="post-tag">
+                    Y-2023
+                </a>
+                
+                <a href="/blog-tag-tips" class="post-tag">
+                    tips
+                </a>
+                
+            </div>
+        </article>
+
+        <article class="post-item">
+            <a href="/blog/how_to_setup_a_vpn/">
+                <h2>Docker+frp+OpenVPN搭建VPN</h2>
+            </a>
+            <div class="post-meta">
+                <div class="post-meta-item">
+                    <i class="far fa-calendar"></i>
+                    March 31, 2022
+                </div>
+                <div class="post-meta-item">
+                    <i class="far fa-clock"></i>
+                    
+
+2 min read 
+                </div>
+            </div>
+            <div class="post-excerpt">
+                15分钟无脑搭建
+            </div>
+            <div class="post-tags">
+                
+                <a href="/blog-tag-y-2022" class="post-tag">
+                    Y-2022
+                </a>
+                
+                <a href="/blog-tag-tips" class="post-tag">
+                    tips
+                </a>
+                
+            </div>
+        </article>
+
+    </div>
+</div>
+
+<hr>
+
+<h2>Archive</h2>
+
+
+
+  
+  
+  <a class="no-underline" href="/tag/Y-2025"><code class="highligher-rouge"><nobr>Y-2025</nobr></code></a>
+
+  
+  
+  <a class="no-underline" href="/tag/math"><code class="highligher-rouge"><nobr>math</nobr></code></a>
+
+  
+  
+  <a class="no-underline" href="/tag/tips"><code class="highligher-rouge"><nobr>tips</nobr></code></a>
+
+  
+  
+  <a class="no-underline" href="/tag/Y-2024"><code class="highligher-rouge"><nobr>Y-2024</nobr></code></a>
+
+  
+  
+  <a class="no-underline" href="/tag/Y-2022"><code class="highligher-rouge"><nobr>Y-2022</nobr></code></a>
+
+  
+  
+  <a class="no-underline" href="/tag/tools"><code class="highligher-rouge"><nobr>tools</nobr></code></a>
+
+  
+  
+  <a class="no-underline" href="/tag/review"><code class="highligher-rouge"><nobr>review</nobr></code></a>
+
+  
+  
+  <a class="no-underline" href="/tag/c++"><code class="highligher-rouge"><nobr>c++</nobr></code></a>
+
+  
+  
+  <a class="no-underline" href="/tag/algorithm"><code class="highligher-rouge"><nobr>algorithm</nobr></code></a>
+
+  
+  
+  <a class="no-underline" href="/tag/vim"><code class="highligher-rouge"><nobr>vim</nobr></code></a>
+
+  
+  
+  <a class="no-underline" href="/tag/Y-2023"><code class="highligher-rouge"><nobr>Y-2023</nobr></code></a>
+
+  
+  
+  <a class="no-underline" href="/tag/framework"><code class="highligher-rouge"><nobr>framework</nobr></code></a>
+
+    </main>
+
+    <footer class="site-footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <p>© 2025 Bill's Tech Blog. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Theme toggle functionality
+        const themeToggle = document.querySelector('.theme-toggle');
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        const currentTheme = localStorage.getItem('theme') || (prefersDark ? 'dark' : 'light');
+
+        function setTheme(theme) {
+            document.documentElement.setAttribute('data-theme', theme);
+            localStorage.setItem('theme', theme);
+            themeToggle.innerHTML = theme === 'dark' ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
+        }
+
+        setTheme(currentTheme);
+
+        themeToggle.addEventListener('click', () => {
+            const newTheme = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+            setTheme(newTheme);
+        });
+
+        // KaTeX auto-render
+        document.addEventListener("DOMContentLoaded", function() {
+            renderMathInElement(document.body, {
+                delimiters: [
+                    {left: "$$", right: "$$", display: true},
+                    {left: "$", right: "$", display: false},
+                    {left: "\\[", right: "\\]", display: true},
+                    {left: "\\(", right: "\\)", display: false}
+                ],
+                throwOnError: false
+            });
+        });
+    </script>
+</body>
+</html> 
