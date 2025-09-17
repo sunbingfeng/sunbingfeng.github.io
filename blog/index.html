@@ -924,6 +924,15 @@
                 </a>
                 
                 
+                <!-- DEBUG: Tag Generation Info -->
+                <div style="background: #f0f0f0; padding: 10px; margin: 10px 0; border: 1px solid #ccc; font-family: monospace; font-size: 12px; color: red;">
+                    <strong>DEBUG TAGS INFO:</strong><br>
+                    Total Posts: 21<br>
+                    Site Tags Size: 12<br>
+                    Jekyll Version: 4.4.1<br>
+                    Environment: development<br>
+                    Safe Mode: <br>
+                </div>
                 
                 
                 
@@ -933,6 +942,19 @@
                 
                 
                 
+                
+                
+                
+                <!-- DEBUG: Generated Tags Info -->
+                <div style="background: #e8f4fd; padding: 10px; margin: 10px 0; border: 1px solid #0066cc; font-family: monospace; font-size: 12px; color: red;">
+                    <strong>DEBUG GENERATED TAGS:</strong><br>
+                    All Tags Count: 12<br>
+                    Tag Counts: 12<br>
+                    Sorted Tag Counts: 12<br>
+                    Initial Tags: 8<br>
+                    All Tags: Y-2025, math, review, c++, algorithm, tips, Y-2024, tools, framework, Y-2023, Y-2022, vim<br>
+                    Tag Counts: Y-2025:10, math:6, review:3, c++:3, algorithm:3, tips:5, Y-2024:5, tools:3, framework:1, Y-2023:2, Y-2022:4, vim:2<br>
+                </div>
                 
                     
                     
@@ -1800,6 +1822,32 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 });
+
+// DEBUG: Blog Tags Debugging
+console.log('=== BLOG TAGS DEBUG ===');
+
+// Check if tags cloud exists
+const tagsCloud = document.querySelector('.tags-cloud');
+if (tagsCloud) {
+    console.log('Tags cloud found:', tagsCloud);
+    const tagStats = tagsCloud.querySelectorAll('.tag-stat');
+    console.log('Number of tag-stat elements:', tagStats.length);
+    
+    tagStats.forEach((tag, index) => {
+        console.log(`Tag ${index}:`, tag.dataset.tag, tag.textContent.trim());
+    });
+} else {
+    console.log('No tags cloud found!');
+}
+
+// Check debug info divs
+const debugDivs = document.querySelectorAll('div[style*="background: #f0f0f0"], div[style*="background: #e8f4fd"]');
+console.log('Debug divs found:', debugDivs.length);
+debugDivs.forEach((div, index) => {
+    console.log(`Debug div ${index}:`, div.textContent);
+});
+
+console.log('=== END BLOG TAGS DEBUG ===');
 </script> 
     </main>
 
