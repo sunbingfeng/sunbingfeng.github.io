@@ -338,10 +338,24 @@
             text-decoration: none;
         }
 
+        nav {
+            display: flex !important;
+            align-items: center !important;
+            height: 100%;
+        }
+
         .nav-links {
-            display: flex;
+            display: flex !important;
             gap: 2rem;
-            list-style: none;
+            list-style: none !important;
+            margin: 0 !important;
+            padding: 0 !important;
+            align-items: center;
+        }
+
+        .nav-links li {
+            margin: 0 !important;
+            padding: 0 !important;
         }
 
         .nav-links a {
