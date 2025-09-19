@@ -3,7 +3,6 @@ toc: true
 layout: post
 title:  "Setup Android Dev Environment"
 date:   2025-09-05
-excerpt: "AI Chat Series"
 image: ""
 comments: true
 excerpt: "Android Setup"
