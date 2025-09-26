@@ -336,11 +336,319 @@
             font-weight: 700;
             color: var(--text-color);
             text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .site-title-ascii {
+            font-family: 'Courier New', monospace;
+            font-size: 2.0rem;
+            font-weight: bold;
+            font-style: italic;
+            color: var(--text-color);
+            text-shadow: 2px 2px 0px var(--gradient-start);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            display: flex;
+            align-items: flex-end;
+            margin-top: 20px;
+        }
+
+        .cat-animation {
+            width: 64px;
+            height: 64px;
+            position: relative;
+            margin-top: 50px;
+        }
+
+        .cat-body {
+            width: 60px;
+            height: 35px;
+            background: var(--text-color);
+            border-radius: 50% 50% 50% 50% / 70% 70% 30% 30%;
+            position: relative;
+        }
+
+        .cat-feet {
+            position: absolute;
+            top: 20px;
+            left: 0;
+            width: 100%;
+            height: 8px;
+        }
+
+        .cat-foot {
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            background: var(--text-color);
+            border-radius: 50%;
+        }
+
+        .cat-foot.left {
+            left: 8px;
+        }
+
+        .cat-foot.right {
+            right: 8px;
+        }
+
+        .cat-head {
+            width: 40px;
+            height: 36px;
+            background: var(--text-color);
+            border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+            position: absolute;
+            top: -18px;
+            left: 4px;
+        }
+
+        .cat-ears {
+            position: absolute;
+            top: -8px;
+            left: 4px;
+        }
+
+        .cat-ear {
+            width: 12px;
+            height: 16px;
+            background: var(--text-color);
+            border-radius: 50% 50% 0 0;
+            position: absolute;
+            clip-path: polygon(50% 5%, 0% 100%, 100% 100%);
+        }
+
+        .cat-ear:first-child {
+            left: 0;
+            transform: rotate(-15deg);
+        }
+
+        .cat-ear:last-child {
+            left: 16px;
+            transform: rotate(15deg);
+        }
+
+        .cat-tail {
+            width: 50px;
+            height: 20px;
+            background: var(--text-color);
+            border-radius: 10px;
+            position: absolute;
+            top: 8px;
+            right: -30px;
+            transform-origin: left center;
+            transform: rotate(-25deg);
+            /* animation: randomTailWag 2s ease-in-out infinite; */
+            clip-path: path('M 0 10 Q 15 2 30 8 Q 45 12 50 10 Q 48 12 45 14 Q 42 16 40 15 Q 35 18 25 15 Q 10 20 0 10');
+        }
+
+        .cat-eyes {
+            position: absolute;
+            top: 10px;
+            left: 8px;
+        }
+
+        .cat-eye {
+            width: 8px;
+            height: 4px;
+            background: var(--background-color);
+            border-radius: 50%;
+            position: absolute;
+            animation: catBlink 4s ease-in-out infinite;
+        }
+
+        .cat-eye:first-child {
+            left: 0;
+        }
+
+        .cat-eye:last-child {
+            left: 12px;
+        }
+
+        .cat-nose {
+            width: 2px;
+            height: 2px;
+            background: var(--background-color);
+            border-radius: 50%;
+            position: absolute;
+            top: 18px;
+            left: 16px;
+        }
+
+        .cat-mouth {
+            position: absolute;
+            top: 22px;
+            left: 16px;
+            width: 0;
+            height: 0;
+        }
+
+        .cat-mouth::before,
+        .cat-mouth::after {
+            content: '';
+            position: absolute;
+            width: 4px;
+            height: 2px;
+            border-bottom: 1px solid var(--background-color);
+            border-radius: 0 0 50% 50%;
+        }
+
+        .cat-mouth::before {
+            left: -4px;
+            transform: rotate(-20deg);
+        }
+
+        .cat-mouth::after {
+            left: 0;
+            transform: rotate(20deg);
+        }
+
+        .cat-whiskers {
+            position: absolute;
+            top: 18px;
+            left: 16px;
+            width: 0;
+            height: 0;
+        }
+
+        .cat-whisker {
+            position: absolute;
+            width: 12px;
+            height: 1px;
+            background: var(--background-color);
+            border-radius: 1px;
+            transform-origin: right center;
+        }
+
+        .cat-whisker.left-1 {
+            top: 2px;
+            left: -12px;
+            transform: rotate(10deg);
+        }
+
+        .cat-whisker.left-2 {
+            top: 2px;
+            left: -12px;
+            transform: rotate(-10deg);
+        }
+
+        .cat-whisker.right-1 {
+            top: 2px;
+            left: -10px;
+            transform: rotate(166deg);
+            transform-origin: right center;
+        }
+
+        .cat-whisker.right-2 {
+            top: 2px;
+            left: -10px;
+            transform: rotate(186deg);
+            transform-origin: right center;
+        }
+
+        @keyframes catWalk {
+            0%, 100% {
+                transform: translateX(0);
+            }
+            25% {
+                transform: translateX(20px);
+            }
+            50% {
+                transform: translateX(40px);
+            }
+            75% {
+                transform: translateX(20px);
+            }
+        }
+
+        @keyframes tailWag {
+            0% {
+                transform: rotate(-10deg);
+            }
+            100% {
+                transform: rotate(10deg);
+            }
+        }
+
+        @keyframes catBlink {
+            0%, 90%, 100% {
+                height: 4px;
+                border-radius: 50%;
+            }
+            95% {
+                height: 1px;
+                border-radius: 50% 50% 0 0;
+            }
+        }
+
+        @keyframes catWalkIn {
+            0% {
+                transform: translateX(-100px);
+            }
+            70% {
+                transform: translateX(0);
+            }
+            100% {
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes titleSlideIn {
+            0% {
+                transform: translateX(-100px);
+            }
+            70% {
+                transform: translateX(0);
+            }
+            100% {
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes hideFeet {
+            0% {
+                opacity: 1;
+            }
+            70% {
+                opacity: 1;
+            }
+            100% {
+                opacity: 0;
+            }
+        }
+
+        @keyframes randomTailWag {
+            0%, 100% {
+                transform: rotate(-25deg);
+            }
+            25% {
+                transform: rotate(-35deg);
+            }
+            50% {
+                transform: rotate(-20deg);
+            }
+            75% {
+                transform: rotate(-40deg);
+            }
+        }
+
+        /* Dark theme adjustments */
+        [data-theme="dark"] .cat-body,
+        [data-theme="dark"] .cat-head,
+        [data-theme="dark"] .cat-ear,
+        [data-theme="dark"] .cat-tail {
+            background: var(--text-color);
+        }
+
+        [data-theme="dark"] .cat-eye,
+        [data-theme="dark"] .cat-nose {
+            background: var(--background-color);
         }
 
         nav {
             display: flex !important;
-            align-items: center !important;
+            align-items: flex-end !important;
             height: 100%;
         }
 
@@ -350,7 +658,7 @@
             list-style: none !important;
             margin: 0 !important;
             padding: 0 !important;
-            align-items: center;
+            align-items: flex-end;
         }
 
         .nav-links li {
@@ -426,7 +734,36 @@
 <body>
     <header class="site-header">
         <div class="container">
-            <a href="{{ '/' | relative_url }}" class="site-title">{{ site.title }}</a>
+            <a href="{{ '/' | relative_url }}" class="site-title">
+                <div class="cat-animation">
+                    <div class="cat-body">
+                        <div class="cat-head">
+                            <div class="cat-ears">
+                                <div class="cat-ear"></div>
+                                <div class="cat-ear"></div>
+                            </div>
+                            <div class="cat-eyes">
+                                <div class="cat-eye"></div>
+                                <div class="cat-eye"></div>
+                            </div>
+                            <div class="cat-nose"></div>
+                            <div class="cat-mouth"></div>
+                            <div class="cat-whiskers">
+                                <div class="cat-whisker left-1"></div>
+                                <div class="cat-whisker left-2"></div>
+                                <div class="cat-whisker right-1"></div>
+                                <div class="cat-whisker right-2"></div>
+                            </div>
+                        </div>
+                        <!-- <div class="cat-feet">
+                            <div class="cat-foot left"></div>
+                            <div class="cat-foot right"></div>
+                        </div> -->
+                        <div class="cat-tail"></div>
+                    </div>
+                </div>
+                <span class="site-title-ascii">{{ site.title }}</span>
+            </a>
             <nav>
                 <ul class="nav-links">
                     <li><a href="{{ '/archive' | relative_url }}">Archive</a></li>
