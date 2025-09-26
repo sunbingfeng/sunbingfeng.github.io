@@ -323,6 +323,8 @@ layout: default
         .toc-container .toc {
             flex: 1;
             overflow-y: auto;
+            min-height: 0;
+            height: 100%;
         }
 
         .toc-container.active {
@@ -584,7 +586,7 @@ layout: default
                 
                 // Toggle display for mobile
                 if (window.innerWidth <= 1024) {
-                    tocContainer.style.display = isExpanded ? 'none' : 'block';
+                    tocContainer.style.display = isExpanded ? 'none' : 'flex';
                 }
             });
 
