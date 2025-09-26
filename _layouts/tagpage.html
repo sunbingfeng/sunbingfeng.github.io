@@ -234,16 +234,11 @@ layout: default
             <i class="fas {{ tag_icon }} tag-icon"></i>
             {{ page.tag }}
         </h1>
-        <p>{{ page.posts.size }} post{% if page.posts.size != 1 %}s{% endif %} tagged with "{{ page.tag }}"</p>
+        <p style="text-align: center;">{{ page.posts.size }} post{% if page.posts.size != 1 %}s{% endif %} tagged with "{{ page.tag }}"</p>
     </div>
 </div>
 
 <div class="tag-content">
-    <a href="{{ '/tags' | relative_url }}" class="back-to-tags">
-        <i class="fas fa-arrow-left"></i>
-        Back to all tags
-    </a>
-
     <div class="post-list">
         {% for post in page.posts %}
         <article class="post-item">

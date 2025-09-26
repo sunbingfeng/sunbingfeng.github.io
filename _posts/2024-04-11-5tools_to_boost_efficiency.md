@@ -7,7 +7,7 @@ excerpt: "吐血推荐"
 image: ""
 comments: true
 toc: true
-tags: Y-2024 tips
+tags: tips
 ---
 
 ## Tmux

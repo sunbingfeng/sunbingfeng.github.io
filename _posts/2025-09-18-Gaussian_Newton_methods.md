@@ -7,7 +7,7 @@ excerpt: "牛顿大法好"
 image: ""
 comments: true
 toc: true
-tags: Y-2025 math
+tags: math
 ---
 
 > 本文是AI Chat系列文章的第11篇， 探究经常用到的几种优化迭代求解方法。

@@ -1,0 +1,296 @@
+---
+layout: default
+---
+
+<style>
+    .archive-container {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 2rem 1rem;
+    }
+
+    .archive-header {
+        text-align: center;
+        margin-bottom: 3rem;
+    }
+
+    .archive-header h1 {
+        font-size: 2.5rem;
+        font-weight: 700;
+        color: var(--text-color);
+        margin-bottom: 1rem;
+    }
+
+    .archive-header p {
+        font-size: 1.1rem;
+        color: var(--text-color);
+        opacity: 0.8;
+        margin: 0;
+    }
+
+    .timeline {
+        position: relative;
+        padding-left: 2rem;
+    }
+
+    .timeline::before {
+        content: '';
+        position: absolute;
+        left: 0.75rem;
+        top: 0;
+        bottom: 0;
+        width: 2px;
+        background: linear-gradient(to bottom, var(--gradient-start), var(--gradient-end));
+        border-radius: 1px;
+    }
+
+    .year-section {
+        position: relative;
+        margin-bottom: 3rem;
+    }
+
+    .year-section::before {
+        content: '';
+        position: absolute;
+        left: -2.25rem;
+        top: 0.5rem;
+        width: 1rem;
+        height: 1rem;
+        background: var(--gradient-start);
+        border-radius: 50%;
+        border: 3px solid var(--background-color);
+        box-shadow: 0 0 0 3px var(--gradient-start);
+    }
+
+    .year-title {
+        font-size: 1.8rem;
+        font-weight: 600;
+        color: var(--text-color);
+        margin-bottom: 1.5rem;
+        padding-left: 1rem;
+        background: var(--background-color);
+        position: relative;
+        z-index: 1;
+    }
+
+    .posts-list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    .post-item {
+        background: var(--card-background);
+        border-radius: 0.75rem;
+        padding: 1.25rem;
+        margin-bottom: 1rem;
+        transition: all 0.3s ease;
+        border-left: 4px solid transparent;
+        position: relative;
+    }
+
+    .post-item:hover {
+        transform: translateX(8px);
+        border-left-color: var(--gradient-start);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    .post-meta {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        margin-bottom: 0.75rem;
+        font-size: 0.9rem;
+        color: var(--text-color);
+        opacity: 0.8;
+    }
+
+    .post-date {
+        background: var(--gradient-start);
+        color: white;
+        padding: 0.25rem 0.75rem;
+        border-radius: 1rem;
+        font-weight: 500;
+        font-size: 0.8rem;
+    }
+
+    .post-title {
+        font-size: 1.25rem;
+        font-weight: 600;
+        margin-bottom: 0.5rem;
+        line-height: 1.4;
+    }
+
+    .post-title a {
+        color: var(--text-color);
+        text-decoration: none;
+        transition: color 0.3s ease;
+    }
+
+    .post-title a:hover {
+        color: var(--gradient-start);
+    }
+
+    .post-excerpt {
+        color: var(--text-color);
+        opacity: 0.8;
+        line-height: 1.6;
+        margin-bottom: 0.75rem;
+    }
+
+    .post-tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+    }
+
+    .tag {
+        background: var(--card-background);
+        color: var(--text-color);
+        padding: 0.2rem 0.6rem;
+        border-radius: 0.5rem;
+        font-size: 0.75rem;
+        font-weight: 500;
+        text-decoration: none;
+        border: 1px solid var(--gradient-start);
+        transition: all 0.3s ease;
+    }
+
+    .tag:hover {
+        background: var(--gradient-start);
+        color: white;
+    }
+
+    .stats {
+        background: var(--card-background);
+        border-radius: 1rem;
+        padding: 1.5rem;
+        margin-bottom: 2rem;
+        text-align: center;
+    }
+
+    .stats-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+        gap: 1rem;
+    }
+
+    .stat-item {
+        text-align: center;
+    }
+
+    .stat-number {
+        font-size: 2rem;
+        font-weight: 700;
+        color: var(--gradient-start);
+        display: block;
+    }
+
+    .stat-label {
+        font-size: 0.9rem;
+        color: var(--text-color);
+        opacity: 0.8;
+        margin-top: 0.25rem;
+    }
+
+    @media (max-width: 768px) {
+        .archive-container {
+            padding: 1rem 0.5rem;
+        }
+
+        .archive-header h1 {
+            font-size: 2rem;
+        }
+
+        .timeline {
+            padding-left: 1.5rem;
+        }
+
+        .timeline::before {
+            left: 0.5rem;
+        }
+
+        .year-section::before {
+            left: -1.75rem;
+            width: 0.75rem;
+            height: 0.75rem;
+        }
+
+        .year-title {
+            font-size: 1.5rem;
+            padding-left: 0.5rem;
+        }
+
+        .post-item {
+            padding: 1rem;
+        }
+
+        .post-meta {
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 0.5rem;
+        }
+
+        .stats-grid {
+            grid-template-columns: repeat(2, 1fr);
+        }
+    }
+</style>
+
+<div class="archive-container">
+    <div class="stats">
+        <div class="stats-grid">
+            <div class="stat-item">
+                <span class="stat-number">{{ site.posts.size }}</span>
+                <div class="stat-label">Total Posts</div>
+            </div>
+            <div class="stat-item">
+                <span class="stat-number">{{ site.posts | group_by: 'date' | size }}</span>
+                <div class="stat-label">Years Active</div>
+            </div>
+            <div class="stat-item">
+                <span class="stat-number">{{ site.tags.size }}</span>
+                <div class="stat-label">Tags</div>
+            </div>
+            <div class="stat-item">
+                <span class="stat-number">{{ site.posts | map: 'date' | sort | first | date: '%Y' }}</span>
+                <div class="stat-label">Since</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="timeline">
+        {% assign posts_by_year = site.posts | group_by_exp: 'post', 'post.date | date: "%Y"' | sort: 'name' | reverse %}
+        
+        {% for year in posts_by_year %}
+        <div class="year-section">
+            <h2 class="year-title">{{ year.name }}</h2>
+            <ul class="posts-list">
+                {% for post in year.items %}
+                <li class="post-item">
+                    <div class="post-meta">
+                        <span class="post-date">{{ post.date | date: "%b %d" }}</span>
+                        <span>{% include reading-time.html content=post.content %}</span>
+                    </div>
+                    <h3 class="post-title">
+                        <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
+                    </h3>
+                    {% if post.excerpt %}
+                    <div class="post-excerpt">
+                        {{ post.excerpt | strip_html | truncatewords: 25 }}
+                    </div>
+                    {% endif %}
+                    {% if post.tags.size > 0 %}
+                    <div class="post-tags">
+                        {% for tag in post.tags %}
+                        <a href="/blog/tag/{{ tag | slugify }}/" class="tag">{{ tag }}</a>
+                        {% endfor %}
+                    </div>
+                    {% endif %}
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+        {% endfor %}
+    </div>
+</div>
